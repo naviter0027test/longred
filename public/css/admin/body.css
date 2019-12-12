@@ -1,0 +1,294 @@
+body {
+    background: #f1f1f1;
+}
+
+.btn {
+    box-shadow: 0 1px 0 #0073aa,0 0 2px 1px #33b3db;
+    text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799;
+    background: #0085ba;
+    border-color: #006799;
+    color: white;
+}
+
+.btn:hover {
+    color: white;
+    background: #008ec2;
+}
+
+.admin-bar {
+    padding: 0px 0 0px 0;
+
+    background: #23282d;
+}
+
+.admin-bar span {
+    display: inline-block;
+    padding: 8px 15px 8px 15px;
+
+    color: white;
+    border: 0px solid transparent;
+    -webkit-transition: background 0.5s; /* Safari prior 6.1 */
+    transition: background 0.5s;
+    text-decoration: none;
+}
+
+.admin-bar a {
+    display: inline-block;
+    padding: 8px 15px 8px 15px;
+
+    color: white;
+    border: 0px solid transparent;
+    -webkit-transition: background 0.5s; /* Safari prior 6.1 */
+    transition: background 0.5s;
+    text-decoration: none;
+}
+
+.admin-bar a:hover {
+    background: #429cbd;
+}
+
+.admin-bar a.clicked {
+    color: #2e6d84;
+    background: #a1cede;
+}
+
+.admin-bar .tool-right {
+    float: right;
+}
+
+.admin-menu {
+    height: 100%;
+
+    width: 160px;
+    background: #23282d;
+}
+
+.admin-menu .menu1 {
+}
+
+.admin-menu a {
+    display: block;
+    padding: 12px 5px 12px 5px;
+
+    color: #ddd;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    -webkit-transition: background 0.5s; /* Safari prior 6.1 */
+    transition: background 0.5s;
+    text-decoration: none;
+}
+
+.admin-menu a:hover {
+    background: #429cbd;
+}
+
+.admin-menu a.clicked {
+    background: #0073aa;
+    color: white;
+}
+
+.content {
+    display: inline-block;
+    margin: 20px 0 0 5%;
+    width: 89%;
+
+    background: white;
+}
+
+.content h3 {
+    margin: 0 0 30px 0;
+    padding: 5px;
+
+    background: #d9ebf2;
+}
+
+.content h3 i {
+    top: 3px;
+}
+
+.content .contentForm1 {
+    margin-left: 30px;
+
+}
+
+.content .contentForm1 .error {
+    color: red;
+}
+
+.content .contentForm1 > div {
+    margin-top: 15px;
+}
+
+.content .contentForm1 div label {
+    display: inline-block;
+    padding: 0px 25px 0px 10px;
+}
+
+.content .contentForm1 div textarea {
+    width: 95%;
+    margin: 10px 0px 20px 0px;
+    padding: 5px;
+}
+
+.content .contentForm1 div input {
+    padding: 3px;
+}
+
+.content .contentForm1 .correctItemSet {
+    padding: 0px 15px 0px 15px;
+}
+
+.content .contentForm1 button {
+    margin: 30px 0px 0px 15px;
+    padding: 10px 25px 10px 25px;
+
+    color: white;
+    background: #2e6d84;
+    border: 0px solid transparent;
+    -webkit-transition: background 0.5s; /* Safari prior 6.1 */
+    transition: background 0.5s;
+}
+
+.content .contentForm1 button:hover {
+    background: #429cbd;
+}
+
+.content .contentForm2 label {
+    margin-left: 5px;
+}
+
+.content .contentForm2 input {
+    margin: 0px 5px 0px 5px;
+    font-size: 10px;
+}
+
+.content .contentForm2 input[type=radio] {
+    position: relative;
+
+    top: 3px;
+}
+
+.content .contentForm2 .searchBtn {
+    text-align: right;
+}
+
+.content .contentForm2 button {
+    margin: 0px 0px 0px 15px;
+    padding: 10px 25px 10px 25px;
+
+    color: white;
+    background: #2e6d84;
+    border: 0px solid transparent;
+    -webkit-transition: background 0.5s; /* Safari prior 6.1 */
+    transition: background 0.5s;
+}
+
+.content .contentForm2 button:hover {
+    background: #429cbd;
+}
+
+.content .hrReset {
+    margin: 5px 0px 20px 10px;
+}
+
+.content .redNote {
+    margin: 0px 0px 0px 0px;
+    color: red;
+}
+
+.content .addItem {
+    margin: 15px;
+
+    text-decoration: none;
+    color: #2e6d84;
+}
+
+.content .contentTable1 {
+    margin: 15px;
+    width: 95%;
+}
+
+.content .contentTable1 thead {
+    color: white;
+    background: #2e6d84;
+}
+
+.content .contentTable1 td {
+    padding: 5px;
+}
+
+.content .contentTable1 a {
+    color: #429cbd;
+    text-decoration: none;
+}
+
+.content .contentTable1 a:hover {
+    color: #2e6d84;
+}
+
+.content .contentTable2 {
+    margin-left: 10px;
+    width: 95%;
+}
+
+.content .contentTable2 thead {
+    color: white;
+    background: #2e6d84;
+}
+
+.content .contentTable2 td {
+    padding: 5px;
+}
+
+.content .contentTable2 a {
+    color: #429cbd;
+    text-decoration: none;
+}
+
+.content .contentTable2 a:hover {
+    color: #2e6d84;
+}
+
+.content .pageData1 {
+    position: relative;
+    top: -40px;
+    margin-right: 40px;
+
+    text-align: right;
+}
+
+.content .paginationCenter {
+    text-align: center;
+}
+
+.content .pagination {
+    margin: 15px;
+    width: 95%;
+
+}
+
+.content .pagination label {
+    margin: 0;
+    padding: 5px;
+
+    color: #2e6d84;
+    border: 1px solid #2e6d84;
+}
+
+.content .pagination a {
+    padding: 5px 5px 7px 5px;
+
+    color: white;
+    background: #2e6d84;
+    border: 1px solid #2e6d84;
+}
+
+.content .pagination a:hover {
+    color: #2e6d84;
+    background: white;
+}
+
+.content .contentInfo1 {
+    padding: 10px;
+}
