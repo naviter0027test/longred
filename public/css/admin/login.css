@@ -1,8 +1,12 @@
-.loginForm {
+.loginDiv {
     margin-top: 20px;
     margin-left: 33%;
-    padding: 26px 24px 46px;
     width: 320px;
+}
+
+.loginForm {
+    margin-top: 20px;
+    padding: 26px 24px 46px;
 
     background: white;
     box-shadow: 0 1px 3px rgba(0,0,0,.13);
