@@ -8,28 +8,33 @@
         <link href='/css/admin/body.css' rel='stylesheet' />
     </head>
     <body>
-        <div class="admin-bar">
-            <span>長鴻系統</span>
-            <div class="tool-right">
-                <a href="/admin/logout">登出</a>
+@include('admin.layout.menu')
+        <div class="content">
+            <h3>通知中心</h3>
+            <div class="notify">
+                <i class="glyphicon glyphicon-bell" ></i>
+                <span class="date">2019-08-02</span>
+                <span class="notify-content">這究得飛料民了然興何？腦見著作需益黃我出手岸電喜維行四展是地生條來農交眾商農大越示動十有。路望受式的可以走或經次裡、積門當應各手的如的使美起有麼在生中個在。</span>
             </div>
-        </div>
-        <div class="admin-menu">
-            <div class="menu1">
-                <a href="/admin/home" class="clicked glyphicon glyphicon-bell">
-                通知中心</a>
+            <div class="notify">
+                <i class="glyphicon glyphicon-bell" ></i>
+                <span class="date">2019-08-02</span>
+                <span class="notify-content">這究得飛料民了然興何？腦見著作需益黃我出手岸電喜維行四展是地生條來農交眾商農大越示動十有。路望受式的可以走或經次裡、積門當應各手的如的使美起有麼在生中個在。</span>
             </div>
-            <div class="menu1">
-                <a href="/admin/setting" class="glyphicon glyphicon-lock">
-                密碼更改</a>
+            <div class="notify">
+                <i class="glyphicon glyphicon-bell" ></i>
+                <span class="date">2019-08-02</span>
+                <span class="notify-content">這究得飛料民了然興何？腦見著作需益黃我出手岸電喜維行四展是地生條來農交眾商農大越示動十有。路望受式的可以走或經次裡、積門當應各手的如的使美起有麼在生中個在。</span>
             </div>
-            <div class="menu1">
-                <a href="/admin/record" class="glyphicon glyphicon-th-list">
-                案件查詢</a>
+            <div class="notify">
+                <i class="glyphicon glyphicon-bell" ></i>
+                <span class="date">2019-08-02</span>
+                <span class="notify-content">這究得飛料民了然興何？腦見著作需益黃我出手岸電喜維行四展是地生條來農交眾商農大越示動十有。路望受式的可以走或經次裡、積門當應各手的如的使美起有麼在生中個在。</span>
             </div>
-            <div class="menu1">
-                <a href="/admin/grant" class="glyphicon glyphicon-eur">
-                撥款查詢</a>
+            <div class="notify">
+                <i class="glyphicon glyphicon-bell" ></i>
+                <span class="date">2019-08-02</span>
+                <span class="notify-content">這究得飛料民了然興何？腦見著作需益黃我出手岸電喜維行四展是地生條來農交眾商農大越示動十有。路望受式的可以走或經次裡、積門當應各手的如的使美起有麼在生中個在。</span>
             </div>
         </div>
     </body>

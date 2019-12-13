@@ -57,7 +57,8 @@ body {
 }
 
 .admin-menu {
-    height: 100%;
+    display: inline-block;
+    height: 700px;
 
     width: 160px;
     background: #23282d;
@@ -90,173 +91,107 @@ body {
 
 .content {
     display: inline-block;
-    margin: 20px 0 0 5%;
-    width: 89%;
+    margin: 20px 0 0 5px;
+    padding: 0 0 0 10px;
+    width: 75%;
 
-    background: white;
+    vertical-align: top;
 }
 
 .content h3 {
     margin: 0 0 30px 0;
-    padding: 5px;
+    padding: 5px 5px 5px 10px;
 
-    background: #d9ebf2;
+    border-left: 3px solid #0073aa;
 }
 
 .content h3 i {
     top: 3px;
 }
 
-.content .contentForm1 {
-    margin-left: 30px;
+.content .notify {
+    padding: 10px;
+    margin-top: 10px;
 
+    background: white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
 
-.content .contentForm1 .error {
-    color: red;
-}
-
-.content .contentForm1 > div {
-    margin-top: 15px;
-}
-
-.content .contentForm1 div label {
+.content .notify i {
     display: inline-block;
-    padding: 0px 25px 0px 10px;
+    margin-left: 5px;
+    width: 3%;
+
+    color: #eea236;
+    font-size: 18px;
+    vertical-align: top;
 }
 
-.content .contentForm1 div textarea {
-    width: 95%;
-    margin: 10px 0px 20px 0px;
+.content .notify span {
+    display: inline-block;
+    margin: 0 20px 0 20px;
+
+    vertical-align: top;
+}
+
+.content .notify span.date {
+    width: 8%;
+}
+
+.content .notify span.notify-content {
+    width: 70%;
+}
+
+.content .form1 {
+    padding: 10px;
+
+    background: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.content .form1 input {
+    padding: 5px;
+    margin: 2px 6px 13px 0;
+    width: 100%;
+
+    color: #32373c;
+    font-size: 18px;
+    background: #fbfbfb;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+    outline: 0;
+    border: 1px solid #ddd;
+}
+
+.content .table1 {
+    padding: 10px;
+    width: 100%;
+
+    background: white;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.content .table1 td {
     padding: 5px;
 }
 
-.content .contentForm1 div input {
+.content .table1 thead td {
+    color: #444;
+}
+
+.content .table1 tbody {
+    background: #f9f9f9;
+}
+
+.content .table1 tbody td a {
     padding: 3px;
 }
 
-.content .contentForm1 .correctItemSet {
-    padding: 0px 15px 0px 15px;
-}
-
-.content .contentForm1 button {
-    margin: 30px 0px 0px 15px;
-    padding: 10px 25px 10px 25px;
-
-    color: white;
-    background: #2e6d84;
-    border: 0px solid transparent;
-    -webkit-transition: background 0.5s; /* Safari prior 6.1 */
-    transition: background 0.5s;
-}
-
-.content .contentForm1 button:hover {
-    background: #429cbd;
-}
-
-.content .contentForm2 label {
-    margin-left: 5px;
-}
-
-.content .contentForm2 input {
-    margin: 0px 5px 0px 5px;
-    font-size: 10px;
-}
-
-.content .contentForm2 input[type=radio] {
-    position: relative;
-
-    top: 3px;
-}
-
-.content .contentForm2 .searchBtn {
-    text-align: right;
-}
-
-.content .contentForm2 button {
-    margin: 0px 0px 0px 15px;
-    padding: 10px 25px 10px 25px;
-
-    color: white;
-    background: #2e6d84;
-    border: 0px solid transparent;
-    -webkit-transition: background 0.5s; /* Safari prior 6.1 */
-    transition: background 0.5s;
-}
-
-.content .contentForm2 button:hover {
-    background: #429cbd;
-}
-
-.content .hrReset {
-    margin: 5px 0px 20px 10px;
-}
-
-.content .redNote {
-    margin: 0px 0px 0px 0px;
-    color: red;
-}
-
-.content .addItem {
-    margin: 15px;
-
-    text-decoration: none;
-    color: #2e6d84;
-}
-
-.content .contentTable1 {
-    margin: 15px;
-    width: 95%;
-}
-
-.content .contentTable1 thead {
-    color: white;
-    background: #2e6d84;
-}
-
-.content .contentTable1 td {
-    padding: 5px;
-}
-
-.content .contentTable1 a {
-    color: #429cbd;
-    text-decoration: none;
-}
-
-.content .contentTable1 a:hover {
-    color: #2e6d84;
-}
-
-.content .contentTable2 {
-    margin-left: 10px;
-    width: 95%;
-}
-
-.content .contentTable2 thead {
-    color: white;
-    background: #2e6d84;
-}
-
-.content .contentTable2 td {
-    padding: 5px;
-}
-
-.content .contentTable2 a {
-    color: #429cbd;
-    text-decoration: none;
-}
-
-.content .contentTable2 a:hover {
-    color: #2e6d84;
-}
-
-.content .pageData1 {
-    position: relative;
-    top: -40px;
-    margin-right: 40px;
-
-    text-align: right;
-}
 
 .content .paginationCenter {
     text-align: center;
@@ -273,22 +208,18 @@ body {
     padding: 5px;
 
     color: #2e6d84;
-    border: 1px solid #2e6d84;
+    border: 1px solid #23282d;
 }
 
 .content .pagination a {
     padding: 5px 5px 7px 5px;
 
     color: white;
-    background: #2e6d84;
-    border: 1px solid #2e6d84;
+    background: #23282d;
+    border: 1px solid #23282d;
 }
 
 .content .pagination a:hover {
     color: #2e6d84;
     background: white;
-}
-
-.content .contentInfo1 {
-    padding: 10px;
 }

@@ -17,7 +17,7 @@ class UserController extends Controller
     }
 
     public function passAdmin(Request $request) {
-        return view('admin.setting');
+        return view('admin.setting.index');
     }
 
     public function login(Request $request) {
