@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('setting', 'Admin\UserController@passUpdate');
 
     Route::get('record', function() { return view('admin/record/index'); });
+    Route::get('record/edit', function() { return view('admin/record/edit'); });
     Route::get('grant', function() { return view('admin/grant/index'); });
 
     Route::get('questions', 'Admin\QuestionController@lists');
