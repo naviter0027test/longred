@@ -70,6 +70,18 @@
                 <p> <input type="text" name="liense" /> </p>
                 <p class=""> <button class="btn">更改</button> </p>
             </form>
+
+            <div class="leaveMessage">
+                <h4>留言</h4>
+                <h5>申請者:</h5>
+                <p> 這究得飛料民了然興何？腦見著作需益黃我出手岸 </p>
+                <h5>管理者:</h5>
+                <p> 積門當應各手的如的使美起有麼在生中個在 </p>
+                <form action="/admin/message/reply" method="post">
+                    <p class=""> <textarea name="replyMsg"></textarea> </p>
+                    <p class=""> <button class="btn">回覆</button> </p>
+                </form>
+            </div>
         </div>
     </body>
     <script src="/lib/jquery-2.1.4.min.js"></script>
