@@ -12,8 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/admin/login');
 });
+
+Route::get('/application', function () {
+    return view('application');
+});
+
+Route::post('/application/create', 'ApplicationController@create');
 
 Route::group(['prefix' => 'admin'], function() {
 
