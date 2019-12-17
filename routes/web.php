@@ -19,6 +19,8 @@ Route::get('/application', function () {
     return view('application');
 });
 
+Route::post('/application/create', 'ApplicationController@create');
+
 Route::group(['prefix' => 'admin'], function() {
 
     Route::get('login', 'Admin\UserController@loginPage');

@@ -10,7 +10,7 @@
     <body>
         <div class="content">
             <h3>新增案件API模擬頁面</h3>
-            <form method='post' action='/application' class='form1' enctype="multipart/form-data">
+            <form method='post' action='/application/create' class='form1' enctype="multipart/form-data">
                 <h5>身份證字號(必填)</h5>
                 <p> <input type="text" name="CustGID" /> </p>
                 <h5>申請人姓名(必填)</h5>
