@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
+use App\Repositories\AdminRepository;
 use Session;
 
 class UserController extends Controller
@@ -21,6 +22,15 @@ class UserController extends Controller
     }
 
     public function login(Request $request) {
+        $params = $request->all();
+        $params['account'] = isset($params['account']) ? $params['account'] : '';
+        $params['password'] = isset($params['password']) ? $params['password'] : '';
+        $adminRepository = new AdminRepository();
+        $adm = $adminRepository->checkPassword($params);
+        if($adm != false) {
+            Session::put('admin', $adm);
+            return redirect('/admin/home');
+        }
         return view('admin.login');
     }
 

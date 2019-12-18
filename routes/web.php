@@ -21,7 +21,7 @@ Route::get('/application', function () {
 
 Route::post('/application/create', 'ApplicationController@create');
 
-Route::group(['prefix' => 'admin'], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['check.login']], function() {
 
     Route::get('login', 'Admin\UserController@loginPage');
     Route::post('login', 'Admin\UserController@login');
