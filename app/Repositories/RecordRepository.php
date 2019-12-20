@@ -47,4 +47,32 @@ class RecordRepository
             $files['CustGIDPicture2']->move($root. $path, $filename);
         }
     }
+
+    public function lists($params) {
+        $nowPage = isset($params['nowPage']) ? $params['nowPage'] : 1;
+        $offset = isset($params['offset']) ? $params['offset'] : 10;
+
+        $recordQuery = Record::orderBy('id', 'desc')
+            ->skip(($nowPage-1) * $offset)
+            ->take($offset);
+        if(isset($params['checkStatus'])) {
+            $recordQuery->where('checkStatus', '=', $params['checkStatus']);
+        }
+        if(isset($params['schedule'])) {
+            $recordQuery->where('schedule', '=', $params['schedule']);
+        }
+        $records = $recordQuery->get();
+        return $records;
+    }
+
+    public function listsAmount($params) {
+        $recordQuery = Record::orderBy('id', 'desc');
+        if(isset($params['checkStatus'])) {
+            $recordQuery->where('checkStatus', '=', $params['checkStatus']);
+        }
+        if(isset($params['schedule'])) {
+            $recordQuery->where('schedule', '=', $params['schedule']);
+        }
+        return $recordQuery->count();
+    }
 }

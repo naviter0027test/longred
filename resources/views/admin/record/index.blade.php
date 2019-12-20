@@ -25,132 +25,32 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($result['records'] as $record)
                     <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
+                        <td>{{ $record->CustGID }}</td>
+                        <td>{{ $record->applicant }}</td>
+                        <td>{{ $record->checkStatus }}</td>
+                        <td>{{ $record->allowDate }}</td>
+                        <td>{{ $record->productName }}</td>
+                        <td>{{ $record->applyAmount }}</td>
+                        <td>{{ $record->created_at }}</td>
                         <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
+                            <a href='/admin/record/edit/{{ $record->id }}' class="glyphicon glyphicon-pencil"></a>
+                            <a href='/admin/record/remove/{{ $record->id }}' class="glyphicon glyphicon-remove"></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
+                @endforeach
                 </tbody>
             </table>
 
             <div class="pagination paginationCenter">
-                <label>1</label>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
+            @for($i = 0; $i < ceil($result['amount'] / $offset); ++$i)
+                @if(($i+1) == $nowPage)
+                <label>{{ $i+1 }}</label>
+                @elseif(($i+1) != $nowPage)
+                <a href="/admin/record/?nowPage={{ $i+1 }}">{{ $i+1 }}</a>
+                @endif
+            @endfor
             </div>
         </div>
     </body>

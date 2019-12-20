@@ -10,7 +10,8 @@ use Session;
 class UserController extends Controller
 {
     public function home(Request $request) {
-        return view('admin.home');
+        $admin = Session::get('admin');
+        return view('admin.home', ['adm' => $admin]);
     }
 
     public function loginPage(Request $request) {
@@ -18,7 +19,8 @@ class UserController extends Controller
     }
 
     public function passAdmin(Request $request) {
-        return view('admin.setting.index');
+        $admin = Session::get('admin');
+        return view('admin.setting.index', ['adm' => $admin]);
     }
 
     public function login(Request $request) {
