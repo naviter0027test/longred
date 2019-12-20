@@ -227,3 +227,12 @@ body {
     color: #2e6d84;
     background: white;
 }
+
+.content .nav {
+    text-align: right;
+    margin: 0px 0px 20px 0px;
+}
+
+.content .nav .importCSV {
+    display: none;
+}

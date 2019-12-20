@@ -11,6 +11,15 @@
 @include('admin.layout.menu')
         <div class="content">
             <h3>案件查詢</h3>
+            <div class="nav">
+                <form method="post" action="/admin/record/import">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <input type="file" name="importCSV" class="importCSV" />
+                </form>
+                <a href="#" class="importBtn btn">
+                    CSV 匯入
+                </a>
+            </div>
             <table class="table1">
                 <thead>
                     <tr>
@@ -36,7 +45,7 @@
                         <td>{{ $record->created_at }}</td>
                         <td>
                             <a href='/admin/record/edit/{{ $record->id }}' class="glyphicon glyphicon-pencil"></a>
-                            <a href='/admin/record/remove/{{ $record->id }}' class="glyphicon glyphicon-remove"></a>
+                            <a href='/admin/record/remove/{{ $record->id }}' class="glyphicon glyphicon-remove recordRemove"></a>
                         </td>
                     </tr>
                 @endforeach
@@ -55,5 +64,6 @@
         </div>
     </body>
     <script src="/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/admin/record/index.js"></script>
 </html>
 
