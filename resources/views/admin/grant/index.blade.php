@@ -47,8 +47,8 @@
             @for($i = 0; $i < ceil($result['amount'] / $offset); ++$i)
                 @if(($i+1) == $nowPage)
                 <label>{{ $i+1 }}</label>
-                @elseif(($i+1) != $nowPage)
-                <a href="/admin/record/?nowPage={{ $i+1 }}">{{ $i+1 }}</a>
+                @elseif(($i+1) != $nowPage && abs($i+1-$nowPage) < 5)
+                <a href="/admin/grant/?nowPage={{ $i+1 }}">{{ $i+1 }}</a>
                 @endif
             @endfor
             </div>

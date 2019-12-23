@@ -12,6 +12,6 @@ $(document).ready(function() {
     });
 
     $('[name=importCSV]').on('change', function() {
-        console.log('start import');
+        $('.importForm').submit();
     });
 });

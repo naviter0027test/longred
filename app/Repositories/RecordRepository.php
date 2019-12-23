@@ -75,4 +75,54 @@ class RecordRepository
         }
         return $recordQuery->count();
     }
+
+    public function import($file) {
+        $content = \File::get($file->getRealPath());
+        $arr = preg_split("/\n/", $content);
+        $resultRow = [];
+        foreach($arr as $i => $row) {
+            try {
+                $csv = str_getcsv($row, ",");
+                $this->importRow($csv);
+                $resultRow[$i] = [
+                    'status' => true,
+                    'msg' => 'success',
+                ];
+            } catch (\Exception $e) {
+                $resultRow[$i] = [
+                    'status' => false,
+                    'msg' => $e->getMessage(),
+                ];
+            }
+        }
+        return $resultRow;
+    }
+
+    public function importRow($row) {
+        if(isset($row[0]) == false) {
+            throw new \Exception('submitId 必填');
+        }
+        $record = Record::where('submitId', '=', $row[0])
+            ->first();
+        //已存在的情況下，視為編輯。相反則是為新增
+        if(isset($record->id)) {
+        } else {
+            $record = new Record;
+            $record->submitId = isset($row[0]) ? $row[0] : '';
+            $record->applicant = isset($row[2]) ? $row[2] : '';
+            $record->checkStatus = isset($row[3]) ? $row[3] : '處理中';
+            $record->applyAmount = isset($row[9]) ? $row[9] : 0;
+            $record->loanAmount = isset($row[10]) ? $row[10] : 0;
+            $record->periods = isset($row[11]) ? $row[11] : 1;
+            $record->periodAmount = isset($row[12]) ? $row[12] : 0;
+            $record->content = isset($row[13]) ? $row[13] : '';
+            $record->schedule = isset($row[14]) ? $row[14] : '尚未撥款';
+            //$record->grantDate = $row[23];
+            $record->grantAmount = isset($row[16]) ? $row[16] : 0;
+            $record->liense = isset($row[20]) ? $row[20] : '';
+            $record->productName = isset($row[24]) ? $row[24] : '';
+            $record->CustGID = isset($row[25]) ? $row[25] : '';
+        }
+        $record->save();
+    }
 }

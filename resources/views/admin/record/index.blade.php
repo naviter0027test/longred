@@ -12,7 +12,7 @@
         <div class="content">
             <h3>案件查詢</h3>
             <div class="nav">
-                <form method="post" action="/admin/record/import">
+                <form method="post" action="/admin/record/import" enctype="multipart/form-data" class="importForm">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <input type="file" name="importCSV" class="importCSV" />
                 </form>
@@ -56,7 +56,7 @@
             @for($i = 0; $i < ceil($result['amount'] / $offset); ++$i)
                 @if(($i+1) == $nowPage)
                 <label>{{ $i+1 }}</label>
-                @elseif(($i+1) != $nowPage)
+                @elseif(($i+1) != $nowPage && abs($i+1-$nowPage) < 5)
                 <a href="/admin/record/?nowPage={{ $i+1 }}">{{ $i+1 }}</a>
                 @endif
             @endfor

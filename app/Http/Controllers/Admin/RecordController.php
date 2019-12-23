@@ -57,4 +57,19 @@ class RecordController extends Controller
         }
         return view('admin/grant/index', ['adm' => $admin, 'result' => $result, 'offset' => $offset, 'nowPage' => $nowPage]);
     }
+
+    public function import(Request $request) {
+        $admin = Session::get('admin');
+        $file = null;
+        $result = [
+            'rows' => [],
+        ];
+        if($request->hasFile('importCSV'))
+            $file = $request->file('importCSV');
+        if($file != null) {
+            $recordRepository = new RecordRepository();
+            $result['rows'] = $recordRepository->import($file);
+        }
+        return view('admin/record/importResult', ['adm' => $admin, 'result' => $result]);
+    }
 }
