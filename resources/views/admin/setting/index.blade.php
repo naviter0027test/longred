@@ -14,14 +14,27 @@
             <form method='post' action='/admin/setting' class='form1'>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <h5>請輸入舊密碼:</h5>
-                <p> <input type="password" name="passwordOld" /> </p>
+                <p>
+                    <input type="password" name="passwordOld" id="passwordOld" required /> 
+                    <label for="passwordOld" class="error col-xs-12"></label>
+                </p>
                 <h5>請輸入新密碼:</h5>
-                <p> <input type="password" name="password" /> </p>
+                <p>
+                    <input type="password" name="password" id="password" required />
+                    <label for="password" class="error col-xs-12"></label>
+                </p>
                 <h5>請輸入新密碼:</h5>
-                <p> <input type="password" name="passwordConfirm" /> </p>
+                <p>
+                    <input type="password" name="passwordConfirm" id="passwordConfirm" required />
+                    <label for="passwordConfirm" class="error col-xs-12"></label>
+                </p>
                 <p class="loginBtnP"> <button class="btn">更改</button> </p>
             </form>
         </div>
     </body>
     <script src="/lib/jquery-2.1.4.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="/lib/jquery-validation/dist/localization/messages_zh_TW.min.js"></script>
+    <script src="/js/admin/setting/index.js"></script>
 </html>
