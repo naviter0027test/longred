@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use \App\Http\Controllers\Controller;
 use App\Repositories\AdminRepository;
 use Session;
+use Exception;
 
 class UserController extends Controller
 {
@@ -42,5 +43,22 @@ class UserController extends Controller
     }
 
     public function passUpdate(Request $request) {
+        $admin = Session::get('admin');
+        $params = $request->all();
+        $params['account'] = $admin->account;
+        $result = [
+            'result' => true,
+            'msg' => 'success',
+        ];
+
+        try {
+            $adminRepository = new AdminRepository();
+            $adminRepository->updatePassword($params);
+        }
+        catch(Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+        return view('admin.proccessResult', ['adm' => $admin, 'result' => $result]);
     }
 }
