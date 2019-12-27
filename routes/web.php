@@ -45,7 +45,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['check.login']], function() 
     Route::post('account/create', 'Admin\AccountController@create');
     Route::get( 'account/edit/{id}', 'Admin\AccountController@edit');
     Route::post('account/edit/{id}', 'Admin\AccountController@update');
-    Route::get( 'account/del/{id}', 'Admin\AccountController@del');
+    Route::get( 'account/remove/{id}', 'Admin\AccountController@remove');
 
     Route::get('result', 'Admin\ResultController@lists');
     Route::get('result/excelExport', 'Admin\ResultController@excelExport');

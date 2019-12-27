@@ -44,5 +44,35 @@ class AccountRepository
         $account->active = isset($params['active']) ? $params['active'] : 0;
         $account->save();
     }
+
+    public function getById($id) {
+        $account = Account::where('id', '=', $id)
+            ->first();
+        if(isset($account->id) == false)
+            throw new Exception('帳號不存在');
+        return $account;
+    }
+
+    public function update($id, $params) {
+        $accountTmp = isset($params['account']) ? $params['account'] : '';
+        $account = Account::where('id', '=', $id)
+            ->first();
+        $account->account = $accountTmp;
+        if(isset($params['password']) && $params['password'] != '')
+            $account->password = md5($params['password']);
+        $account->name = isset($params['name']) ? $params['name'] : '';
+        $account->email = isset($params['email']) ? $params['email'] : '';
+        $account->phone = isset($params['phone']) ? $params['phone'] : '';
+        $account->active = isset($params['active']) ? $params['active'] : 0;
+        $account->save();
+    }
+
+    public function delById($id) {
+        $account = Account::where('id', '=', $id)
+            ->first();
+        if(isset($account->id) == false)
+            throw new Exception('帳號不存在');
+        $account->delete();
+    }
 }
 

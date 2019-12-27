@@ -55,4 +55,56 @@ class AccountController extends Controller
         }
         return view('admin.account.createResult', ['adm' => $admin, 'result' => $result]);
     }
+
+    public function edit(Request $request, $id) {
+        $admin = Session::get('admin');
+        $result = [
+            'result' => true,
+            'msg' => 'success',
+        ];
+        try {
+            $accountRepository = new AccountRepository();
+            $result['account'] = $accountRepository->getById($id);
+        }
+        catch(Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+        return view('admin.account.edit', ['adm' => $admin, 'result' => $result]);
+    }
+
+    public function update(Request $request, $id) {
+        $admin = Session::get('admin');
+        $params = $request->all();
+        $result = [
+            'result' => true,
+            'msg' => '編輯成功',
+        ];
+        try {
+            $accountRepository = new AccountRepository();
+            $result['account'] = $accountRepository->update($id, $params);
+        }
+        catch(Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+        return view('admin.account.createResult', ['adm' => $admin, 'result' => $result]);
+    }
+
+    public function remove(Request $request, $id) {
+        $admin = Session::get('admin');
+        $result = [
+            'result' => true,
+            'msg' => '刪除成功',
+        ];
+        try {
+            $accountRepository = new AccountRepository();
+            $accountRepository->delById($id);
+        }
+        catch(Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+        return view('admin.account.createResult', ['adm' => $admin, 'result' => $result]);
+    }
 }

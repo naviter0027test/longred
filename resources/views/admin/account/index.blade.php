@@ -23,6 +23,7 @@
                         <td>名稱</td>
                         <td>手機</td>
                         <td>Email</td>
+                        <td>狀態</td>
                         <td>建立日期</td>
                         <td>操作</td>
                     </tr>
@@ -34,10 +35,11 @@
                         <td>{{ $account->name }}</td>
                         <td>{{ $account->phone }}</td>
                         <td>{{ $account->email }}</td>
+                        <td>{{ $account->active == 1 ? '啟用' : '未啟用' }}</td>
                         <td>{{ $account->created_at }}</td>
                         <td>
                             <a href='/admin/account/edit/{{ $account->id }}' class="glyphicon glyphicon-pencil"></a>
-                            <a href='/admin/account/remove/{{ $account->id }}' class="glyphicon glyphicon-remove"></a>
+                            <a href='/admin/account/remove/{{ $account->id }}' class="glyphicon glyphicon-remove del"></a>
                         </td>
                     </tr>
                 @endforeach
@@ -56,5 +58,6 @@
         </div>
     </body>
     <script src="/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/admin/account/index.js"></script>
 </html>
 

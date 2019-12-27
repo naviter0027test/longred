@@ -10,7 +10,7 @@
     <body>
 @include('admin.layout.menu')
         <div class="content">
-            <h3>新增結果</h3>
+            <h3>結果</h3>
             <div class="nav">
             </div>
             <table class="table1">
