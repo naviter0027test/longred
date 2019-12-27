@@ -21,6 +21,11 @@ Route::get('/application', function () {
 
 Route::post('/application/create', 'ApplicationController@create');
 
+Route::group(['prefix' => 'telegram'], function() {
+    Route::any('test', 'TelegramController@test');
+    Route::get('login', 'TelegramController@login');
+});
+
 Route::group(['prefix' => 'admin', 'middleware' => ['check.login']], function() {
 
     Route::get('login', 'Admin\UserController@loginPage');
