@@ -11,7 +11,6 @@ class AdminRepository
             ->where('password', '=', md5($params['password']))
             ->first();
         if(isset($adm->id)) {
-            \Log::info($adm->toArray());
             return $adm;
         }
         return false;

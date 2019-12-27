@@ -40,12 +40,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['check.login']], function() 
     Route::post('record/import', 'Admin\RecordController@import');
     Route::get('grant', 'Admin\RecordController@grant');
 
-    Route::get('questions', 'Admin\QuestionController@lists');
-    Route::get('questions/create', 'Admin\QuestionController@createPage');
-    Route::post('questions/create', 'Admin\QuestionController@create');
-    Route::get('questions/edit/{id}', 'Admin\QuestionController@edit');
-    Route::post('questions/edit/{id}', 'Admin\QuestionController@update');
-    Route::get('questions/del/{id}', 'Admin\QuestionController@del');
+    Route::get( 'account', 'Admin\AccountController@lists');
+    Route::get( 'account/create', 'Admin\AccountController@createPage');
+    Route::post('account/create', 'Admin\AccountController@create');
+    Route::get( 'account/edit/{id}', 'Admin\AccountController@edit');
+    Route::post('account/edit/{id}', 'Admin\AccountController@update');
+    Route::get( 'account/del/{id}', 'Admin\AccountController@del');
 
     Route::get('result', 'Admin\ResultController@lists');
     Route::get('result/excelExport', 'Admin\ResultController@excelExport');
