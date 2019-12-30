@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['check.login']], function() 
 
     Route::get('record', 'Admin\RecordController@index');
     Route::get('record/edit/{id}', 'Admin\RecordController@edit');
+    Route::post('record/edit/{id}', 'Admin\RecordController@update');
     Route::post('record/import', 'Admin\RecordController@import');
     Route::get('grant', 'Admin\RecordController@grant');
 

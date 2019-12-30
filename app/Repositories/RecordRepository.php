@@ -63,6 +63,14 @@ class RecordRepository
             $recordQuery->where('schedule', '=', $params['schedule']);
         }
         $records = $recordQuery->get();
+        foreach($records as $record) {
+            if(is_null($record->allowDate) == false) {
+                $record->allowDate = date('Y-m-d', strtotime($record->allowDate));
+            }
+            if(is_null($record->grantDate) == false) {
+                $record->grantDate = date('Y-m-d', strtotime($record->grantDate));
+            }
+        }
         return $records;
     }
 
@@ -138,5 +146,67 @@ class RecordRepository
         if(is_null($record->grantDate) == false)
             $record->grantDateVal = date('Y-m-d', strtotime($record->grantDate));
         return $record;
+    }
+
+    public function updateById($id, $params, $files = []) {
+        $record = Record::where('id', '=', $id)
+            ->first();
+        if(isset($record->id) == false) {
+            throw new Exception('案件不存在');
+        }
+        $record->CustGID = isset($params['CustGID']) ? $params['CustGID'] : '';
+        $record->applicant = isset($params['applicant']) ? $params['applicant'] : '';
+        $record->inCharge = isset($params['inCharge']) ? $params['inCharge'] : '';
+        if(isset($params['allowDate']) && is_null($params['allowDate']) == false)
+            $record->allowDate = $params['allowDate']. ' 00:00:00';
+        $record->productName = isset($params['productName']) ? $params['productName'] : '';
+        $record->applyAmount = isset($params['applyAmount']) ? $params['applyAmount'] : 0;
+        $record->loanAmount = isset($params['loanAmount']) ? $params['loanAmount'] : 0;
+        $record->periods = isset($params['periods']) ? $params['periods'] : 0;
+        $record->periodAmount = isset($params['periodAmount']) ? $params['periodAmount'] : 0;
+        $record->content = isset($params['content']) ? $params['content'] : '';
+        if(isset($params['grantDate']) && is_null($params['grantDate']) == false)
+            $record->grantDate = $params['grantDate']. ' 00:00:00';
+        $record->grantAmount = isset($params['grantAmount']) ? $params['grantAmount'] : 0;
+        $record->liense = isset($params['liense']) ? $params['liense'] : '';
+
+
+        if(isset($params['checkStatus']) && is_null($params['checkStatus']) == false) {
+            $record->checkStatus =  $params['checkStatus'];
+        }
+        if(isset($params['schedule']) && is_null($params['schedule']) == false) {
+            $record->schedule = $params['schedule'];
+        }
+
+        $record->save();
+
+        $root = config('filesystems')['disks']['uploads']['root'];
+        $path = date('/Y/m'). '/';
+        if(isset($files['CustGIDPicture1'])) {
+            if(trim($record->CustGIDPicture1) == '') {
+                $ext = $files['CustGIDPicture1']->getClientOriginalExtension();
+                $filename = $record->id. "_pic1.$ext";
+                $record->CustGIDPicture1 = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->CustGIDPicture1);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['CustGIDPicture1']->move($root. $path, $filename);
+        }
+        if(isset($files['CustGIDPicture2'])) {
+            if(trim($record->CustGIDPicture2) == '') {
+                $ext = $files['CustGIDPicture2']->getClientOriginalExtension();
+                $filename = $record->id. "_pic2.$ext";
+                $record->CustGIDPicture2 = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->CustGIDPicture2);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['CustGIDPicture2']->move($root. $path, $filename);
+        }
     }
 }

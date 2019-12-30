@@ -14,7 +14,7 @@
             @if($result['result'] == false) 
             {{ $result['msg'] }}
             @else
-            <form method='post' action='/admin/record/edit' class='form1' enctype="multipart/form-data">
+            <form method='post' action='/admin/record/edit/{{ $result['record']->id }}' class='form1' enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <h5>身份證字號</h5>
                 <p> <input type="text" name="CustGID" value="{{ $result['record']->CustGID }}" /> </p>
@@ -41,7 +41,7 @@
                     <input type="file" name="CustGIDPicture1" /> </p>
                 <h5>身份證照片 反面 </h5>
                 <p>
-                @if($result['record']->CustGIDPicture1 != '')
+                @if($result['record']->CustGIDPicture2 != '')
                     <img src="/uploads{{ $result['record']->CustGIDPicture2 }}" class="custPic" /> <br />
                 @else
                     無<br />

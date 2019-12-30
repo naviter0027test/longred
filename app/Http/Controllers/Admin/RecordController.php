@@ -49,6 +49,29 @@ class RecordController extends Controller
         return view('admin/record/edit', ['adm' => $admin, 'result' => $result]);
     }
 
+    public function update(Request $request, $id) {
+        $admin = Session::get('admin');
+        $params = $request->all();
+        $files = [];
+        $result = [
+            'result' => true,
+            'msg' => 'success',
+        ];
+        if($request->hasFile('CustGIDPicture1'))
+            $files['CustGIDPicture1'] = $request->file('CustGIDPicture1');
+        if($request->hasFile('CustGIDPicture2'))
+            $files['CustGIDPicture2'] = $request->file('CustGIDPicture2');
+
+        try {
+            $recordRepository = new RecordRepository();
+            $recordRepository->updateById($id, $params, $files);
+        } catch (Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+        return view('admin.proccessResult', ['adm' => $admin, 'result' => $result]);
+    }
+
     public function grant(Request $request) {
         $params = $request->all();
         $nowPage = isset($params['nowPage']) ? $params['nowPage'] : 1;
