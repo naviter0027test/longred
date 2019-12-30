@@ -7,6 +7,7 @@ use \App\Http\Controllers\Controller;
 use App\Repositories\AdminRepository;
 use App\Repositories\RecordRepository;
 use Session;
+use Exception;
 
 class RecordController extends Controller
 {
@@ -33,7 +34,19 @@ class RecordController extends Controller
 
     public function edit(Request $request, $id) {
         $admin = Session::get('admin');
-        return view('admin/record/edit', ['adm' => $admin]);
+        $result = [
+            'result' => true,
+            'msg' => 'success',
+        ];
+        try {
+            $recordRepository = new RecordRepository();
+            $result['record'] = $recordRepository->getById($id);
+        }
+        catch(Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+        return view('admin/record/edit', ['adm' => $admin, 'result' => $result]);
     }
 
     public function grant(Request $request) {

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Record;
+use Exception;
 
 class RecordRepository
 {
@@ -124,5 +125,18 @@ class RecordRepository
             $record->CustGID = isset($row[25]) ? $row[25] : '';
         }
         $record->save();
+    }
+
+    public function getById($id) {
+        $record = Record::where('id', '=', $id)
+            ->first();
+        if(isset($record->id) == false) {
+            throw new Exception('案件不存在');
+        }
+        if(is_null($record->allowDate) == false)
+            $record->allowDateVal = date('Y-m-d', strtotime($record->allowDate));
+        if(is_null($record->grantDate) == false)
+            $record->grantDateVal = date('Y-m-d', strtotime($record->grantDate));
+        return $record;
     }
 }
