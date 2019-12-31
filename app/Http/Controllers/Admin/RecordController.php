@@ -64,7 +64,7 @@ class RecordController extends Controller
 
         try {
             $recordRepository = new RecordRepository();
-            $recordRepository->updateById($id, $params, $files);
+            $recordRepository->updateById($id, $params, $admin, $files);
         } catch (Exception $e) {
             $result['result'] = false;
             $result['msg'] = $e->getMessage();
@@ -104,7 +104,7 @@ class RecordController extends Controller
             $file = $request->file('importCSV');
         if($file != null) {
             $recordRepository = new RecordRepository();
-            $result['rows'] = $recordRepository->import($file);
+            $result['rows'] = $recordRepository->import($file, $admin);
         }
         return view('admin/record/importResult', ['adm' => $admin, 'result' => $result]);
     }

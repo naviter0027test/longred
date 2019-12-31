@@ -85,14 +85,14 @@ class RecordRepository
         return $recordQuery->count();
     }
 
-    public function import($file) {
+    public function import($file, $admin) {
         $content = \File::get($file->getRealPath());
         $arr = preg_split("/\n/", $content);
         $resultRow = [];
         foreach($arr as $i => $row) {
             try {
                 $csv = str_getcsv($row, ",");
-                $this->importRow($csv);
+                $this->importRow($csv, $admin);
                 $resultRow[$i] = [
                     'status' => true,
                     'msg' => 'success',
@@ -107,7 +107,7 @@ class RecordRepository
         return $resultRow;
     }
 
-    public function importRow($row) {
+    public function importRow($row, $admin) {
         if(isset($row[0]) == false) {
             throw new \Exception('submitId 必填');
         }
@@ -115,6 +115,48 @@ class RecordRepository
             ->first();
         //已存在的情況下，視為編輯。相反則是為新增
         if(isset($record->id)) {
+            $record->applicant = isset($row[2]) ? $row[2] : '';
+            $record->applyAmount = isset($row[9]) ? $row[9] : 0;
+            $record->loanAmount = isset($row[10]) ? $row[10] : 0;
+            $record->periods = isset($row[11]) ? $row[11] : 1;
+            $record->periodAmount = isset($row[12]) ? $row[12] : 0;
+            $record->content = isset($row[13]) ? $row[13] : '';
+            //$record->grantDate = $row[23];
+            $record->grantAmount = isset($row[16]) ? $row[16] : 0;
+            $record->liense = isset($row[20]) ? $row[20] : '';
+            $record->productName = isset($row[24]) ? $row[24] : '';
+            $record->CustGID = isset($row[25]) ? $row[25] : '';
+
+            $checkArr = [
+                '處理中',
+                '待核准',
+                '核准',
+                '取消申辦',
+                '婉拒',
+            ];
+            if(isset($row[3]) && in_array($row[3], $checkArr) == true) {
+                if($record->checkStatus != $row[3]) {
+                    $oldStatus = $record->checkStatus;
+                    $newStatus = $row[3];
+                    $messageRepository = new MessageRepository();
+                    $messageRepository->statusUpdate($record->id, "審核狀況:$oldStatus -> $newStatus", $admin->id);
+                }
+                $record->checkStatus = $row[3];
+            }
+            $scheduleArr = [
+                '已撥款',
+                '尚未撥款',
+                '支票已出',
+            ];
+            if(isset($row[14]) && in_array($row[14], $scheduleArr) == true) {
+                if($record->schedule != $row[14]) {
+                    $oldStatus = $record->schedule;
+                    $newStatus = $row[14];
+                    $messageRepository = new MessageRepository();
+                    $messageRepository->statusUpdate($record->id, "撥款狀況:$oldStatus -> $newStatus", $admin->id);
+                }
+                $record->schedule = $row[14];
+            }
         } else {
             $record = new Record;
             $record->submitId = isset($row[0]) ? $row[0] : '';
@@ -148,7 +190,7 @@ class RecordRepository
         return $record;
     }
 
-    public function updateById($id, $params, $files = []) {
+    public function updateById($id, $params, $admin, $files = []) {
         $record = Record::where('id', '=', $id)
             ->first();
         if(isset($record->id) == false) {
@@ -172,9 +214,21 @@ class RecordRepository
 
 
         if(isset($params['checkStatus']) && is_null($params['checkStatus']) == false) {
+            if($record->checkStatus != $params['checkStatus']) {
+                $oldStatus = $record->checkStatus;
+                $newStatus = $params['checkStatus'];
+                $messageRepository = new MessageRepository();
+                $messageRepository->statusUpdate($record->id, "審核狀況:$oldStatus -> $newStatus", $admin->id);
+            }
             $record->checkStatus =  $params['checkStatus'];
         }
         if(isset($params['schedule']) && is_null($params['schedule']) == false) {
+            if($record->schedule != $params['schedule']) {
+                $oldStatus = $record->schedule;
+                $newStatus = $params['schedule'];
+                $messageRepository = new MessageRepository();
+                $messageRepository->statusUpdate($record->id, "撥款狀況:$oldStatus -> $newStatus", $admin->id);
+            }
             $record->schedule = $params['schedule'];
         }
 
