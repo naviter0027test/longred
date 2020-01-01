@@ -29,7 +29,7 @@ class RecordController extends Controller
             $result['result'] = false;
             $result['msg'] = $e->getMessage();
         }
-        return view('admin/record/index', ['adm' => $admin, 'result' => $result, 'offset' => $offset, 'nowPage' => $nowPage]);
+        return view('admin/record/index', ['adm' => $admin, 'result' => $result, 'offset' => $offset, 'nowPage' => $nowPage, 'params' => $params]);
     }
 
     public function edit(Request $request, $id) {
@@ -91,7 +91,7 @@ class RecordController extends Controller
             $result['result'] = false;
             $result['msg'] = $e->getMessage();
         }
-        return view('admin/grant/index', ['adm' => $admin, 'result' => $result, 'offset' => $offset, 'nowPage' => $nowPage]);
+        return view('admin/grant/index', ['adm' => $admin, 'result' => $result, 'offset' => $offset, 'nowPage' => $nowPage, 'params' => $params]);
     }
 
     public function import(Request $request) {

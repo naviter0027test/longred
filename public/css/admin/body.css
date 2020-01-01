@@ -144,6 +144,14 @@ body {
     width: 70%;
 }
 
+.content .searchBar {
+    display: inline;
+}
+
+.content .importBtn {
+    margin-left: 5px;
+}
+
 .content .form1 {
     padding: 10px;
 

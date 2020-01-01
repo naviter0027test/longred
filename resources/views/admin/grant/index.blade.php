@@ -11,6 +11,17 @@
 @include('admin.layout.menu')
         <div class="content">
             <h3>撥款查詢</h3>
+            <div class="nav">
+                <form method="get" action="/admin/grant" class="searchBar">
+                    日期區間
+                    <input type="date" name="startDate" value="{{ isset($params['startDate']) ? $params['startDate'] : '' }}" />
+                    ~
+                    <input type="date" name="endDate" value="{{ isset($params['endDate']) ? $params['endDate'] : '' }}" />
+                    <br />
+                    <input type="text" name="keyword" placeholder="關鍵字查詢" value="{{ isset($params['keyword']) ? $params['keyword'] : '' }}" />
+                    <button class="btn">查詢</button>
+                </form>
+            </div>
             <table class="table1">
                 <thead>
                     <tr>

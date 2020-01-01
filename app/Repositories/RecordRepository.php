@@ -52,15 +52,31 @@ class RecordRepository
     public function lists($params) {
         $nowPage = isset($params['nowPage']) ? $params['nowPage'] : 1;
         $offset = isset($params['offset']) ? $params['offset'] : 10;
+        $startDate = date('Y-m-d 00:00:00', strtotime('-3 months'));
 
         $recordQuery = Record::orderBy('id', 'desc')
             ->skip(($nowPage-1) * $offset)
             ->take($offset);
         if(isset($params['checkStatus'])) {
-            $recordQuery->where('checkStatus', '=', $params['checkStatus']);
+            $recordQuery->where('checkStatus', 'like', '%'. $params['checkStatus']. '%');
         }
         if(isset($params['schedule'])) {
-            $recordQuery->where('schedule', '=', $params['schedule']);
+            $recordQuery->where('schedule', 'like', '%'. $params['schedule']. '%');
+        }
+        if(isset($params['startDate'])) {
+            $startDate = $params['startDate']. ' 00:00:00';
+        }
+        $recordQuery->where('created_at', '>=', $startDate);
+        if(isset($params['endDate'])) {
+            $endDate = $params['endDate']. ' 23:59:59';
+            $recordQuery->where('created_at', '<=', $endDate);
+        }
+        if(isset($params['keyword'])) {
+            $recordQuery->where(function($query) use ($params) {
+                $query->orWhere('applicant', 'like', '%'. $params['keyword']. '%');
+                $query->orWhere('CustGID', 'like', '%'. $params['keyword']. '%');
+                $query->orWhere('productName', 'like', '%'. $params['keyword']. '%');
+            });
         }
         $records = $recordQuery->get();
         foreach($records as $record) {
@@ -118,7 +134,7 @@ class RecordRepository
             $record->applicant = isset($row[2]) ? $row[2] : '';
             $record->applyAmount = isset($row[9]) ? $row[9] : 0;
             $record->loanAmount = isset($row[10]) ? $row[10] : 0;
-            $record->periods = isset($row[11]) ? $row[11] : 1;
+            $record->periods = isset($row[11]) ? $row[11] : 0;
             $record->periodAmount = isset($row[12]) ? $row[12] : 0;
             $record->content = isset($row[13]) ? $row[13] : '';
             //$record->grantDate = $row[23];
@@ -164,7 +180,7 @@ class RecordRepository
             $record->checkStatus = isset($row[3]) ? $row[3] : '處理中';
             $record->applyAmount = isset($row[9]) ? $row[9] : 0;
             $record->loanAmount = isset($row[10]) ? $row[10] : 0;
-            $record->periods = isset($row[11]) ? $row[11] : 1;
+            $record->periods = isset($row[11]) ? $row[11] : 0;
             $record->periodAmount = isset($row[12]) ? $row[12] : 0;
             $record->content = isset($row[13]) ? $row[13] : '';
             $record->schedule = isset($row[14]) ? $row[14] : '尚未撥款';
