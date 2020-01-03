@@ -15,11 +15,23 @@ Route::get('/', function () {
     return redirect('/admin/login');
 });
 
-Route::get('/application', function () {
-    return view('application');
-});
+Route::group(['middleware' => ['check.account']], function() {
 
-Route::post('/application/create', 'ApplicationController@create');
+    Route::get('/application', function () {
+        return view('application');
+    });
+    Route::post('/application/create', 'ApplicationController@create');
+    Route::get('/application/create', function () {
+        return view('application');
+    });
+
+    Route::group(['prefix' => 'account'], function() {
+        Route::get('login', 'AccountController@loginPage');
+        Route::post('login', 'AccountController@login');
+        Route::get('logout', 'AccountController@logout');
+        Route::get('get', 'AccountController@getMyData');
+    });
+});
 
 Route::group(['prefix' => 'telegram'], function() {
     Route::any('test', 'TelegramController@test');

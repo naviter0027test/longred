@@ -47,7 +47,6 @@
                         <td>{{ $record->created_at }}</td>
                         <td>
                             <a href='/admin/record/edit/{{ $record->id }}' class="glyphicon glyphicon-pencil"></a>
-                            <a href='/admin/record/remove/{{ $record->id }}' class="glyphicon glyphicon-remove"></a>
                         </td>
                     </tr>
                 @endforeach

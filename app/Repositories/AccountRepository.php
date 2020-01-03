@@ -7,6 +7,16 @@ use Exception;
 
 class AccountRepository
 {
+    public function checkPassword($params) {
+        $adm = Account::where('account', '=', $params['account'])
+            ->where('password', '=', md5($params['password']))
+            ->first();
+        if(isset($adm->id)) {
+            return $adm;
+        }
+        return false;
+    }
+
     public function lists($params) {
         $keyword = isset($params['keyword']) ? $params['keyword'] : '';
         $nowPage = isset($params['nowPage']) ? $params['nowPage'] : 1;
