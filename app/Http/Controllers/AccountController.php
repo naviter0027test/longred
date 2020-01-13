@@ -32,6 +32,21 @@ class AccountController extends Controller
         return redirect('/account/login');
     }
 
+    public function isLogin(Request $request) {
+        $result = [
+            'status' => true,
+            'msg' => 'has login'
+        ];
+
+        if(Session::has('account') == false) {
+            $result = [
+                'status' => false,
+                'msg' => 'not login'
+            ];
+        }
+        return $result;
+    }
+
     public function getMyData(Request $request) {
     }
 }

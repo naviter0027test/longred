@@ -24,6 +24,6 @@ class CheckAccountLoginMiddle
             return $next($request);
         }
 
-        return redirect('/account/login');
+        return redirect('/account/isLogin');
     }
 }

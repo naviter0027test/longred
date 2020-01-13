@@ -32,6 +32,9 @@ Route::group(['middleware' => ['check.account']], function() {
         Route::get('get', 'AccountController@getMyData');
     });
 });
+Route::group(['prefix' => 'account'], function() {
+    Route::get('isLogin', 'AccountController@isLogin');
+});
 
 Route::group(['prefix' => 'telegram'], function() {
     Route::any('test', 'TelegramController@test');
