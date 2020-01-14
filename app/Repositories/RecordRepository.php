@@ -29,6 +29,8 @@ class RecordRepository
         $record->grantAmount = 0;
         $record->liense = isset($params['liense']) ? $params['liense'] : '';
         $record->ProjectCategory = '';
+        if(isset($params['accountId']))
+            $record->accountId = $params['accountId'];
         $record->save();
 
         $root = config('filesystems')['disks']['uploads']['root'];
@@ -46,6 +48,13 @@ class RecordRepository
             $record->CustGIDPicture2 = $path. $filename;
             $record->save();
             $files['CustGIDPicture2']->move($root. $path, $filename);
+        }
+        if(isset($files['applyUploadPath'])) {
+            $ext = $files['applyUploadPath']->getClientOriginalExtension();
+            $filename = $record->id. "_apply.$ext";
+            $record->applyUploadPath = $path. $filename;
+            $record->save();
+            $files['applyUploadPath']->move($root. $path, $filename);
         }
     }
 
@@ -278,5 +287,14 @@ class RecordRepository
             }
             $files['CustGIDPicture2']->move($root. $path, $filename);
         }
+    }
+
+    public function del($id) {
+        $record = Record::where('id', '=', $id)
+            ->first();
+        if(isset($record->id) == false) {
+            throw new Exception('案件不存在');
+        }
+        $record->delete();
     }
 }

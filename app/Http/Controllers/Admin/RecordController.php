@@ -108,4 +108,22 @@ class RecordController extends Controller
         }
         return view('admin/record/importResult', ['adm' => $admin, 'result' => $result]);
     }
+
+    public function remove(Request $request, $id) {
+        $admin = Session::get('admin');
+        $files = [];
+        $result = [
+            'result' => true,
+            'msg' => 'success',
+        ];
+
+        try {
+            $recordRepository = new RecordRepository();
+            $recordRepository->del($id);
+        } catch (Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+        return view('admin.proccessResult', ['adm' => $admin, 'result' => $result]);
+    }
 }

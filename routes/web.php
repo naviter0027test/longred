@@ -54,6 +54,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['check.login']], function() 
     Route::get('record/edit/{id}', 'Admin\RecordController@edit');
     Route::post('record/edit/{id}', 'Admin\RecordController@update');
     Route::post('record/import', 'Admin\RecordController@import');
+    Route::get('record/remove/{id}', 'Admin\RecordController@remove');
     Route::get('grant', 'Admin\RecordController@grant');
 
     Route::get( 'account', 'Admin\AccountController@lists');
