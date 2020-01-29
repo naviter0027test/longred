@@ -22,4 +22,8 @@
         <a href="/admin/grant" class="{{ strpos(\Request::path(), 'admin/grant') === false ? '' : 'clicked' }} glyphicon glyphicon-eur">
         撥款查詢</a>
     </div>
+    <div class="menu1">
+        <a href="/admin/account" class="{{ strpos(\Request::path(), 'admin/account') === false ? '' : 'clicked' }} glyphicon glyphicon-user">
+        使用者管理</a>
+    </div>
 </div>

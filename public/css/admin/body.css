@@ -144,6 +144,14 @@ body {
     width: 70%;
 }
 
+.content .searchBar {
+    display: inline;
+}
+
+.content .importBtn {
+    margin-left: 5px;
+}
+
 .content .form1 {
     padding: 10px;
 
@@ -248,4 +256,13 @@ body {
 .content .pagination a:hover {
     color: #2e6d84;
     background: white;
+}
+
+.content .nav {
+    text-align: right;
+    margin: 0px 0px 20px 0px;
+}
+
+.content .nav .importCSV {
+    display: none;
 }

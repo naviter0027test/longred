@@ -11,6 +11,40 @@
 @include('admin.layout.menu')
         <div class="content">
             <h3>案件查詢</h3>
+            <div class="nav">
+                <form method="post" action="/admin/record/import" enctype="multipart/form-data" class="importForm">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <input type="file" name="importCSV" class="importCSV" />
+                </form>
+                <form method="get" action="/admin/record" class="searchBar">
+                    案件狀態
+                    <select name="checkStatus">
+                        <option value=""  >請選擇</option>
+                        <option value="處理中"  {{ isset($params['checkStatus']) && $params['checkStatus'] == "處理中" ? 'selected="selected"' : '' }}  >處理中</option>
+                        <option value="待核准"  {{ isset($params['checkStatus']) && $params['checkStatus'] == "待核准" ? 'selected="selected"' : '' }}  >待核准</option>
+                        <option value="核准"    {{ isset($params['checkStatus']) && $params['checkStatus'] == "核准" ? 'selected="selected"' : '' }}    >核准</option>
+                        <option value="取消申辦" {{ isset($params['checkStatus']) && $params['checkStatus'] == "取消申辦" ? 'selected="selected"' : '' }}>取消申辦</option>
+                        <option value="婉拒"    {{ isset($params['checkStatus']) && $params['checkStatus'] == "婉拒" ? 'selected="selected"' : '' }}    >婉拒</option>
+                    </select>
+                    撥款狀態
+                    <select name="schedule">
+                        <option value=""  >請選擇</option>
+                        <option value="已撥款"  {{ isset($params['checkStatus']) && $params['checkStatus'] == "已撥款" ? 'selected="selected"' : '' }} >已撥款</option>
+                        <option value="尚未撥款" {{ isset($params['checkStatus']) && $params['checkStatus'] == "尚未撥款" ? 'selected="selected"' : '' }}>尚未撥款</option>
+                        <option value="支票已出" {{ isset($params['checkStatus']) && $params['checkStatus'] == "支票已出" ? 'selected="selected"' : '' }}>支票已出</option>
+                    </select>
+                    進件日期區間
+                    <input type="date" name="startDate" value="{{ isset($params['startDate']) ? $params['startDate'] : '' }}" />
+                    ~
+                    <input type="date" name="endDate" value="{{ isset($params['endDate']) ? $params['endDate'] : '' }}" />
+                    <br />
+                    <input type="text" name="keyword" placeholder="關鍵字查詢" value="{{ isset($params['keyword']) ? $params['keyword'] : '' }}" />
+                    <button class="btn">查詢</button>
+                </form>
+                <a href="#" class="importBtn btn">
+                    CSV 匯入
+                </a>
+            </div>
             <table class="table1">
                 <thead>
                     <tr>
@@ -25,135 +59,40 @@
                     </tr>
                 </thead>
                 <tbody>
+                @if(isset($result['records']))
+                @foreach($result['records'] as $record)
                     <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
+                        <td>{{ $record->CustGID }}</td>
+                        <td>{{ $record->applicant }}</td>
+                        <td>{{ $record->checkStatus }}</td>
+                        <td>{{ $record->allowDate }}</td>
+                        <td>{{ $record->productName }}</td>
+                        <td>{{ $record->applyAmount }}</td>
+                        <td>{{ $record->created_at }}</td>
                         <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
+                            <a href='/admin/record/edit/{{ $record->id }}' class="glyphicon glyphicon-pencil"></a>
+                            <a href='/admin/record/remove/{{ $record->id }}' class="glyphicon glyphicon-remove recordRemove"></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>處理中</td>
-                        <td>2019-11-12</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
+                @endforeach
+                @endif
                 </tbody>
             </table>
 
             <div class="pagination paginationCenter">
-                <label>1</label>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
+            @if(isset($result['amount']))
+            @for($i = 0; $i < ceil($result['amount'] / $offset); ++$i)
+                @if(($i+1) == $nowPage)
+                <label>{{ $i+1 }}</label>
+                @elseif(($i+1) != $nowPage && abs($i+1-$nowPage) < 5)
+                <a href="/admin/record/?nowPage={{ $i+1 }}">{{ $i+1 }}</a>
+                @endif
+            @endfor
+            @endif
             </div>
         </div>
     </body>
     <script src="/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/admin/record/index.js"></script>
 </html>
 

@@ -28,6 +28,10 @@
                 <p> <input type="text" name="productName" /> </p>
                 <h5>車牌號碼</h5>
                 <p> <input type="text" name="liense" /> </p>
+                <h5>申請文件 </h5>
+                <p>
+                    <input type="file" name="applyUploadPath" />
+                </p>
                 <p class=""> <button class="btn">申請</button> </p>
             </form>
         </div>

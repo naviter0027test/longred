@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\RecordRepository;
+use Session;
 
 class ApplicationController extends Controller
 {
     public function create(Request $request) {
+        $account = Session::get('account');
         $res = [
             'status' => true,
             'message' => '',
@@ -31,7 +33,10 @@ class ApplicationController extends Controller
             $files['CustGIDPicture1'] = $request->file('CustGIDPicture1');
         if($request->hasFile('CustGIDPicture2'))
             $files['CustGIDPicture2'] = $request->file('CustGIDPicture2');
+        if($request->hasFile('applyUploadPath'))
+            $files['applyUploadPath'] = $request->file('applyUploadPath');
 
+        $params['accountId'] = $account->id;
         try {
             $recordRepository = new RecordRepository();
             $recordRepository->create($params, $files);

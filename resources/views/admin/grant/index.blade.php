@@ -11,6 +11,17 @@
 @include('admin.layout.menu')
         <div class="content">
             <h3>撥款查詢</h3>
+            <div class="nav">
+                <form method="get" action="/admin/grant" class="searchBar">
+                    日期區間
+                    <input type="date" name="startDate" value="{{ isset($params['startDate']) ? $params['startDate'] : '' }}" />
+                    ~
+                    <input type="date" name="endDate" value="{{ isset($params['endDate']) ? $params['endDate'] : '' }}" />
+                    <br />
+                    <input type="text" name="keyword" placeholder="關鍵字查詢" value="{{ isset($params['keyword']) ? $params['keyword'] : '' }}" />
+                    <button class="btn">查詢</button>
+                </form>
+            </div>
             <table class="table1">
                 <thead>
                     <tr>
@@ -25,145 +36,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                @foreach($result['records'] as $record)
                     <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
+                        <td>{{ $record->CustGID }}</td>
+                        <td>{{ $record->applicant }}</td>
+                        <td>{{ $record->productName }}</td>
+                        <td>{{ $record->grantAmount }}</td>
+                        <td>{{ $record->grantDate }}</td>
+                        <td>{{ $record->schedule }}</td>
+                        <td>{{ $record->created_at }}</td>
                         <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
+                            <a href='/admin/record/edit/{{ $record->id }}' class="glyphicon glyphicon-pencil"></a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>A123456789</td>
-                        <td>王小明</td>
-                        <td>A型信用商貸</td>
-                        <td>45000</td>
-                        <td>2019-11-22</td>
-                        <td>已撥款</td>
-                        <td>2019-10-02 09:02:56</td>
-                        <td>
-                            <a href='/admin/record/edit' class="glyphicon glyphicon-pencil"></a>
-                            <a href='#' class="glyphicon glyphicon-remove"></a>
-                        </td>
-                    </tr>
+                @endforeach
                 </tbody>
             </table>
 
             <div class="pagination paginationCenter">
-                <label>1</label>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
+            @for($i = 0; $i < ceil($result['amount'] / $offset); ++$i)
+                @if(($i+1) == $nowPage)
+                <label>{{ $i+1 }}</label>
+                @elseif(($i+1) != $nowPage && abs($i+1-$nowPage) < 5)
+                <a href="/admin/grant/?nowPage={{ $i+1 }}">{{ $i+1 }}</a>
+                @endif
+            @endfor
             </div>
         </div>
     </body>
