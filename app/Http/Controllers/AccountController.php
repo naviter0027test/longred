@@ -15,6 +15,10 @@ class AccountController extends Controller
     }
 
     public function login(Request $request) {
+        $result = [
+            'status' => true,
+            'msg' => 'login success',
+        ];
         $params = $request->all();
         $params['account'] = isset($params['account']) ? $params['account'] : '';
         $params['password'] = isset($params['password']) ? $params['password'] : '';
@@ -22,14 +26,22 @@ class AccountController extends Controller
         $account = $accountRepository->checkPassword($params);
         if($account != false) {
             Session::put('account', $account);
-            return redirect('/application/create');
+            $result = [
+                'status' => false,
+                'msg' => 'login failure',
+            ];
+            return json_encode($result);
         }
-        return view('account.login');
+        return json_encode($result);
     }
 
     public function logout(Request $request) {
         Session::flush();
-        return redirect('/account/login');
+        $result = [
+            'status' => true,
+            'msg' => 'logout success',
+        ];
+        return json_encode($result);
     }
 
     public function isLogin(Request $request) {
@@ -44,7 +56,7 @@ class AccountController extends Controller
                 'msg' => 'not login'
             ];
         }
-        return $result;
+        return json_encode($result);
     }
 
     public function getMyData(Request $request) {
