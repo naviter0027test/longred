@@ -16,8 +16,8 @@ class AccountController extends Controller
 
     public function login(Request $request) {
         $result = [
-            'status' => true,
-            'msg' => 'login success',
+            'status' => false,
+            'msg' => 'login failure',
         ];
         $params = $request->all();
         $params['account'] = isset($params['account']) ? $params['account'] : '';
@@ -27,8 +27,8 @@ class AccountController extends Controller
         if($account != false) {
             Session::put('account', $account);
             $result = [
-                'status' => false,
-                'msg' => 'login failure',
+                'status' => true,
+                'msg' => 'login success',
             ];
             return json_encode($result);
         }
