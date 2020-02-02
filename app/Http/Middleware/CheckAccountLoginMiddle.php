@@ -18,7 +18,8 @@ class CheckAccountLoginMiddle
     {
         if(Session::has('account') == true) {
             if($request->path() == 'account/login')
-                return redirect('/application/create');
+                return redirect('/account/isLogin');
+                //return redirect('/application/create');
             return $next($request);
         } else if($request->path() == 'account/login') {
             return $next($request);
