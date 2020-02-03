@@ -32,6 +32,16 @@
                 <p>
                     <input type="file" name="applyUploadPath" />
                 </p>
+                <h5>財產證明 </h5>
+                <p>
+                    <input type="file" name="proofOfProperty" />
+                </p>
+                <h5>其他 </h5>
+                <p>
+                    <input type="file" name="otherDoc" />
+                </p>
+                <h5>備註</h5>
+                <p> <input type="text" name="memo" /> </p>
                 <p class=""> <button class="btn">申請</button> </p>
             </form>
         </div>

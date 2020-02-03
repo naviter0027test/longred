@@ -29,6 +29,7 @@ class RecordRepository
         $record->grantAmount = 0;
         $record->liense = isset($params['liense']) ? $params['liense'] : '';
         $record->ProjectCategory = '';
+        $record->memo = isset($params['memo']) ? $params['memo'] : '';
         if(isset($params['accountId']))
             $record->accountId = $params['accountId'];
         $record->save();
@@ -55,6 +56,20 @@ class RecordRepository
             $record->applyUploadPath = $path. $filename;
             $record->save();
             $files['applyUploadPath']->move($root. $path, $filename);
+        }
+        if(isset($files['proofOfProperty'])) {
+            $ext = $files['proofOfProperty']->getClientOriginalExtension();
+            $filename = $record->id. "_property.$ext";
+            $record->proofOfProperty = $path. $filename;
+            $record->save();
+            $files['proofOfProperty']->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'])) {
+            $ext = $files['otherDoc']->getClientOriginalExtension();
+            $filename = $record->id. "_other.$ext";
+            $record->otherDoc = $path. $filename;
+            $record->save();
+            $files['otherDoc']->move($root. $path, $filename);
         }
     }
 

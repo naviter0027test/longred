@@ -35,6 +35,10 @@ class ApplicationController extends Controller
             $files['CustGIDPicture2'] = $request->file('CustGIDPicture2');
         if($request->hasFile('applyUploadPath'))
             $files['applyUploadPath'] = $request->file('applyUploadPath');
+        if($request->hasFile('proofOfProperty'))
+            $files['proofOfProperty'] = $request->file('proofOfProperty');
+        if($request->hasFile('otherDoc'))
+            $files['otherDoc'] = $request->file('otherDoc');
 
         $params['accountId'] = $account->id;
         try {
