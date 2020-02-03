@@ -30,6 +30,9 @@ Route::group(['middleware' => ['check.account']], function() {
         Route::post('login', 'AccountController@login');
         Route::get('logout', 'AccountController@logout');
         Route::get('get', 'AccountController@getMyData');
+
+        Route::get('record', 'RecordController@index');
+        Route::post('record', 'RecordController@get');
     });
 });
 Route::group(['prefix' => 'account'], function() {

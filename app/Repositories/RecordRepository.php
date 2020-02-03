@@ -74,8 +74,8 @@ class RecordRepository
     }
 
     public function lists($params) {
-        $nowPage = isset($params['nowPage']) ? $params['nowPage'] : 1;
-        $offset = isset($params['offset']) ? $params['offset'] : 10;
+        $nowPage = isset($params['nowPage']) ? (int) $params['nowPage'] : 1;
+        $offset = isset($params['offset']) ? (int) $params['offset'] : 10;
         $startDate = date('Y-m-d 00:00:00', strtotime('-3 months'));
 
         $recordQuery = Record::orderBy('id', 'desc')
@@ -102,6 +102,9 @@ class RecordRepository
                 $query->orWhere('productName', 'like', '%'. $params['keyword']. '%');
             });
         }
+        if(isset($params['accountId'])) {
+            $recordQuery->where('accountId', '=', $params['accountId']);
+        }
         $records = $recordQuery->get();
         foreach($records as $record) {
             if(is_null($record->allowDate) == false) {
@@ -121,6 +124,9 @@ class RecordRepository
         }
         if(isset($params['schedule'])) {
             $recordQuery->where('schedule', '=', $params['schedule']);
+        }
+        if(isset($params['accountId'])) {
+            $recordQuery->where('accountId', '=', $params['accountId']);
         }
         return $recordQuery->count();
     }
