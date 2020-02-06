@@ -31,4 +31,12 @@ class MessageRepository
         $message->who = $params['who'];
         $message->save();
     }
+
+    public function getByRecordId($params) {
+        $msgQty = Message::whereIn('type', [3, 6])
+            ->where('recordId', '=', $params['recordId'])
+            ->whereNotNull('isAsk');
+        $messages = $msgQty->get();
+        return $messages;
+    }
 }
