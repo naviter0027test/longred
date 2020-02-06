@@ -72,10 +72,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['check.login']], function() 
     Route::post('account/edit/{id}', 'Admin\AccountController@update');
     Route::get( 'account/remove/{id}', 'Admin\AccountController@remove');
 
-    Route::get('result', 'Admin\ResultController@lists');
-    Route::get('result/excelExport', 'Admin\ResultController@excelExport');
-    Route::get('result/pdfExport', 'Admin\ResultController@pdfExport');
-    Route::get('detail/{id}', 'Admin\ResultController@detail');
+    Route::get('message/record/{id}', 'Admin\MessageController@getByRecordId');
 
     Route::get('logout', 'Admin\UserController@logout');
 });

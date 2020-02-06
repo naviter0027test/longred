@@ -33,7 +33,7 @@ class MessageRepository
     }
 
     public function getByRecordId($params) {
-        $msgQty = Message::whereIn('type', [3, 6])
+        $msgQty = Message::whereIn('type', [3])
             ->where('recordId', '=', $params['recordId'])
             ->whereNotNull('isAsk');
         $messages = $msgQty->get();
