@@ -33,6 +33,9 @@ Route::group(['middleware' => ['check.account']], function() {
 
         Route::get('record', 'RecordController@index');
         Route::post('record', 'RecordController@get');
+
+        Route::get('message/send', 'MessageController@sendPage');
+        Route::post('message/send', 'MessageController@send');
     });
 });
 Route::group(['prefix' => 'account'], function() {
