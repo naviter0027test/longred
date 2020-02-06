@@ -14,12 +14,17 @@ class AddColMessage extends Migration
     public function up()
     {
         Schema::table('Message', function (Blueprint $table) {
+            $table->dropColumn('who');
+        });
+        Schema::table('Message', function (Blueprint $table) {
+            $table->integer('who')
+                ->nullable()
+                ->after('isAsk')
+                ->comment('當type為3 要記錄是誰留言');
             $table->tinyInteger('isAsk')
                 ->nullable()
                 ->after('recordId')
                 ->comment('1:使用者留言 2:管理者回覆');
-            $table->tinyInteger('type')
-                ->comment('1:最新消息,2:公告,3:案件回覆,4:補件通知,5:案件狀態更新,6:案件使用者留言');
         });
     }
 
