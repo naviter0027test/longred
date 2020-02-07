@@ -14,7 +14,7 @@
             @if($result['result'] == false) 
             {{ $result['msg'] }}
             @else
-            <form method='post' action='/admin/record/edit/{{ $result['record']->id }}' class='form1' enctype="multipart/form-data">
+            <form method='post' action='/admin/record/edit/{{ $result['record']->id }}' recordId="{{ $result['record']->id }}" class='form1' enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <h5>身份證字號</h5>
                 <p> <input type="text" name="CustGID" value="{{ $result['record']->CustGID }}" /> </p>
@@ -87,11 +87,13 @@
 
             <div class="leaveMessage">
                 <h4>留言</h4>
-                <h5>申請者:</h5>
-                <p> 這究得飛料民了然興何？腦見著作需益黃我出手岸 </p>
-                <h5>管理者:</h5>
-                <p> 積門當應各手的如的使美起有麼在生中個在 </p>
-                <form action="/admin/message/reply" method="post">
+                <div class="leaveMsgDiv">
+                    <h5>申請者:</h5>
+                    <p> 這究得飛料民了然興何？腦見著作需益黃我出手岸 </p>
+                    <h5>管理者:</h5>
+                    <p> 積門當應各手的如的使美起有麼在生中個在 </p>
+                </div>
+                <form action="/admin/message/send" method="post">
                     <p class=""> <textarea name="replyMsg"></textarea> </p>
                     <p class=""> <button class="btn">回覆</button> </p>
                 </form>
