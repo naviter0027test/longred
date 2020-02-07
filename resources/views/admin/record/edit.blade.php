@@ -93,8 +93,10 @@
                     <h5>管理者:</h5>
                     <p> 積門當應各手的如的使美起有麼在生中個在 </p>
                 </div>
-                <form action="/admin/message/send" method="post">
-                    <p class=""> <textarea name="replyMsg"></textarea> </p>
+                <form action="/admin/message/send" method="post" class="replyMsg">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <input type="hidden" name="recordId" value="{{ $result['record']->id }}" />
+                    <p class=""> <textarea name="content"></textarea> </p>
                     <p class=""> <button class="btn">回覆</button> </p>
                 </form>
             </div>

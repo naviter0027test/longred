@@ -73,6 +73,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['check.login']], function() 
     Route::get( 'account/remove/{id}', 'Admin\AccountController@remove');
 
     Route::get('message/record/{id}', 'Admin\MessageController@getByRecordId');
+    Route::post('message/send', 'Admin\MessageController@send');
 
     Route::get('logout', 'Admin\UserController@logout');
 });

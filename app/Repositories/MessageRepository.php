@@ -28,7 +28,8 @@ class MessageRepository
         else
             throw new Exception('recordId is required');
         $message->isAsk = $params['isAsk'];
-        $message->who = $params['who'];
+        if(isset($params['who']))
+            $message->who = $params['who'];
         $message->save();
     }
 
