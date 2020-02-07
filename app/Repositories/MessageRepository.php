@@ -40,4 +40,110 @@ class MessageRepository
         $messages = $msgQty->get();
         return $messages;
     }
+
+    public function getNews($params) {
+        $keyword = isset($params['keyword']) ? $params['keyword'] : '';
+        $nowPage = isset($params['nowPage']) ? $params['nowPage'] : 1;
+        $offset = isset($params['offset']) ? $params['offset'] : 10;
+        $messages = Message::where('type', '=', 1)
+            ->orderBy('id', 'desc')
+            ->skip(($nowPage-1) * $offset)
+            ->take($offset)
+            ->get();
+        if(isset($messages[0])) {
+            return $messages;
+        }
+        return [];
+    }
+
+    public function getNewsAmount($params) {
+        $keyword = isset($params['keyword']) ? $params['keyword'] : '';
+        $amount = Message::where('type', '=', 1)
+            ->count();
+        return $amount;
+    }
+
+    public function createNew($params) {
+        $message = new Message();
+        $message->type = 1;
+        $message->content = $params['content'];
+        $message->save();
+    }
+
+    public function getNewsById($id) {
+        $message = Message::where('id', '=', $id)
+            ->first();
+        if(isset($message->id) == false)
+            throw new Exception('資料不存在');
+        return $message;
+    }
+
+    public function editNew($id, $params) {
+        $messageTmp = isset($params['content']) ? $params['content'] : '';
+        $message = Message::where('id', '=', $id)
+            ->first();
+        $message->content = isset($params['content']) ? $params['content'] : '';
+        $message->save();
+    }
+
+    public function delNewById($id) {
+        $message = Message::where('id', '=', $id)
+            ->first();
+        if(isset($message->id) == false)
+            throw new Exception('資料不存在');
+        $message->delete();
+    }
+
+    public function getAnnouncement($params) {
+        $keyword = isset($params['keyword']) ? $params['keyword'] : '';
+        $nowPage = isset($params['nowPage']) ? $params['nowPage'] : 1;
+        $offset = isset($params['offset']) ? $params['offset'] : 10;
+        $messages = Message::where('type', '=', 2)
+            ->orderBy('id', 'desc')
+            ->skip(($nowPage-1) * $offset)
+            ->take($offset)
+            ->get();
+        if(isset($messages[0])) {
+            return $messages;
+        }
+        return [];
+    }
+
+    public function getAnnouncementAmount($params) {
+        $keyword = isset($params['keyword']) ? $params['keyword'] : '';
+        $amount = Message::where('type', '=', 2)
+            ->count();
+        return $amount;
+    }
+
+    public function createAnnouncement($params) {
+        $message = new Message();
+        $message->type = 2;
+        $message->content = $params['content'];
+        $message->save();
+    }
+
+    public function getAnnouncementById($id) {
+        $message = Message::where('id', '=', $id)
+            ->first();
+        if(isset($message->id) == false)
+            throw new Exception('資料不存在');
+        return $message;
+    }
+
+    public function editAnnouncement($id, $params) {
+        $messageTmp = isset($params['content']) ? $params['content'] : '';
+        $message = Message::where('id', '=', $id)
+            ->first();
+        $message->content = isset($params['content']) ? $params['content'] : '';
+        $message->save();
+    }
+
+    public function delAnnouncementById($id) {
+        $message = Message::where('id', '=', $id)
+            ->first();
+        if(isset($message->id) == false)
+            throw new Exception('資料不存在');
+        $message->delete();
+    }
 }

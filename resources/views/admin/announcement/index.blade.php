@@ -10,36 +10,30 @@
     <body>
 @include('admin.layout.menu')
         <div class="content">
-            <h3>使用者管理</h3>
+            <h3>公告管理</h3>
             <div class="nav">
-                <a href="/admin/account/create" class="btn">
+                <a href="/admin/announcement/create" class="btn">
                     新增
                 </a>
             </div>
             <table class="table1">
                 <thead>
                     <tr>
-                        <td>帳號</td>
-                        <td>名稱</td>
-                        <td>手機</td>
-                        <td>Email</td>
-                        <td>狀態</td>
+                        <td>內容</td>
                         <td>建立日期</td>
+                        <td>修改日期</td>
                         <td>操作</td>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($result['accounts'] as $account)
+                @foreach($result['announcements'] as $item)
                     <tr>
-                        <td>{{ $account->account }}</td>
-                        <td>{{ $account->name }}</td>
-                        <td>{{ $account->phone }}</td>
-                        <td>{{ $account->email }}</td>
-                        <td>{{ $account->active == 1 ? '啟用' : '未啟用' }}</td>
-                        <td>{{ $account->created_at }}</td>
+                        <td>{{ $item->content }}</td>
+                        <td>{{ $item->created_at }}</td>
+                        <td>{{ $item->updated_at }}</td>
                         <td>
-                            <a href='/admin/account/edit/{{ $account->id }}' class="glyphicon glyphicon-pencil"></a>
-                            <a href='/admin/account/remove/{{ $account->id }}' class="glyphicon glyphicon-remove del"></a>
+                            <a href='/admin/announcement/edit/{{ $item->id }}' class="glyphicon glyphicon-pencil"></a>
+                            <a href='/admin/announcement/remove/{{ $item->id }}' class="glyphicon glyphicon-remove del"></a>
                         </td>
                     </tr>
                 @endforeach
@@ -51,13 +45,12 @@
                 @if(($i+1) == $nowPage)
                 <label>{{ $i+1 }}</label>
                 @elseif(($i+1) != $nowPage && abs($i+1-$nowPage) < 5)
-                <a href="/admin/account/?nowPage={{ $i+1 }}">{{ $i+1 }}</a>
+                <a href="/admin/announcement/?nowPage={{ $i+1 }}">{{ $i+1 }}</a>
                 @endif
             @endfor
             </div>
         </div>
     </body>
     <script src="/lib/jquery-2.1.4.min.js"></script>
-    <script src="/js/admin/account/index.js"></script>
+    <script src="/js/admin/announcement/index.js"></script>
 </html>
-

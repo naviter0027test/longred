@@ -75,5 +75,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['check.login']], function() 
     Route::get('message/record/{id}', 'Admin\MessageController@getByRecordId');
     Route::post('message/send', 'Admin\MessageController@send');
 
+    Route::get('news', 'Admin\MessageController@getNews');
+    Route::get('news/create', 'Admin\MessageController@createNewPage');
+    Route::post('news/create', 'Admin\MessageController@createNew');
+    Route::get('news/edit/{id}', 'Admin\MessageController@editNewPage');
+    Route::post('news/edit/{id}', 'Admin\MessageController@editNew');
+    Route::get( 'news/remove/{id}', 'Admin\MessageController@removeNew');
+
+    Route::get('announcement', 'Admin\MessageController@getAnnouncement');
+    Route::get('announcement/create', 'Admin\MessageController@createAnnouncementPage');
+    Route::post('announcement/create', 'Admin\MessageController@createAnnouncement');
+    Route::get('announcement/edit/{id}', 'Admin\MessageController@editAnnouncementPage');
+    Route::post('announcement/edit/{id}', 'Admin\MessageController@editAnnouncement');
+    Route::get( 'announcement/remove/{id}', 'Admin\MessageController@removeAnnouncement');
+
     Route::get('logout', 'Admin\UserController@logout');
 });

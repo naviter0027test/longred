@@ -26,4 +26,12 @@
         <a href="/admin/account" class="{{ strpos(\Request::path(), 'admin/account') === false ? '' : 'clicked' }} glyphicon glyphicon-user">
         使用者管理</a>
     </div>
+    <div class="menu1">
+        <a href="/admin/news" class="{{ strpos(\Request::path(), 'admin/news') === false ? '' : 'clicked' }} glyphicon glyphicon-envelope">
+        消息管理</a>
+    </div>
+    <div class="menu1">
+        <a href="/admin/announcement" class="{{ strpos(\Request::path(), 'admin/announcement') === false ? '' : 'clicked' }} glyphicon glyphicon-bookmark">
+        公告管理</a>
+    </div>
 </div>
