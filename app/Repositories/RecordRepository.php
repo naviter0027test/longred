@@ -64,12 +64,47 @@ class RecordRepository
             $record->save();
             $files['proofOfProperty']->move($root. $path, $filename);
         }
-        if(isset($files['otherDoc'])) {
-            $ext = $files['otherDoc']->getClientOriginalExtension();
+        if(isset($files['otherDoc'][0])) {
+            $ext = $files['otherDoc'][0]->getClientOriginalExtension();
             $filename = $record->id. "_other.$ext";
             $record->otherDoc = $path. $filename;
             $record->save();
-            $files['otherDoc']->move($root. $path, $filename);
+            $files['otherDoc'][0]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][1])) {
+            $ext = $files['otherDoc'][1]->getClientOriginalExtension();
+            $filename = $record->id. "_other2.$ext";
+            $record->otherDoc2 = $path. $filename;
+            $record->save();
+            $files['otherDoc'][1]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][2])) {
+            $ext = $files['otherDoc'][2]->getClientOriginalExtension();
+            $filename = $record->id. "_other3.$ext";
+            $record->otherDoc3 = $path. $filename;
+            $record->save();
+            $files['otherDoc'][2]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][3])) {
+            $ext = $files['otherDoc'][3]->getClientOriginalExtension();
+            $filename = $record->id. "_other4.$ext";
+            $record->otherDoc4 = $path. $filename;
+            $record->save();
+            $files['otherDoc'][3]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][4])) {
+            $ext = $files['otherDoc'][4]->getClientOriginalExtension();
+            $filename = $record->id. "_other5.$ext";
+            $record->otherDoc5 = $path. $filename;
+            $record->save();
+            $files['otherDoc'][4]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][5])) {
+            $ext = $files['otherDoc'][5]->getClientOriginalExtension();
+            $filename = $record->id. "_other6.$ext";
+            $record->otherDoc6 = $path. $filename;
+            $record->save();
+            $files['otherDoc'][5]->move($root. $path, $filename);
         }
     }
 

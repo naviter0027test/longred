@@ -38,7 +38,12 @@
                 </p>
                 <h5>其他 </h5>
                 <p>
-                    <input type="file" name="otherDoc" />
+                    <input type="file" name="otherDoc[]" />
+                    <input type="file" name="otherDoc[]" />
+                    <input type="file" name="otherDoc[]" />
+                    <input type="file" name="otherDoc[]" />
+                    <input type="file" name="otherDoc[]" />
+                    <input type="file" name="otherDoc[]" />
                 </p>
                 <h5>備註</h5>
                 <p> <input type="text" name="memo" /> </p>
