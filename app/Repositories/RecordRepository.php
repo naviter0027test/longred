@@ -353,4 +353,15 @@ class RecordRepository
         }
         $record->delete();
     }
+
+    public function cancel($id, $accountId) {
+        $record = Record::where('id', '=', $id)
+            ->where('accountId', '=', $accountId)
+            ->first();
+        if(isset($record->id) == false) {
+            throw new Exception('案件不存在');
+        }
+        $record->checkStatus = '取消申辦';
+        $record->save();
+    }
 }

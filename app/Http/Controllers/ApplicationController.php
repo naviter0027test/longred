@@ -53,4 +53,38 @@ class ApplicationController extends Controller
 
         return response()->json($res);
     }
+
+    public function cancelPage(Request $request) {
+        return view('account.application.cancel');
+    }
+
+    public function cancel(Request $request) {
+        $account = Session::get('account');
+        $res = [
+            'status' => true,
+            'message' => 'cancel success',
+        ];
+
+        $validate = Validator::make($request->all(), [
+            'recordId' => 'required',
+        ]);
+
+        if($validate->fails()) {
+            $res['status'] = false;
+            $res['message'] = $validate->errors();
+            return response()->json($res, 200);
+        }
+        $params = $request->all();
+
+        try {
+            $id = isset($params['recordId']) ? $params['recordId'] : 0;
+            $recordRepository = new RecordRepository();
+            $recordRepository->cancel($id, $account->id);
+        } catch (Exception $e) {
+            $res['status'] = false;
+            $res['message'] = $e->getMessage();
+        }
+
+        return response()->json($res);
+    }
 }

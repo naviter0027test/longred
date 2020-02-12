@@ -13,7 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         'account/*',
-        'application/create',
+        'application/*',
         'telegram/*',
     ];
 }
