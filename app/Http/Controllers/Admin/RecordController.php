@@ -61,6 +61,12 @@ class RecordController extends Controller
             $files['CustGIDPicture1'] = $request->file('CustGIDPicture1');
         if($request->hasFile('CustGIDPicture2'))
             $files['CustGIDPicture2'] = $request->file('CustGIDPicture2');
+        if($request->hasFile('applyUploadPath'))
+            $files['applyUploadPath'] = $request->file('applyUploadPath');
+        if($request->hasFile('proofOfProperty'))
+            $files['proofOfProperty'] = $request->file('proofOfProperty');
+        if($request->hasFile('otherDoc'))
+            $files['otherDoc'] = $request->file('otherDoc');
 
         try {
             $recordRepository = new RecordRepository();
