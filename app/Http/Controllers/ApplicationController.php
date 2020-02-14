@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\RecordRepository;
 use Session;
+use Exception;
 
 class ApplicationController extends Controller
 {

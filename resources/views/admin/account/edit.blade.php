@@ -29,8 +29,8 @@
                 <h5>狀態</h5>
                 <p>
                     <select name="active">
-                        <option value="0" {{ $result['account']->active == 0 ? 'checked' : '' }} >未啟用</option>
-                        <option value="1" {{ $result['account']->active == 1 ? 'checked' : '' }} >啟用</option>
+                        <option value="0" {{ $result['account']->active == 0 ? 'selected' : '' }} >未啟用</option>
+                        <option value="1" {{ $result['account']->active == 1 ? 'selected' : '' }} >啟用</option>
                     </select>
                 </p>
                 <p class=""> <button class="btn">編輯</button> </p>

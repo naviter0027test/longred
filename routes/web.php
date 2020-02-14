@@ -44,6 +44,8 @@ Route::group(['middleware' => ['check.account']], function() {
 });
 Route::group(['prefix' => 'account'], function() {
     Route::get('isLogin', 'AccountController@isLogin');
+    Route::get('forget', 'AccountController@forgetPage');
+    Route::post('forget', 'AccountController@forget');
 });
 
 Route::group(['prefix' => 'telegram'], function() {

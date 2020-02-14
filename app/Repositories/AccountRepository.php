@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Account;
 use Exception;
+use Config;
 
 class AccountRepository
 {
@@ -83,6 +84,35 @@ class AccountRepository
         if(isset($account->id) == false)
             throw new Exception('帳號不存在');
         $account->delete();
+    }
+
+    public function sendNewPassword($email) {
+        $email = trim($email);
+        $account = Account::where('email', '=', $email)
+            ->first();
+        if(isset($account->id) == false)
+            throw new Exception('帳號不存在');
+        $newPassword = $this->newPass();
+        \Mail::send('email.forget', ['password' => $newPassword, 'account' => $account], function($message) use ($account) {
+            $fromAddr = Config::get('mail.from.address');
+            $fromName = Config::get('mail.from.name');
+            $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
+            $message->from($fromAddr, $fromName);
+            $message->to($account->email, $account->name)->subject("$testTitle 長鴻系統 - 忘記密碼 (系統發信，請勿回覆)");
+        });
+        $account->password = md5($newPassword);
+        $account->save();
+        return $newPassword;
+    }
+
+    public function newPass($len = 8) {
+        $charArr = ['1','2','3','4','5','6','7','8','9','0','q','a','z','w','s','x','e','d','c','r','f','v','t','g','b','y','h','n','u','j','m','i','k','o','l','p'];
+        $charArrLen = count($charArr);
+        $newPass = '';
+        for($i = 0; $i < $len; ++$i) {
+            $newPass .= $charArr[rand(0, $charArrLen - 1)];
+        }
+        return $newPass;
     }
 }
 
