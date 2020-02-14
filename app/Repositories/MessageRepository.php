@@ -66,6 +66,7 @@ class MessageRepository
     public function createNew($params) {
         $message = new Message();
         $message->type = 1;
+        $message->title = isset($params['title']) ? $params['title'] : '';
         $message->content = $params['content'];
         $message->save();
     }
@@ -82,6 +83,7 @@ class MessageRepository
         $messageTmp = isset($params['content']) ? $params['content'] : '';
         $message = Message::where('id', '=', $id)
             ->first();
+        $message->title = isset($params['title']) ? $params['title'] : '';
         $message->content = isset($params['content']) ? $params['content'] : '';
         $message->save();
     }
@@ -119,6 +121,7 @@ class MessageRepository
     public function createAnnouncement($params) {
         $message = new Message();
         $message->type = 2;
+        $message->title = isset($params['title']) ? $params['title'] : '';
         $message->content = $params['content'];
         $message->save();
     }
@@ -135,6 +138,7 @@ class MessageRepository
         $messageTmp = isset($params['content']) ? $params['content'] : '';
         $message = Message::where('id', '=', $id)
             ->first();
+        $message->title = isset($params['title']) ? $params['title'] : '';
         $message->content = isset($params['content']) ? $params['content'] : '';
         $message->save();
     }

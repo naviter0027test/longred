@@ -19,7 +19,7 @@
             <table class="table1">
                 <thead>
                     <tr>
-                        <td>內容</td>
+                        <td>標題</td>
                         <td>建立日期</td>
                         <td>修改日期</td>
                         <td>操作</td>
@@ -28,7 +28,7 @@
                 <tbody>
                 @foreach($result['announcements'] as $item)
                     <tr>
-                        <td>{{ $item->content }}</td>
+                        <td>{{ $item->title }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->updated_at }}</td>
                         <td>

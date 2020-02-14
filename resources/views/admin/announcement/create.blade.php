@@ -13,6 +13,8 @@
             <h3>公告 - 新增</h3>
             <form method='post' action='/admin/announcement/create' class='form1' enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <h5>標題</h5>
+                <p> <input type="text" name="title" required /> </p>
                 <h5>內容</h5>
                 <p> <textarea name="content" required ></textarea> </p>
                 <p class=""> <button class="btn">新增</button> </p>

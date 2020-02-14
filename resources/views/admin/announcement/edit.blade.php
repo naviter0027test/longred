@@ -16,6 +16,8 @@
             @else
             <form method='post' action='/admin/announcement/edit/{{ $result['announcement']->id }}' class='form1' enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                <h5>標題</h5>
+                <p> <input type="text" name="title" value="{{ $result['announcement']->title }}" required /> </p>
                 <h5>內容</h5>
                 <p> <textarea name="content" required >{{ $result['announcement']->content }}</textarea> </p>
                 <p class=""> <button class="btn">編輯</button> </p>
