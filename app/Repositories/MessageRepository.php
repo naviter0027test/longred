@@ -150,4 +150,47 @@ class MessageRepository
             throw new Exception('資料不存在');
         $message->delete();
     }
+
+    public function getByAccountId($params) {
+        $nowPage = $params['nowPage'];
+        $offset = $params['offset'];
+        $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
+            ->where(function($query) use ($params) {
+                $query->orWhereIn('Message.type', [1,2])
+                    ->orWhere(function($qty) use ($params) {
+                        $qty->where('Record.accountId', '=', $params['accountId'])
+                            ->whereIn('Message.type', [3, 4, 5]);
+                    });
+            })
+            ;
+        $messages = $messageQty->orderBy('Message.id', 'desc')
+            ->skip(($nowPage-1) * $offset)
+            ->take($offset)
+            ->select(['Message.*'])
+            ->get();
+        foreach($messages as $idx => $message) {
+            $messages[$idx]->titleShow = $message->content;
+            switch($message->type) {
+            case 1:
+            case 2:
+                $messages[$idx]->titleShow = $message->title;
+                break;
+            }
+        }
+        return $messages;
+    }
+
+    public function getAmountByAccountId($params) {
+        $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
+            ->where(function($query) use ($params) {
+                $query->orWhereIn('Message.type', [1,2])
+                    ->orWhere(function($qty) use ($params) {
+                        $qty->where('Record.accountId', '=', $params['accountId'])
+                            ->whereIn('Message.type', [3, 4, 5]);
+                    });
+            })
+            ;
+        $amount = $messageQty->count();
+        return $amount;
+    }
 }

@@ -79,4 +79,44 @@ class MessageController extends Controller
         }
         return json_encode($result);
     }
+
+    public function listsPage(Request $request) {
+        return view('account.message.list');
+    }
+
+    public function listsByAccountId(Request $request) {
+        $params = $request->all();
+        $validate = Validator::make($request->all(), [
+            'nowPage' => 'integer',
+            'offset' => 'integer',
+        ]);
+
+        if($validate->fails()) {
+            $res['status'] = false;
+            $res['message'] = $validate->errors();
+            return response()->json($res, 200);
+        }
+        $params['nowPage'] = isset($params['nowPage']) ? $params['nowPage'] : 1;
+        $params['offset'] = isset($params['offset']) ? $params['offset'] : 10;
+
+        $account = Session::get('account');
+        $params['accountId'] = $account->id;
+        $result = [
+            'result' => true,
+            'msg' => 'success',
+            'nowPage' => $params['nowPage'],
+            'offset' => $params['offset'],
+        ];
+        try {
+            $messageRepository = new MessageRepository();
+            $result['data'] = $messageRepository->getByAccountId($params);
+            $result['amount'] = $messageRepository->getAmountByAccountId($params);
+        }
+        catch(Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+
+        return json_encode($result);
+    }
 }
