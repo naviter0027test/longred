@@ -193,4 +193,52 @@ class MessageRepository
         $amount = $messageQty->count();
         return $amount;
     }
+
+    public function lists($params) {
+        $nowPage = $params['nowPage'];
+        $offset = $params['offset'];
+        $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
+            ;
+        $messages = $messageQty->orderBy('Message.id', 'desc')
+            ->skip(($nowPage-1) * $offset)
+            ->take($offset)
+            ->select(['Message.*'])
+            ->get();
+        foreach($messages as $idx => $message) {
+            $messages[$idx]->titleShow = $message->content;
+            $messages[$idx]->dateShow = date('Y-m-d', strtotime($message->created_at));
+            switch($message->type) {
+            case 1:
+            case 2:
+                $messages[$idx]->titleShow = $message->title;
+                break;
+            }
+
+            switch($message->type) {
+            case 1:
+                $messages[$idx]->typeShow = '消息'; 
+                break;
+            case 2:
+                $messages[$idx]->typeShow = '公告';
+                break;
+            case 3:
+                $messages[$idx]->typeShow = '案件回覆';
+                break;
+            case 4:
+                $messages[$idx]->typeShow = '補件通知';
+                break;
+            case 5:
+                $messages[$idx]->typeShow = '案件狀態更新';
+                break;
+            }
+        }
+        return $messages;
+    }
+
+    public function listsAmount($params) {
+        $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
+            ;
+        $amount = $messageQty->count();
+        return $amount;
+    }
 }
