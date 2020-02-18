@@ -18,8 +18,6 @@ class ApplicationController extends Controller
         ];
 
         $validate = Validator::make($request->all(), [
-            'CustGID' => 'required',
-            'applicant' => 'required',
             'applyAmount' => 'required',
         ]);
 
