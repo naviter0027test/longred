@@ -26,6 +26,8 @@ Route::group(['middleware' => ['check.account']], function() {
     });
     Route::post('/application/cancel', 'ApplicationController@cancel');
     Route::get('/application/cancel', 'ApplicationController@cancelPage');
+    Route::post('/application/update', 'ApplicationController@update');
+    Route::get('/application/update', 'ApplicationController@updatePage');
 
     Route::group(['prefix' => 'account'], function() {
         Route::get('login', 'AccountController@loginPage');

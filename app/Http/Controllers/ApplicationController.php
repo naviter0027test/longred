@@ -86,4 +86,48 @@ class ApplicationController extends Controller
 
         return response()->json($res);
     }
+
+    public function updatePage(Request $request) {
+        return view('account.application.update');
+    }
+
+    public function update(Request $request) {
+        $account = Session::get('account');
+        $res = [
+            'status' => true,
+            'message' => 'success',
+        ];
+
+        $validate = Validator::make($request->all(), [
+            'recordId' => 'required',
+        ]);
+
+        if($validate->fails()) {
+            $res['status'] = false;
+            $res['message'] = $validate->errors();
+            return response()->json($res, 200);
+        }
+
+        $params = $request->all();
+        $id = $params['recordId'];
+
+        if($request->hasFile('CustGIDPicture1'))
+            $files['CustGIDPicture1'] = $request->file('CustGIDPicture1');
+        if($request->hasFile('CustGIDPicture2'))
+            $files['CustGIDPicture2'] = $request->file('CustGIDPicture2');
+        if($request->hasFile('applyUploadPath'))
+            $files['applyUploadPath'] = $request->file('applyUploadPath');
+        if($request->hasFile('proofOfProperty'))
+            $files['proofOfProperty'] = $request->file('proofOfProperty');
+        if($request->hasFile('otherDoc'))
+            $files['otherDoc'] = $request->file('otherDoc');
+        try {
+            $recordRepository = new RecordRepository();
+            $recordRepository->updateFileById($id, $files);
+        } catch (Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+        return response()->json($res);
+    }
 }

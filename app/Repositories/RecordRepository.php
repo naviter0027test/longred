@@ -468,4 +468,145 @@ class RecordRepository
         $record->checkStatus = '取消申辦';
         $record->save();
     }
+
+    public function updateFileById($id, $files = []) {
+        $record = Record::where('id', '=', $id)
+            ->first();
+        if(isset($record->id) == false) {
+            throw new Exception('案件不存在');
+        }
+
+        $root = config('filesystems')['disks']['uploads']['root'];
+        $path = date('/Y/m'). '/';
+        if(isset($files['CustGIDPicture1'])) {
+            if(trim($record->CustGIDPicture1) == '') {
+                $ext = $files['CustGIDPicture1']->getClientOriginalExtension();
+                $filename = $record->id. "_pic1.$ext";
+                $record->CustGIDPicture1 = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->CustGIDPicture1);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['CustGIDPicture1']->move($root. $path, $filename);
+        }
+        if(isset($files['CustGIDPicture2'])) {
+            if(trim($record->CustGIDPicture2) == '') {
+                $ext = $files['CustGIDPicture2']->getClientOriginalExtension();
+                $filename = $record->id. "_pic2.$ext";
+                $record->CustGIDPicture2 = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->CustGIDPicture2);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['CustGIDPicture2']->move($root. $path, $filename);
+        }
+        if(isset($files['applyUploadPath'])) {
+            if(trim($record->applyUploadPath) == '') {
+                $ext = $files['applyUploadPath']->getClientOriginalExtension();
+                $filename = $record->id. "_apply.$ext";
+                $record->applyUploadPath = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->applyUploadPath);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['applyUploadPath']->move($root. $path, $filename);
+        }
+        if(isset($files['proofOfProperty'])) {
+            if(trim($record->proofOfProperty) == '') {
+                $ext = $files['proofOfProperty']->getClientOriginalExtension();
+                $filename = $record->id. "_property.$ext";
+                $record->proofOfProperty = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->proofOfProperty);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['proofOfProperty']->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][0])) {
+            if(trim($record->otherDoc) == '') {
+                $ext = $files['otherDoc'][0]->getClientOriginalExtension();
+                $filename = $record->id. "_other.$ext";
+                $record->otherDoc = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->otherDoc);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['otherDoc'][0]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][1])) {
+            if(trim($record->otherDoc2) == '') {
+                $ext = $files['otherDoc'][1]->getClientOriginalExtension();
+                $filename = $record->id. "_other2.$ext";
+                $record->otherDoc2 = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->otherDoc2);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['otherDoc'][1]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][2])) {
+            if(trim($record->otherDoc3) == '') {
+                $ext = $files['otherDoc'][2]->getClientOriginalExtension();
+                $filename = $record->id. "_other3.$ext";
+                $record->otherDoc3 = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->otherDoc3);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['otherDoc'][2]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][3])) {
+            if(trim($record->otherDoc4) == '') {
+                $ext = $files['otherDoc'][3]->getClientOriginalExtension();
+                $filename = $record->id. "_other4.$ext";
+                $record->otherDoc4 = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->otherDoc4);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['otherDoc'][3]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][4])) {
+            if(trim($record->otherDoc5) == '') {
+                $ext = $files['otherDoc'][4]->getClientOriginalExtension();
+                $filename = $record->id. "_other5.$ext";
+                $record->otherDoc5 = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->otherDoc5);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['otherDoc'][4]->move($root. $path, $filename);
+        }
+        if(isset($files['otherDoc'][5])) {
+            if(trim($record->otherDoc6) == '') {
+                $ext = $files['otherDoc'][5]->getClientOriginalExtension();
+                $filename = $record->id. "_other6.$ext";
+                $record->otherDoc6 = $path. $filename;
+                $record->save();
+            } else {
+                $splitArr = preg_split("/\//", $record->otherDoc6);
+                $path = $splitArr[0]. "/". $splitArr[1]. "/". $splitArr[2]. "/";
+                $filename = $splitArr[3];
+            }
+            $files['otherDoc'][5]->move($root. $path, $filename);
+        }
+    }
 }
