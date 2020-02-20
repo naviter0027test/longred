@@ -476,6 +476,19 @@ class RecordRepository
             throw new Exception('案件不存在');
         }
 
+        $notify = [
+            'CustGIDPicture1' => false,
+            'CustGIDPicture2' => false,
+            'applyUploadPath' => false,
+            'proofOfProperty' => false,
+            'otherDoc' => false,
+            'otherDoc2' => false,
+            'otherDoc3' => false,
+            'otherDoc4' => false,
+            'otherDoc5' => false,
+            'otherDoc6' => false,
+        ];
+
         $root = config('filesystems')['disks']['uploads']['root'];
         $path = date('/Y/m'). '/';
         if(isset($files['CustGIDPicture1'])) {
@@ -490,6 +503,7 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['CustGIDPicture1']->move($root. $path, $filename);
+            $notify['CustGIDPicture1'] = true;
         }
         if(isset($files['CustGIDPicture2'])) {
             if(trim($record->CustGIDPicture2) == '') {
@@ -503,6 +517,7 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['CustGIDPicture2']->move($root. $path, $filename);
+            $notify['CustGIDPicture2'] = true;
         }
         if(isset($files['applyUploadPath'])) {
             if(trim($record->applyUploadPath) == '') {
@@ -516,6 +531,7 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['applyUploadPath']->move($root. $path, $filename);
+            $notify['applyUploadPath'] = true;
         }
         if(isset($files['proofOfProperty'])) {
             if(trim($record->proofOfProperty) == '') {
@@ -529,6 +545,7 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['proofOfProperty']->move($root. $path, $filename);
+            $notify['proofOfProperty'] = true;
         }
         if(isset($files['otherDoc'][0])) {
             if(trim($record->otherDoc) == '') {
@@ -542,6 +559,7 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][0]->move($root. $path, $filename);
+            $notify['otherDoc'] = true;
         }
         if(isset($files['otherDoc'][1])) {
             if(trim($record->otherDoc2) == '') {
@@ -555,6 +573,7 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][1]->move($root. $path, $filename);
+            $notify['otherDoc2'] = true;
         }
         if(isset($files['otherDoc'][2])) {
             if(trim($record->otherDoc3) == '') {
@@ -568,6 +587,7 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][2]->move($root. $path, $filename);
+            $notify['otherDoc3'] = true;
         }
         if(isset($files['otherDoc'][3])) {
             if(trim($record->otherDoc4) == '') {
@@ -581,6 +601,7 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][3]->move($root. $path, $filename);
+            $notify['otherDoc4'] = true;
         }
         if(isset($files['otherDoc'][4])) {
             if(trim($record->otherDoc5) == '') {
@@ -594,6 +615,7 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][4]->move($root. $path, $filename);
+            $notify['otherDoc5'] = true;
         }
         if(isset($files['otherDoc'][5])) {
             if(trim($record->otherDoc6) == '') {
@@ -607,6 +629,16 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][5]->move($root. $path, $filename);
+            $notify['otherDoc6'] = true;
+        }
+        $isNotify = false;
+        foreach($notify as $item) {
+            if($item == true)
+                $isNotify = true;
+        }
+        if($isNotify) {
+            $messageRepository = new MessageRepository();
+            $messageRepository->additionalNotify($id, $notify);
         }
     }
 }

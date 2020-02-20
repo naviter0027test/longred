@@ -3,7 +3,10 @@
 namespace App\Repositories;
 
 use App\Message;
+use App\Account;
+use App\Record;
 use Exception;
+use Config;
 
 class MessageRepository
 {
@@ -39,6 +42,59 @@ class MessageRepository
             ->whereNotNull('isAsk');
         $messages = $msgQty->get();
         return $messages;
+    }
+
+    public function additionalNotify($recordId, $notify) {
+        $receive1 = Config::get('mail.receive1');
+        $receive2 = Config::get('mail.receive2');
+        $receive3 = '';
+        $link = "/admin/record/edit/$recordId";
+        \Mail::send('email.additionalNotify', ['link' => $link, 'notify' => $notify], function($mail) use ($receive1, $receive2, $receive3) {
+            $fromAddr = Config::get('mail.from.address');
+            $fromName = Config::get('mail.from.name');
+            $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
+            $mail->from($fromAddr, $fromName);
+            $mail->to($receive1, '管理者')
+                ->cc($receive2)
+                ->subject("$testTitle 長鴻系統 - 補件通知 (系統發信，請勿回覆)");
+        });
+
+        $notifyArr = [];
+        if($notify['CustGIDPicture1'] == true) {
+            array_push( $notifyArr, ' 身份證照片正面 ');
+        }
+        if($notify['CustGIDPicture2'] == true) {
+            array_push( $notifyArr, ' 身份證照片反面 ');
+        }
+        if($notify['applyUploadPath'] == true) {
+            array_push( $notifyArr, ' 申請文件 ');
+        }
+        if($notify['proofOfProperty'] == true) {
+            array_push( $notifyArr, ' 財力證明 ');
+        }
+        if($notify['otherDoc'] == true) {
+            array_push( $notifyArr, ' 其他文件1 ');
+        }
+        if($notify['otherDoc2'] == true) {
+            array_push( $notifyArr, ' 其他文件2 ');
+        }
+        if($notify['otherDoc3'] == true) {
+            array_push( $notifyArr, ' 其他文件3 ');
+        }
+        if($notify['otherDoc4'] == true) {
+            array_push( $notifyArr, ' 其他文件4 ');
+        }
+        if($notify['otherDoc5'] == true) {
+            array_push( $notifyArr, ' 其他文件5 ');
+        }
+        if($notify['otherDoc6'] == true) {
+            array_push( $notifyArr, ' 其他文件6 ');
+        }
+        $message = new Message();
+        $message->content = '補件通知 補件:'. implode(',', $notifyArr);
+        $message->type = 4;
+        $message->recordId = $recordId;
+        $message->save();
     }
 
     public function getNews($params) {

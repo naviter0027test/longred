@@ -120,4 +120,6 @@ return [
         ],
     ],
 
+    'receive1' => 'app.receive@ch-finance.com.tw',
+    'receive2' => 'app.changhong@gmail.com',
 ];
