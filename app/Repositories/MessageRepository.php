@@ -18,6 +18,21 @@ class MessageRepository
         $message->recordId = $recordId;
         $message->creator = $creator;
         $message->save();
+
+        $receive1 = Config::get('mail.receive1');
+        $receive2 = Config::get('mail.receive2');
+        $receive3 = '';
+        $link = "/admin/record/edit/$recordId";
+
+        \Mail::send('email.statusUpdate', ['link' => $link, 'content' => $content, 'recordId' => $recordId], function($mail) use ($receive1, $receive2, $receive3) {
+            $fromAddr = Config::get('mail.from.address');
+            $fromName = Config::get('mail.from.name');
+            $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
+            $mail->from($fromAddr, $fromName);
+            $mail->to($receive1, '管理者')
+                ->cc($receive2)
+                ->subject("$testTitle 長鴻系統 - 補件通知 (系統發信，請勿回覆)");
+        });
     }
 
     //案件留言與回覆
