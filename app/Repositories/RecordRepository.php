@@ -32,7 +32,6 @@ class RecordRepository
         $record->memo = isset($params['memo']) ? $params['memo'] : '';
         $record->created_at = date('Y-m-d H:i:s');
         $record->updated_at = date('Y-m-d H:i:s');
-        \Log::info(date('Y-m-d H:i:s'));
         if(isset($params['accountId']))
             $record->accountId = $params['accountId'];
         $record->save();
@@ -210,6 +209,7 @@ class RecordRepository
             $record->liense = isset($row[20]) ? $row[20] : '';
             $record->productName = isset($row[24]) ? $row[24] : '';
             $record->CustGID = isset($row[25]) ? $row[25] : '';
+            $record->updated_at = date('Y-m-d H:i:s');
 
             $checkArr = [
                 '處理中',
@@ -257,6 +257,8 @@ class RecordRepository
             $record->liense = isset($row[20]) ? $row[20] : '';
             $record->productName = isset($row[24]) ? $row[24] : '';
             $record->CustGID = isset($row[25]) ? $row[25] : '';
+            $record->created_at = date('Y-m-d H:i:s');
+            $record->updated_at = date('Y-m-d H:i:s');
         }
         $record->save();
     }
@@ -295,6 +297,7 @@ class RecordRepository
             $record->grantDate = $params['grantDate']. ' 00:00:00';
         $record->grantAmount = isset($params['grantAmount']) ? $params['grantAmount'] : 0;
         $record->liense = isset($params['liense']) ? $params['liense'] : '';
+        $record->updated_at = date('Y-m-d H:i:s');
 
 
         if(isset($params['checkStatus']) && is_null($params['checkStatus']) == false) {
@@ -491,6 +494,8 @@ class RecordRepository
             'otherDoc5' => false,
             'otherDoc6' => false,
         ];
+
+        $record->updated_at = date('Y-m-d H:i:s');
 
         $root = config('filesystems')['disks']['uploads']['root'];
         $path = date('/Y/m'). '/';
