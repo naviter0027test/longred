@@ -108,6 +108,10 @@ class RecordRepository
             $record->save();
             $files['otherDoc'][5]->move($root. $path, $filename);
         }
+
+        $params['recordId'] = $record->id;
+        $messageRepository = new MessageRepository();
+        $messageRepository->recordAdd($params);
     }
 
     public function lists($params) {
