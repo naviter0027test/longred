@@ -65,6 +65,11 @@ class MessageRepository
                     ->cc($receive2)
                     ->subject("$testTitle 長鴻系統 - 留言通知 (系統發信，請勿回覆)");
             });
+
+            $teleLink = url($link);
+            $teleContent = "[系統通知] 留言通知 請前往查看 $teleLink";
+            $telegramRepository = new TelegramRepository();
+            $telegramRepository->notify($teleContent);
         }
         if(isset($params['who']))
             $message->who = $params['who'];
@@ -95,6 +100,11 @@ class MessageRepository
             $mail->to([$receive1, $receive2])
                 ->subject("$testTitle 長鴻系統 - 進件通知 (系統發信，請勿回覆)");
         });
+
+        $teleLink = url($link);
+        $teleContent = "[系統通知] 進件通知 請前往查看 $teleLink";
+        $telegramRepository = new TelegramRepository();
+        $telegramRepository->notify($teleContent);
     }
 
     public function getByRecordId($params) {
