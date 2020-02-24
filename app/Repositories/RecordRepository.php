@@ -30,6 +30,9 @@ class RecordRepository
         $record->liense = isset($params['liense']) ? $params['liense'] : '';
         $record->ProjectCategory = '';
         $record->memo = isset($params['memo']) ? $params['memo'] : '';
+        $record->created_at = date('Y-m-d H:i:s');
+        $record->updated_at = date('Y-m-d H:i:s');
+        \Log::info(date('Y-m-d H:i:s'));
         if(isset($params['accountId']))
             $record->accountId = $params['accountId'];
         $record->save();
