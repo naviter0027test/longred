@@ -84,4 +84,47 @@ class AccountController extends Controller
 
         return response()->json($res);
     }
+
+    public function appleTokenSetPage(Request $request) {
+        return view('account.apple.set');
+    }
+
+    public function appleTokenGetPage(Request $request) {
+        return view('account.apple.get');
+    }
+
+    public function appleTokenSet(Request $request) {
+        $account = Session::get('account');
+        $params = $request->all();
+        $appleToken = isset($params['appleToken']) ? $params['appleToken'] : '';
+        $res = [
+            'status' => true,
+            'msg' => '設定成功'
+        ];
+        try {
+            $accountRepository = new AccountRepository();
+            $accountRepository->appleTokenSet($account->id, $appleToken);
+        } catch (Exception $e) {
+            $res['status'] = false;
+            $res['message'] = $e->getMessage();
+        }
+        return response()->json($res);
+    }
+
+    public function appleTokenGet(Request $request) {
+        $account = Session::get('account');
+        $accountRepository = new AccountRepository();
+        $res = [
+            'status' => true,
+            'msg' => '設定成功'
+        ];
+        try {
+            $accountRepository = new AccountRepository();
+            $res['appleToken'] = $accountRepository->appleTokenGet($account->id);
+        } catch (Exception $e) {
+            $res['status'] = false;
+            $res['message'] = $e->getMessage();
+        }
+        return response()->json($res);
+    }
 }

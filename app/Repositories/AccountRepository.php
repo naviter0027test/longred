@@ -114,5 +114,22 @@ class AccountRepository
         }
         return $newPass;
     }
+
+    public function appleTokenSet($id, $appleToken) {
+        $account = Account::where('id', '=', $id)
+            ->first();
+        if(isset($account->id) == false)
+            throw new Exception('帳號不存在');
+        $account->appleToken = $appleToken;
+        $account->save();
+    }
+
+    public function appleTokenGet($id) {
+        $account = Account::where('id', '=', $id)
+            ->first();
+        if(isset($account->id) == false)
+            throw new Exception('帳號不存在');
+        return $account->appleToken;
+    }
 }
 

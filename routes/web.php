@@ -34,6 +34,10 @@ Route::group(['middleware' => ['check.account']], function() {
         Route::post('login', 'AccountController@login');
         Route::get('logout', 'AccountController@logout');
         Route::get('get', 'AccountController@getMyData');
+        Route::get('apple-token/set', 'AccountController@appleTokenSetPage');
+        Route::post('apple-token/set', 'AccountController@appleTokenSet');
+        Route::get('apple-token/get', 'AccountController@appleTokenGetPage');
+        Route::post('apple-token/get', 'AccountController@appleTokenGet');
 
         Route::get('record', 'RecordController@index');
         Route::post('record', 'RecordController@get');
