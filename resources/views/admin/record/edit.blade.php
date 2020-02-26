@@ -52,10 +52,10 @@
                     補件如下:
                     <input type="file" name="CustGIDPicture2" />
                 </p>
-                <h5>申請文件 </h5>
+                <h5>申請書 </h5>
                 <p>
                 @if($result['record']->applyUploadPath != '')
-                    <a href="/uploads{{ $result['record']->applyUploadPath }}" >查看</a> <br />
+                    <img src="/uploads{{ $result['record']->applyUploadPath }}" /> <br />
                 @else
                     無<br />
                 @endif
@@ -65,7 +65,7 @@
                 <h5>財力證明 </h5>
                 <p>
                 @if($result['record']->proofOfProperty != '')
-                    <a href="/uploads{{ $result['record']->proofOfProperty }}" >查看</a> <br />
+                    <img src="/uploads{{ $result['record']->proofOfProperty }}" /> <br />
                 @else
                     無<br />
                 @endif
@@ -75,7 +75,7 @@
                 <h5>其他文件1 </h5>
                 <p>
                 @if($result['record']->otherDoc != '')
-                    <a href="/uploads{{ $result['record']->otherDoc }}" >查看</a> <br />
+                    <img src="/uploads{{ $result['record']->otherDoc }}" /> <br />
                 @else
                     無<br />
                 @endif
@@ -85,7 +85,7 @@
                 <h5>其他文件2 </h5>
                 <p>
                 @if($result['record']->otherDoc2 != '')
-                    <a href="/uploads{{ $result['record']->otherDoc2 }}" >查看</a> <br />
+                    <img src="/uploads{{ $result['record']->otherDoc2 }}" /> <br />
                 @else
                     無<br />
                 @endif
@@ -95,7 +95,7 @@
                 <h5>其他文件3 </h5>
                 <p>
                 @if($result['record']->otherDoc3 != '')
-                    <a href="/uploads{{ $result['record']->otherDoc3 }}" >查看</a> <br />
+                    <img src="/uploads{{ $result['record']->otherDoc3 }}" /> <br />
                 @else
                     無<br />
                 @endif
@@ -105,7 +105,7 @@
                 <h5>其他文件4 </h5>
                 <p>
                 @if($result['record']->otherDoc4 != '')
-                    <a href="/uploads{{ $result['record']->otherDoc4 }}" >查看</a> <br />
+                    <img src="/uploads{{ $result['record']->otherDoc4 }}" /> <br />
                 @else
                     無<br />
                 @endif
@@ -115,7 +115,7 @@
                 <h5>其他文件5 </h5>
                 <p>
                 @if($result['record']->otherDoc5 != '')
-                    <a href="/uploads{{ $result['record']->otherDoc5 }}" >查看</a> <br />
+                    <img src="/uploads{{ $result['record']->otherDoc5 }}" /> <br />
                 @else
                     無<br />
                 @endif
@@ -125,7 +125,7 @@
                 <h5>其他文件6 </h5>
                 <p>
                 @if($result['record']->otherDoc6 != '')
-                    <a href="/uploads{{ $result['record']->otherDoc6 }}" >查看</a> <br />
+                    <img src="/uploads{{ $result['record']->otherDoc6 }}" /> <br />
                 @else
                     無<br />
                 @endif

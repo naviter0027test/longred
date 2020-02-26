@@ -108,6 +108,10 @@ class RecordRepository
             $record->save();
             $files['otherDoc'][5]->move($root. $path, $filename);
         }
+
+        $params['recordId'] = $record->id;
+        $messageRepository = new MessageRepository();
+        $messageRepository->recordAdd($params);
     }
 
     public function lists($params) {
@@ -205,7 +209,7 @@ class RecordRepository
             $record->periodAmount = isset($row[12]) ? $row[12] : 0;
             $record->content = isset($row[13]) ? $row[13] : '';
             //$record->grantDate = $row[23];
-            $record->grantAmount = isset($row[16]) ? $row[16] : 0;
+            $record->grantAmount = isset($row[16]) ? (int) $row[16] : 0;
             $record->liense = isset($row[20]) ? $row[20] : '';
             $record->productName = isset($row[24]) ? $row[24] : '';
             $record->CustGID = isset($row[25]) ? $row[25] : '';
@@ -253,7 +257,7 @@ class RecordRepository
             $record->content = isset($row[13]) ? $row[13] : '';
             $record->schedule = isset($row[14]) ? $row[14] : '尚未撥款';
             //$record->grantDate = $row[23];
-            $record->grantAmount = isset($row[16]) ? $row[16] : 0;
+            $record->grantAmount = isset($row[16]) ? (int) $row[16] : 0;
             $record->liense = isset($row[20]) ? $row[20] : '';
             $record->productName = isset($row[24]) ? $row[24] : '';
             $record->CustGID = isset($row[25]) ? $row[25] : '';

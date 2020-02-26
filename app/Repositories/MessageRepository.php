@@ -46,9 +46,65 @@ class MessageRepository
         else
             throw new Exception('recordId is required');
         $message->isAsk = $params['isAsk'];
+
+        //使用者留言的狀況下，要發通知
+        if($message->isAsk == 1) { 
+            $recordId = $params['recordId'];
+            $content = "使用者留言: ". $message->content;
+            $receive1 = Config::get('mail.receive1');
+            $receive2 = Config::get('mail.receive2');
+            $receive3 = '';
+            $link = "/admin/record/edit/$recordId";
+
+            \Mail::send('email.userAsk', ['link' => $link, 'content' => $content, 'recordId' => $recordId], function($mail) use ($receive1, $receive2, $receive3) {
+                $fromAddr = Config::get('mail.from.address');
+                $fromName = Config::get('mail.from.name');
+                $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
+                $mail->from($fromAddr, $fromName);
+                $mail->to($receive1, '管理者')
+                    ->cc($receive2)
+                    ->subject("$testTitle 長鴻系統 - 留言通知 (系統發信，請勿回覆)");
+            });
+
+            $teleLink = url($link);
+            $teleContent = "[系統通知] 留言通知 請前往查看 $teleLink";
+            $telegramRepository = new TelegramRepository();
+            $telegramRepository->notify($teleContent);
+        }
         if(isset($params['who']))
             $message->who = $params['who'];
         $message->save();
+    }
+
+    //案件新增通知
+    public function recordAdd($params) {
+        //狀態變動的相關處理於此，比如寄信或一些通知
+        $recordId = 0;
+        if(isset($params['recordId']))
+            $recordId = $params['recordId'];
+        else
+            throw new Exception('recordId is required');
+
+        //使用者留言的狀況下，要發通知
+        $recordId = $params['recordId'];
+        $receive1 = Config::get('mail.receive1');
+        $receive2 = Config::get('mail.receive2');
+        $receive3 = '';
+        $link = "/admin/record/edit/$recordId";
+
+        \Mail::send('email.recordAdd', ['link' => $link, 'recordId' => $recordId], function($mail) use ($receive1, $receive2, $receive3) {
+            $fromAddr = Config::get('mail.from.address');
+            $fromName = Config::get('mail.from.name');
+            $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
+            $mail->from($fromAddr, $fromName);
+            $mail->to([$receive1, $receive2])
+                ->subject("$testTitle 長鴻系統 - 進件通知 (系統發信，請勿回覆)");
+        });
+
+        $teleLink = url($link);
+        $teleContent = "[系統通知] 進件通知 請前往查看 $teleLink";
+        $telegramRepository = new TelegramRepository();
+        $telegramRepository->notify($teleContent);
     }
 
     public function getByRecordId($params) {
@@ -64,6 +120,7 @@ class MessageRepository
         $receive2 = Config::get('mail.receive2');
         $receive3 = '';
         $link = "/admin/record/edit/$recordId";
+        /*
         \Mail::send('email.additionalNotify', ['link' => $link, 'notify' => $notify], function($mail) use ($receive1, $receive2, $receive3) {
             $fromAddr = Config::get('mail.from.address');
             $fromName = Config::get('mail.from.name');
@@ -73,6 +130,7 @@ class MessageRepository
                 ->cc($receive2)
                 ->subject("$testTitle 長鴻系統 - 補件通知 (系統發信，請勿回覆)");
         });
+         */
 
         $notifyArr = [];
         if($notify['CustGIDPicture1'] == true) {
