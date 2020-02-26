@@ -123,10 +123,10 @@ class RecordRepository
             ->skip(($nowPage-1) * $offset)
             ->take($offset);
         if(isset($params['checkStatus'])) {
-            $recordQuery->where('checkStatus', 'like', '%'. $params['checkStatus']. '%');
+            $recordQuery->where('checkStatus', '=', $params['checkStatus']);
         }
         if(isset($params['schedule'])) {
-            $recordQuery->where('schedule', 'like', '%'. $params['schedule']. '%');
+            $recordQuery->where('schedule', '=', $params['schedule']);
         }
         if(isset($params['startDate'])) {
             $startDate = $params['startDate']. ' 00:00:00';
