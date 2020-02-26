@@ -116,7 +116,7 @@ class AccountController extends Controller
         $accountRepository = new AccountRepository();
         $res = [
             'status' => true,
-            'msg' => '設定成功'
+            'msg' => '取得成功'
         ];
         try {
             $accountRepository = new AccountRepository();
