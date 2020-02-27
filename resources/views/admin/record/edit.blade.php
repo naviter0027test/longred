@@ -151,9 +151,8 @@
                 <h5>撥款狀態</h5>
                 <p>
                     <select name="schedule">
-                        <option value="尚未撥款" {{ $result['record']->schedule == '尚未撥款' ? 'selected="selected"' : '' }} >尚未撥款</option>
+                        <option value="核准" {{ $result['record']->schedule == '核准' ? 'selected="selected"' : '' }} >核准</option>
                         <option value="已撥款"   {{ $result['record']->schedule == '已撥款' ? 'selected="selected"' : '' }} >已撥款</option>
-                        <option value="支票已出" {{ $result['record']->schedule == '支票已出' ? 'selected="selected"' : '' }} >支票已出</option>
                     </select>
                 </p>
                 <h5>撥款日期</h5>

@@ -29,9 +29,8 @@
                     撥款狀態
                     <select name="schedule">
                         <option value=""  >請選擇</option>
-                        <option value="已撥款"  {{ isset($params['checkStatus']) && $params['checkStatus'] == "已撥款" ? 'selected="selected"' : '' }} >已撥款</option>
-                        <option value="尚未撥款" {{ isset($params['checkStatus']) && $params['checkStatus'] == "尚未撥款" ? 'selected="selected"' : '' }}>尚未撥款</option>
-                        <option value="支票已出" {{ isset($params['checkStatus']) && $params['checkStatus'] == "支票已出" ? 'selected="selected"' : '' }}>支票已出</option>
+                        <option value="核准"  {{ isset($params['schedule']) && $params['schedule'] == "核准" ? 'selected="selected"' : '' }} >核准</option>
+                        <option value="已撥款"  {{ isset($params['schedule']) && $params['schedule'] == "已撥款" ? 'selected="selected"' : '' }} >已撥款</option>
                     </select>
                     進件日期區間
                     <input type="date" name="startDate" value="{{ isset($params['startDate']) ? $params['startDate'] : '' }}" />

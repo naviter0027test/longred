@@ -25,7 +25,7 @@ class RecordRepository
         $record->periods = 0;
         $record->periodAmount = 0;
         $record->content = '';
-        $record->schedule = '尚未撥款';
+        $record->schedule = '';
         $record->grantAmount = 0;
         $record->liense = isset($params['liense']) ? $params['liense'] : '';
         $record->ProjectCategory = '';
@@ -232,9 +232,8 @@ class RecordRepository
                 $record->checkStatus = $row[3];
             }
             $scheduleArr = [
+                '核准',
                 '已撥款',
-                '尚未撥款',
-                '支票已出',
             ];
             if(isset($row[14]) && in_array($row[14], $scheduleArr) == true) {
                 if($record->schedule != $row[14]) {
@@ -255,7 +254,7 @@ class RecordRepository
             $record->periods = isset($row[11]) ? $row[11] : 0;
             $record->periodAmount = isset($row[12]) ? $row[12] : 0;
             $record->content = isset($row[13]) ? $row[13] : '';
-            $record->schedule = isset($row[14]) ? $row[14] : '尚未撥款';
+            $record->schedule = isset($row[14]) ? $row[14] : '';
             //$record->grantDate = $row[23];
             $record->grantAmount = isset($row[16]) ? (int) $row[16] : 0;
             $record->liense = isset($row[20]) ? $row[20] : '';
