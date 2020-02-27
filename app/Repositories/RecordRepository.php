@@ -200,16 +200,23 @@ class RecordRepository
         }
         $record = Record::where('submitId', '=', $row[0])
             ->first();
+        $allowDate = null;
+        $grantDate = null;
+        if(isset($row[7]))
+            $allowDate = date('Y-m-d H:i:s', strtotime($row[7]));
+        if(isset($row[15]) && trim($row[15]) != '')
+            $grantDate = date('Y-m-d H:i:s', strtotime($row[15]));
         //已存在的情況下，視為編輯。相反則是為新增
         if(isset($record->id)) {
             $record->applicant = isset($row[2]) ? $row[2] : '';
+            $record->allowDate = $allowDate;
             $record->applyAmount = isset($row[9]) ? $row[9] : 0;
             $record->loanAmount = isset($row[10]) ? $row[10] : 0;
             $record->periods = isset($row[11]) ? $row[11] : 0;
             $record->periodAmount = isset($row[12]) ? $row[12] : 0;
             $record->content = isset($row[13]) ? $row[13] : '';
-            //$record->grantDate = $row[23];
-            $record->grantAmount = isset($row[16]) ? (int) $row[16] : 0;
+            $record->grantDate = $grantDate;
+            $record->grantAmount = isset($row[16]) ? $row[16] : 0;
             $record->liense = isset($row[20]) ? $row[20] : '';
             $record->productName = isset($row[24]) ? $row[24] : '';
             $record->CustGID = isset($row[25]) ? $row[25] : '';
@@ -249,14 +256,15 @@ class RecordRepository
             $record->submitId = isset($row[0]) ? $row[0] : '';
             $record->applicant = isset($row[2]) ? $row[2] : '';
             $record->checkStatus = isset($row[3]) ? $row[3] : '處理中';
+            $record->allowDate = $allowDate;
             $record->applyAmount = isset($row[9]) ? $row[9] : 0;
             $record->loanAmount = isset($row[10]) ? $row[10] : 0;
             $record->periods = isset($row[11]) ? $row[11] : 0;
             $record->periodAmount = isset($row[12]) ? $row[12] : 0;
             $record->content = isset($row[13]) ? $row[13] : '';
             $record->schedule = isset($row[14]) ? $row[14] : '';
-            //$record->grantDate = $row[23];
-            $record->grantAmount = isset($row[16]) ? (int) $row[16] : 0;
+            $record->grantDate = $grantDate;
+            $record->grantAmount = isset($row[16]) ? $row[16] : 0;
             $record->liense = isset($row[20]) ? $row[20] : '';
             $record->productName = isset($row[24]) ? $row[24] : '';
             $record->CustGID = isset($row[25]) ? $row[25] : '';
