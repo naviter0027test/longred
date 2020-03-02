@@ -155,7 +155,6 @@ class RecordController extends Controller
         $headers = array(
             'Content-Type: application/octet-stream',
         );
-        //return $files;
         return response()->download($zipArr['path'], $zipArr['name'], $headers);
     }
 

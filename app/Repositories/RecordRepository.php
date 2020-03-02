@@ -768,6 +768,9 @@ class RecordRepository
         $zipArr = [];
         $zipArr['path'] = 'temps/'. $account->account. '.zip';
         $zipArr['name'] = $account->account. '.zip';
+        $zipArr['count'] = count($files);
+        if($zipArr['count'] == 0)
+            throw new Exception('此案無上傳檔案');
         if($zip->open($zipArr['path'], \ZipArchive::CREATE | \ZipArchive::OVERWRITE)) {
             foreach($files as $f) {
                 $zip->addFile("temps/$f", "$f");
