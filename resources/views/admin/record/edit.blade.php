@@ -14,6 +14,9 @@
             @if($result['result'] == false) 
             {{ $result['msg'] }}
             @else
+            @if(trim($result['record']->accountId) != '')
+            <a class="btn" target="_blank" href="/admin/record/edit/download/{{ $result['record']->id }}">下載所有圖片</a>
+            @endif
             <form method='post' action='/admin/record/edit/{{ $result['record']->id }}' recordId="{{ $result['record']->id }}" class='form1' enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <h5>身份證字號</h5>

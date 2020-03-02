@@ -3,7 +3,9 @@
 namespace App\Repositories;
 
 use App\Record;
+use App\Account;
 use Exception;
+use Storage;
 
 class RecordRepository
 {
@@ -662,5 +664,121 @@ class RecordRepository
     }
 
     public function downloadAllImages($recordId) {
+        $record = Record::where('id', '=', $recordId)
+            ->first();
+        if(isset($record->id) == false) {
+            throw new Exception('案件不存在');
+        }
+
+        $account = Account::where('id', '=', $record->accountId)
+            ->first();
+        if(isset($account->id) == false) {
+            throw new Exception('帳號不存在');
+        }
+        if(trim($account->appleToken) == '') {
+            throw new Exception('apple token 為空');
+        }
+
+        $uploadsRoot = config('filesystems')['disks']['uploads']['root'];
+        $tempsRoot = config('filesystems')['disks']['temps']['root'];
+        $seriesNum = 1;
+        $files = [];
+        if(trim($record->CustGIDPicture1) != '') {
+            $splitArr = preg_split("/\./", $record->CustGIDPicture1);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->CustGIDPicture1);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+        if(trim($record->CustGIDPicture2) != '') {
+            $splitArr = preg_split("/\./", $record->CustGIDPicture2);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->CustGIDPicture2);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+        if(trim($record->applyUploadPath) != '') {
+            $splitArr = preg_split("/\./", $record->applyUploadPath);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->applyUploadPath);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+        if(trim($record->proofOfProperty) != '') {
+            $splitArr = preg_split("/\./", $record->proofOfProperty);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->proofOfProperty);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+        if(trim($record->otherDoc) != '') {
+            $splitArr = preg_split("/\./", $record->otherDoc);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->otherDoc);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+        if(trim($record->otherDoc2) != '') {
+            $splitArr = preg_split("/\./", $record->otherDoc2);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->otherDoc2);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+        if(trim($record->otherDoc3) != '') {
+            $splitArr = preg_split("/\./", $record->otherDoc3);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->otherDoc3);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+        if(trim($record->otherDoc4) != '') {
+            $splitArr = preg_split("/\./", $record->otherDoc4);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->otherDoc4);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+        if(trim($record->otherDoc5) != '') {
+            $splitArr = preg_split("/\./", $record->otherDoc5);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->otherDoc5);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+        if(trim($record->otherDoc6) != '') {
+            $splitArr = preg_split("/\./", $record->otherDoc6);
+            $ext = $splitArr[count($splitArr)-1];
+            $content = Storage::disk('uploads')->get($record->otherDoc6);
+            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
+            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            ++$seriesNum;
+        }
+
+        $zip = new \ZipArchive();
+        $zipArr = [];
+        $zipArr['path'] = 'temps/'. $account->account. '.zip';
+        $zipArr['name'] = $account->account. '.zip';
+        if($zip->open($zipArr['path'], \ZipArchive::CREATE | \ZipArchive::OVERWRITE)) {
+            foreach($files as $f) {
+                $zip->addFile("temps/$f", "$f");
+            }
+            $zip->close();
+            foreach($files as $f) {
+                Storage::disk('temps')->delete($f);
+            }
+        } else {
+            throw new Exception('zip open failed');
+        }
+        return $zipArr;
     }
 }

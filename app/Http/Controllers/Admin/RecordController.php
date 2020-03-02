@@ -132,4 +132,31 @@ class RecordController extends Controller
         }
         return view('admin.proccessResult', ['adm' => $admin, 'result' => $result]);
     }
+
+    public function downloadAllImages(Request $request, $id) {
+        $admin = Session::get('admin');
+        $result = [
+            'result' => true,
+            'msg' => 'success',
+        ];
+
+        $files = '';
+        try {
+            $recordRepository = new RecordRepository();
+            $zipArr = $recordRepository->downloadAllImages($id);
+        } catch (Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+
+        if($result['result'] == false)
+            return view('admin.proccessResult', ['adm' => $admin, 'result' => $result]);
+
+        $headers = array(
+            'Content-Type: application/octet-stream',
+        );
+        //return $files;
+        return response()->download($zipArr['path'], $zipArr['name'], $headers);
+    }
+
 }
