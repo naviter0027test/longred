@@ -122,10 +122,10 @@ class RecordRepository
         $recordQuery = Record::orderBy('id', 'desc')
             ->skip(($nowPage-1) * $offset)
             ->take($offset);
-        if(isset($params['checkStatus'])) {
+        if(isset($params['checkStatus']) && trim($params['checkStatus']) != '') {
             $recordQuery->where('checkStatus', '=', $params['checkStatus']);
         }
-        if(isset($params['schedule'])) {
+        if(isset($params['schedule']) && trim($params['schedule']) != '') {
             $recordQuery->where('schedule', '=', $params['schedule']);
         }
         if(isset($params['startDate'])) {
@@ -659,5 +659,8 @@ class RecordRepository
             $messageRepository = new MessageRepository();
             $messageRepository->additionalNotify($id, $notify);
         }
+    }
+
+    public function downloadAllImages($recordId) {
     }
 }

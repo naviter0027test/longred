@@ -22,6 +22,14 @@
                         <option value="婉拒">婉拒</option>
                     </select>
                 </p>
+                <h5>撥款狀態</h5>
+                <p> 
+                    <select name="schedule" > 
+                        <option value=""></option>
+                        <option value="核准">核准</option>
+                        <option value="已撥款">已撥款</option>
+                    </select>
+                </p>
                 <h5>進件日期區間</h5>
                 <p> 
                     <input type="date" name="startDate" value="" />
