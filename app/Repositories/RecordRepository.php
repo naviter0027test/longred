@@ -14,7 +14,7 @@ class RecordRepository
         $recordCount = Record::where('created_at', '>=' , "$today 00:00:00")
             ->where('created_at', '<=', "$today 23:59:59")
             ->count();
-        $submitId = date('Ymd'). str_pad($recordCount+1, 5, '0', STR_PAD_LEFT);
+        $submitId = date('ymd'). 'A'. str_pad($recordCount+1, 3, '0', STR_PAD_LEFT). rand(10, 99);
         $record = new Record();
         $record->submitId = $submitId;
         $record->CustGID = isset($params['CustGID']) ? $params['CustGID'] : '';
@@ -683,84 +683,85 @@ class RecordRepository
         $tempsRoot = config('filesystems')['disks']['temps']['root'];
         $seriesNum = 1;
         $files = [];
+        $fileTemName = $record->submitId. '_'. $account->account;
         if(trim($record->CustGIDPicture1) != '') {
             $splitArr = preg_split("/\./", $record->CustGIDPicture1);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->CustGIDPicture1);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
         if(trim($record->CustGIDPicture2) != '') {
             $splitArr = preg_split("/\./", $record->CustGIDPicture2);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->CustGIDPicture2);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
         if(trim($record->applyUploadPath) != '') {
             $splitArr = preg_split("/\./", $record->applyUploadPath);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->applyUploadPath);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
         if(trim($record->proofOfProperty) != '') {
             $splitArr = preg_split("/\./", $record->proofOfProperty);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->proofOfProperty);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
         if(trim($record->otherDoc) != '') {
             $splitArr = preg_split("/\./", $record->otherDoc);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->otherDoc);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
         if(trim($record->otherDoc2) != '') {
             $splitArr = preg_split("/\./", $record->otherDoc2);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->otherDoc2);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
         if(trim($record->otherDoc3) != '') {
             $splitArr = preg_split("/\./", $record->otherDoc3);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->otherDoc3);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
         if(trim($record->otherDoc4) != '') {
             $splitArr = preg_split("/\./", $record->otherDoc4);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->otherDoc4);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
         if(trim($record->otherDoc5) != '') {
             $splitArr = preg_split("/\./", $record->otherDoc5);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->otherDoc5);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
         if(trim($record->otherDoc6) != '') {
             $splitArr = preg_split("/\./", $record->otherDoc6);
             $ext = $splitArr[count($splitArr)-1];
             $content = Storage::disk('uploads')->get($record->otherDoc6);
-            Storage::disk('temps')->put($account->appleToken. '_'. $account->account. "_$seriesNum.$ext", $content);
-            array_push($files, $account->appleToken. '_'. $account->account. "_$seriesNum.$ext");
+            Storage::disk('temps')->put($fileTemName. "_$seriesNum.$ext", $content);
+            array_push($files, $fileTemName. "_$seriesNum.$ext");
             ++$seriesNum;
         }
 
