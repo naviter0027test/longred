@@ -204,14 +204,22 @@ class RecordRepository
             ->first();
         $allowDate = null;
         $grantDate = null;
+        $createDate = date('Y-m-d H:i:s');
         if(isset($row[7]))
             $allowDate = date('Y-m-d H:i:s', strtotime($row[7]));
         if(isset($row[15]) && trim($row[15]) != '')
             $grantDate = date('Y-m-d H:i:s', strtotime($row[15]));
+        if(isset($row[23]) && trim($row[23]) != '')
+            $createDate = date('Y-m-d H:i:s', strtotime($row[23]));
         //已存在的情況下，視為編輯。相反則是為新增
         if(isset($record->id)) {
+            $record->contractId = isset($row[1]) ? $row[1] : '';
             $record->applicant = isset($row[2]) ? $row[2] : '';
+            $record->dealer = isset($row[4]) ? $row[4] : '';
+            $record->inCharge = isset($row[5]) ? $row[5] : '';
+            $record->beneficiary = isset($row[6]) ? $row[6] : '';
             $record->allowDate = $allowDate;
+            $record->product = isset($row[8]) ? $row[8] : '';
             $record->applyAmount = isset($row[9]) ? $row[9] : 0;
             $record->loanAmount = isset($row[10]) ? $row[10] : 0;
             $record->periods = isset($row[11]) ? $row[11] : 0;
@@ -219,7 +227,12 @@ class RecordRepository
             $record->content = isset($row[13]) ? $row[13] : '';
             $record->grantDate = $grantDate;
             $record->grantAmount = isset($row[16]) ? $row[16] : 0;
+            $record->dealerName = isset($row[17]) ? $row[17] : '';
+            $record->inChargeName = isset($row[18]) ? $row[18] : '';
+            $record->beneficiaryName = isset($row[19]) ? $row[19] : '';
             $record->liense = isset($row[20]) ? $row[20] : '';
+            $record->ProjectCategory = isset($row[21]) ? $row[21] : '';
+            $record->SubArea = isset($row[22]) ? $row[22] : '';
             $record->productName = isset($row[24]) ? $row[24] : '';
             $record->CustGID = isset($row[25]) ? $row[25] : '';
             $record->updated_at = date('Y-m-d H:i:s');
@@ -256,9 +269,14 @@ class RecordRepository
         } else {
             $record = new Record;
             $record->submitId = isset($row[0]) ? $row[0] : '';
+            $record->contractId = isset($row[1]) ? $row[1] : '';
             $record->applicant = isset($row[2]) ? $row[2] : '';
             $record->checkStatus = isset($row[3]) ? $row[3] : '處理中';
+            $record->dealer = isset($row[4]) ? $row[4] : '';
+            $record->inCharge = isset($row[5]) ? $row[5] : '';
+            $record->beneficiary = isset($row[6]) ? $row[6] : '';
             $record->allowDate = $allowDate;
+            $record->product = isset($row[8]) ? $row[8] : '';
             $record->applyAmount = isset($row[9]) ? $row[9] : 0;
             $record->loanAmount = isset($row[10]) ? $row[10] : 0;
             $record->periods = isset($row[11]) ? $row[11] : 0;
@@ -267,10 +285,15 @@ class RecordRepository
             $record->schedule = isset($row[14]) ? $row[14] : '';
             $record->grantDate = $grantDate;
             $record->grantAmount = isset($row[16]) ? $row[16] : 0;
+            $record->dealerName = isset($row[17]) ? $row[17] : '';
+            $record->inChargeName = isset($row[18]) ? $row[18] : '';
+            $record->beneficiaryName = isset($row[19]) ? $row[19] : '';
             $record->liense = isset($row[20]) ? $row[20] : '';
+            $record->ProjectCategory = isset($row[21]) ? $row[21] : '';
+            $record->SubArea = isset($row[22]) ? $row[22] : '';
             $record->productName = isset($row[24]) ? $row[24] : '';
             $record->CustGID = isset($row[25]) ? $row[25] : '';
-            $record->created_at = date('Y-m-d H:i:s');
+            $record->created_at = $createDate;
             $record->updated_at = date('Y-m-d H:i:s');
         }
         $record->save();
