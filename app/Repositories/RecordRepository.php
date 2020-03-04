@@ -698,9 +698,6 @@ class RecordRepository
         if(isset($account->id) == false) {
             throw new Exception('帳號不存在');
         }
-        if(trim($account->appleToken) == '') {
-            throw new Exception('apple token 為空');
-        }
 
         $uploadsRoot = config('filesystems')['disks']['uploads']['root'];
         $tempsRoot = config('filesystems')['disks']['temps']['root'];
