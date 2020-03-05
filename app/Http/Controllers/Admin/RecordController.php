@@ -82,7 +82,7 @@ class RecordController extends Controller
         $params = $request->all();
         $nowPage = isset($params['nowPage']) ? $params['nowPage'] : 1;
         $offset = isset($params['offset']) ? $params['offset'] : 10;
-        $params['schedule'] = '已撥款';
+        $params['checkStatus'] = '核准';
         $admin = Session::get('admin');
         $result = [
             'result' => true,
