@@ -249,7 +249,7 @@ class RecordRepository
                     $oldStatus = $record->checkStatus;
                     $newStatus = $row[3];
                     $messageRepository = new MessageRepository();
-                    $messageRepository->statusUpdate($record->id, "審核狀況:$oldStatus -> $newStatus", $admin->id);
+                    $messageRepository->statusUpdate($record->id, "審核狀況:$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id);
                 }
                 $record->checkStatus = $row[3];
             }
@@ -262,7 +262,7 @@ class RecordRepository
                     $oldStatus = $record->schedule;
                     $newStatus = $row[14];
                     $messageRepository = new MessageRepository();
-                    $messageRepository->statusUpdate($record->id, "撥款狀況:$oldStatus -> $newStatus", $admin->id);
+                    $messageRepository->statusUpdate($record->id, "撥款狀況:$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id);
                 }
                 $record->schedule = $row[14];
             }
@@ -341,7 +341,7 @@ class RecordRepository
                 $oldStatus = $record->checkStatus;
                 $newStatus = $params['checkStatus'];
                 $messageRepository = new MessageRepository();
-                $messageRepository->statusUpdate($record->id, "審核狀況:$oldStatus -> $newStatus", $admin->id);
+                $messageRepository->statusUpdate($record->id, "審核狀況:$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id);
             }
             $record->checkStatus =  $params['checkStatus'];
         }
@@ -350,7 +350,7 @@ class RecordRepository
                 $oldStatus = $record->schedule;
                 $newStatus = $params['schedule'];
                 $messageRepository = new MessageRepository();
-                $messageRepository->statusUpdate($record->id, "撥款狀況:$oldStatus -> $newStatus", $admin->id);
+                $messageRepository->statusUpdate($record->id, "撥款狀況:$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id);
             }
             $record->schedule = $params['schedule'];
         }
