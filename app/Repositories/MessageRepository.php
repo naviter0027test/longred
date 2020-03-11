@@ -33,6 +33,20 @@ class MessageRepository
                 ->cc($receive2)
                 ->subject("$testTitle 長鴻系統 - 補件通知 (系統發信，請勿回覆)");
         });
+
+        /*
+        $record = Record::where('id', '=', $recordId)->first();
+        if(isset($record->id) == false) {
+            throw new Exception('案件不存在');
+        }
+
+        if(is_numeric($record->accountId)) {
+            $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
+            $content = $testTitle. $content;
+            $appleRepository = new AppleRepository();
+            $appleRepository->pushOne($record->accountId, $content);
+        }
+         */
     }
 
     //案件留言與回覆
@@ -198,6 +212,13 @@ class MessageRepository
         $message->title = isset($params['title']) ? $params['title'] : '';
         $message->content = $params['content'];
         $message->save();
+
+        if(trim($message->title) != '') {
+            $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
+            $content = $testTitle. "長鴻 消息通知:". $message->title;
+            $appleRepository = new AppleRepository();
+            $appleRepository->pushNewsToAll($message->title);
+        }
     }
 
     public function getNewsById($id) {
@@ -253,6 +274,13 @@ class MessageRepository
         $message->title = isset($params['title']) ? $params['title'] : '';
         $message->content = $params['content'];
         $message->save();
+
+        if(trim($message->title) != '') {
+            $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
+            $content = $testTitle. "長鴻 公告通知:". $message->title;
+            $appleRepository = new AppleRepository();
+            $appleRepository->pushNewsToAll($message->title);
+        }
     }
 
     public function getAnnouncementById($id) {
