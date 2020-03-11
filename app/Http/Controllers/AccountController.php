@@ -127,4 +127,8 @@ class AccountController extends Controller
         }
         return response()->json($res);
     }
+
+    public function apiHelp(Request $request) {
+        return view('api.help');
+    }
 }

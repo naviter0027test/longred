@@ -49,6 +49,8 @@ Route::group(['middleware' => ['check.account']], function() {
         Route::get('message/record-id', 'MessageController@getByRecordIdPage');
         Route::post('message/record-id', 'MessageController@getByRecordId');
     });
+
+    Route::get('/api/help', 'AccountController@apiHelp');
 });
 Route::group(['prefix' => 'account'], function() {
     Route::get('isLogin', 'AccountController@isLogin');
