@@ -40,6 +40,10 @@
                 <p>
                     <input type="text" name="keyword" placeholder="關鍵字查詢" value="" />
                 </p>
+                <h5>經銷商</h5>
+                <p>
+                    <input type="text" name="dealer" placeholder="經銷商" value="" />
+                </p>
                 <h5>第幾頁</h5>
                 <p>
                     <input type="number" name="nowPage" value="1" />

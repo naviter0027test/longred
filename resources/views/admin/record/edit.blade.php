@@ -135,10 +135,22 @@
                     補件如下:
                     <input type="file" name="otherDoc[]" />
                 </p>
+                <h5>經銷商</h5>
+                <p> <input type="text" name="dealer" value="{{ $result['record']->dealer }}" /> </p>
+                <h5>經銷商名稱</h5>
+                <p> <input type="text" name="dealerName" value="{{ $result['record']->dealerName }}" /> </p>
                 <h5>經辦廠商</h5>
                 <p> <input type="text" name="inCharge" value="{{ $result['record']->inCharge }}" /> </p>
+                <h5>經辦廠商名稱</h5>
+                <p> <input type="text" name="inChargeName" value="{{ $result['record']->inChargeName }}" /> </p>
+                <h5>受款廠商</h5>
+                <p> <input type="text" name="beneficiary" value="{{ $result['record']->beneficiary }}" /> </p>
+                <h5>受款廠商名稱</h5>
+                <p> <input type="text" name="beneficiaryName" value="{{ $result['record']->beneficiaryName }}" /> </p>
                 <h5>準駁日期</h5>
                 <p> <input type="date" name="allowDate" value="{{ $result['record']->allowDateVal }}" /> </p>
+                <h5>商品</h5>
+                <p> <input type="text" name="product" value="{{ $result['record']->product}}" /> </p>
                 <h5>商品名稱</h5>
                 <p> <input type="text" name="productName" value="{{ $result['record']->productName }}" /> </p>
                 <h5>申貸金額</h5>
@@ -164,6 +176,10 @@
                 <p> <input type="text" name="grantAmount" value="{{ $result['record']->grantAmount }}" /> </p>
                 <h5>車牌號碼</h5>
                 <p> <input type="text" name="liense" value="{{ $result['record']->liense }}" /> </p>
+                <h5>承辦廠商區域</h5>
+                <p> <input type="text" name="SubArea" value="{{ $result['record']->SubArea }}" /> </p>
+                <h5>動產設定</h5>
+                <p> <input type="text" name="ProjectCategory" value="{{ $result['record']->ProjectCategory }}" /> </p>
                 <p class=""> <button class="btn">更改</button> </p>
             </form>
 

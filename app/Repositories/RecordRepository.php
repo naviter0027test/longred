@@ -124,6 +124,9 @@ class RecordRepository
         $recordQuery = Record::orderBy('id', 'desc')
             ->skip(($nowPage-1) * $offset)
             ->take($offset);
+        if(isset($params['dealer']) && trim($params['dealer']) != '') {
+            $recordQuery->where('dealer', 'like', "%". $params['dealer']. "%");
+        }
         if(isset($params['checkStatus']) && trim($params['checkStatus']) != '') {
             $recordQuery->where('checkStatus', '=', $params['checkStatus']);
         }
@@ -320,7 +323,12 @@ class RecordRepository
         }
         $record->CustGID = isset($params['CustGID']) ? $params['CustGID'] : '';
         $record->applicant = isset($params['applicant']) ? $params['applicant'] : '';
+        $record->dealer = isset($params['dealer']) ? $params['dealer'] : '';
+        $record->dealerName = isset($params['dealerName']) ? $params['dealerName'] : '';
         $record->inCharge = isset($params['inCharge']) ? $params['inCharge'] : '';
+        $record->inChargeName = isset($params['inChargeName']) ? $params['inChargeName'] : '';
+        $record->beneficiary = isset($params['beneficiary']) ? $params['beneficiary'] : '';
+        $record->beneficiaryName = isset($params['beneficiaryName']) ? $params['beneficiaryName'] : '';
         if(isset($params['allowDate']) && is_null($params['allowDate']) == false)
             $record->allowDate = $params['allowDate']. ' 00:00:00';
         $record->productName = isset($params['productName']) ? $params['productName'] : '';
@@ -333,6 +341,8 @@ class RecordRepository
             $record->grantDate = $params['grantDate']. ' 00:00:00';
         $record->grantAmount = isset($params['grantAmount']) ? $params['grantAmount'] : 0;
         $record->liense = isset($params['liense']) ? $params['liense'] : '';
+        $record->SubArea = isset($params['SubArea']) ? $params['SubArea'] : '';
+        $record->ProjectCategory = isset($params['ProjectCategory']) ? $params['ProjectCategory'] : '';
         $record->updated_at = date('Y-m-d H:i:s');
 
 
