@@ -85,10 +85,10 @@ class ImportCsvFromFtp extends Command
                     }
                     Storage::disk('csvlog')->put(date('Ymd-His'). '.log', $logData);
                     //\Log::info($resultRow);
+                } else {
+                    //刪除已匯入的檔案
+                    Storage::disk('csvftp')->delete($fileName);
                 }
-
-                //刪除已匯入的檔案
-                Storage::disk('csvftp')->delete($fileName);
             }
         }
     }
