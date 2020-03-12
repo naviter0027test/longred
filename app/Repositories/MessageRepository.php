@@ -31,7 +31,7 @@ class MessageRepository
             $mail->from($fromAddr, $fromName);
             $mail->to($receive1, '管理者')
                 ->cc($receive2)
-                ->subject("$testTitle 長鴻系統 - 補件通知 (系統發信，請勿回覆)");
+                ->subject("$testTitle 長鴻系統 - 狀態變動 (系統發信，請勿回覆)");
         });
 
         /*
