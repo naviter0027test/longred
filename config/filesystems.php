@@ -74,6 +74,26 @@ return [
             'root' => public_path(). '/temps',
         ],
 
+        'csvftp' => [
+            'driver' => 'ftp',
+            'host' => 'ch-finance.com.tw',
+            'username' => 'App_Update@ch-finance.com.tw',
+            'password' => 'App_UpdateUser',
+            'ssl' => false, //false表示ftp,  true表示sftp
+            'port' => 21,
+            'passive' => true,
+            'timeout' => 30,
+        ],
+
+        'csvtmp' => [
+            'driver' => 'local',
+            'root' => storage_path('csvtmp'),
+        ],
+
+        'csvlog' => [
+            'driver' => 'local',
+            'root' => storage_path('csvlog'),
+        ],
     ],
 
 ];
