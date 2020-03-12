@@ -619,8 +619,10 @@
                 <td style="width:381.1pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding:2.75pt 2.38pt 2.38pt; vertical-align:top">
                     <p style="margin-top:0pt; margin-bottom:0pt; widows:0; orphans:0; font-size:12pt"><span style="font-family:'Times New Roman'">當</span><span style="font-family:'Times New Roman'">email</span><span style="font-family:'Times New Roman'">找到對應的帳號，會賦予該帳號新的密碼，並將新密碼寄到信箱中</span></p>
                     <p style="margin-top:0pt; margin-bottom:0pt; widows:0; orphans:0; font-size:12pt"><span style="font-family:'Times New Roman'">&#xa0;</span></p>
+<!--
                     <p style="margin-top:0pt; margin-bottom:0pt; widows:0; orphans:0; font-size:12pt"><span style="font-family:'Times New Roman'">使用本</span><span style="font-family:'Times New Roman'">api</span><span style="font-family:'Times New Roman'">，前提為帳號要有</span><span style="font-family:'Times New Roman'">email</span><span style="font-family:'Times New Roman'">，如下圖</span></p>
                     <p style="margin-top:0pt; margin-bottom:0pt; widows:0; orphans:0; font-size:12pt"><img src="a8ylo-8h88t.001.png" width="507" height="363" alt="" style="-aw-left-pos:0.7pt; -aw-rel-hpos:column; -aw-rel-vpos:paragraph; -aw-top-pos:0pt; -aw-wrap-type:topbottom" />
+-->
                         <br />
                     </p>
                 </td>
