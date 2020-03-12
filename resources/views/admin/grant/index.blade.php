@@ -25,6 +25,7 @@
                     <input type="date" name="endDate" value="{{ isset($params['endDate']) ? $params['endDate'] : '' }}" />
                     <br />
                     <input type="text" name="keyword" placeholder="關鍵字查詢" value="{{ isset($params['keyword']) ? $params['keyword'] : '' }}" />
+                    <input type="text" name="dealer" placeholder="經銷商" value="{{ isset($params['dealer']) ? $params['dealer'] : '' }}" />
                     <button class="btn">查詢</button>
                 </form>
             </div>
