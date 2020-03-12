@@ -343,6 +343,7 @@ class RecordRepository
         $record->liense = isset($params['liense']) ? $params['liense'] : '';
         $record->SubArea = isset($params['SubArea']) ? $params['SubArea'] : '';
         $record->ProjectCategory = isset($params['ProjectCategory']) ? $params['ProjectCategory'] : '';
+        $record->memo = isset($params['memo']) ? $params['memo'] : '';
         $record->updated_at = date('Y-m-d H:i:s');
 
 

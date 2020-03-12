@@ -180,6 +180,8 @@
                 <p> <input type="text" name="SubArea" value="{{ $result['record']->SubArea }}" /> </p>
                 <h5>動產設定</h5>
                 <p> <input type="text" name="ProjectCategory" value="{{ $result['record']->ProjectCategory }}" /> </p>
+                <h5>備註</h5>
+                <p> <textarea type="text" name="memo" >{{ $result['record']->memo }}</textarea> </p>
                 <p class=""> <button class="btn">更改</button> </p>
             </form>
 
