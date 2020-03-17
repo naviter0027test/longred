@@ -518,6 +518,9 @@ class RecordRepository
         if(isset($record->id) == false) {
             throw new Exception('案件不存在');
         }
+        if($record->checkStatus != '處理中') {
+            throw new Exception('審核狀態須為處理中才可取消');
+        }
         $record->checkStatus = '取消申辦';
         $record->save();
     }

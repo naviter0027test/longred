@@ -51,9 +51,11 @@ class MessageRepository
 
     //案件留言與回覆
     public function send($params) {
+        $record = Record::where('id', '=', $params['recordId'])->first();
         //狀態變動的相關處理於此，比如寄信或一些通知
         $message = new Message();
         $message->content = isset($params['content']) ? $params['content'] : '';
+        $message->content .= " (". $record->applicant. ")";
         $message->type = isset($params['type']) ? $params['type'] : 0;
         if(isset($params['recordId']))
             $message->recordId = $params['recordId'];
