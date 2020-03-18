@@ -551,7 +551,7 @@
                     <p style="margin-top:0pt; margin-bottom:0pt; widows:0; orphans:0; font-size:12pt"><span style="font-family:'Microsoft YaHei'">備註</span></p>
                 </td>
                 <td style="width:381.1pt; border-right-style:solid; border-right-width:0.75pt; border-left-style:solid; border-left-width:0.75pt; border-bottom-style:solid; border-bottom-width:0.75pt; padding:2.75pt 2.38pt 2.38pt; vertical-align:top">
-                    <p style="margin-top:0pt; margin-bottom:0pt; widows:0; orphans:0; font-size:12pt"><span style="font-family:'Times New Roman'">&#xa0;</span></p>
+                    <p style="margin-top:0pt; margin-bottom:0pt; widows:0; orphans:0; font-size:12pt"><span style="font-family:'Times New Roman'">僅限審核狀態為『處理中』的案件</span></p>
                 </td>
             </tr>
         </table>

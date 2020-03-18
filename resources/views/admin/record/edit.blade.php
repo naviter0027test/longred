@@ -21,6 +21,8 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <h5>身份證字號</h5>
                 <p> <input type="text" name="CustGID" value="{{ $result['record']->CustGID }}" /> </p>
+                <h5>進件編號</h5>
+                <p> {{ $result['record']->submitId }} </p>
                 <h5>申請人姓名</h5>
                 <p> <input type="text" name="applicant" value="{{ $result['record']->applicant }}" /> </p>
                 <h5>案件狀態</h5>
