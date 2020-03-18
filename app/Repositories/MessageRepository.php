@@ -179,11 +179,20 @@ class MessageRepository
         if($notify['otherDoc6'] == true) {
             array_push( $notifyArr, ' 其他文件6 ');
         }
-        $message = new Message();
-        $message->content = '補件通知 補件:'. implode(',', $notifyArr);
-        $message->type = 4;
-        $message->recordId = $recordId;
-        $message->save();
+        if(count($notifyArr) > 0) {
+            $message = new Message();
+            $message->content = '補件通知 補件:'. implode(',', $notifyArr);
+            $message->type = 4;
+            $message->recordId = $recordId;
+            $message->save();
+
+            $link = "/admin/record/edit/$recordId";
+
+            $teleLink = url($link);
+            $teleContent = "[系統通知] 補件通知 請前往查看 $teleLink";
+            $telegramRepository = new TelegramRepository();
+            $telegramRepository->notify($teleContent);
+        }
     }
 
     public function getNews($params) {
