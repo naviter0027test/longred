@@ -195,6 +195,23 @@ class MessageRepository
         }
     }
 
+    public function cancelNotify($record) {
+        $link = "/admin/record/edit/". $record->id;
+
+        $content = "取消申辦 (". $record->applicant. ")";
+        //狀態變動的相關處理於此，比如寄信或一些通知
+        $message = new Message();
+        $message->content = $content;
+        $message->type = 5;
+        $message->recordId = $record->id;
+        $message->save();
+
+        $teleLink = url($link);
+        $teleContent = "[系統通知] 取消申辦 請前往查看 $teleLink";
+        $teleRepository = new TelegramRepository();
+        $teleRepository->notify($teleContent);
+    }
+
     public function getNews($params) {
         $keyword = isset($params['keyword']) ? $params['keyword'] : '';
         $nowPage = isset($params['nowPage']) ? $params['nowPage'] : 1;

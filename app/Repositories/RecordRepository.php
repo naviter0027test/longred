@@ -523,6 +523,9 @@ class RecordRepository
         }
         $record->checkStatus = '取消申辦';
         $record->save();
+
+        $messageRepository = new MessageRepository();
+        $messageRepository->cancelNotify($record);
     }
 
     public function updateFileById($id, $files = []) {
