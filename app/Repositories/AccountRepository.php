@@ -52,6 +52,8 @@ class AccountRepository
         $account->name = isset($params['name']) ? $params['name'] : '';
         $account->email = isset($params['email']) ? $params['email'] : '';
         $account->phone = isset($params['phone']) ? $params['phone'] : '';
+        $account->area = isset($params['area']) ? $params['area'] : '';
+        $account->permission = isset($params['permission']) ? $params['permission'] : '';
         $account->active = isset($params['active']) ? $params['active'] : 0;
         $account->save();
     }
@@ -75,6 +77,8 @@ class AccountRepository
         $account->email = isset($params['email']) ? $params['email'] : '';
         $account->phone = isset($params['phone']) ? $params['phone'] : '';
         $account->active = isset($params['active']) ? $params['active'] : 0;
+        $account->area = isset($params['area']) ? $params['area'] : '';
+        $account->permission = isset($params['permission']) ? $params['permission'] : '';
         $account->save();
     }
 

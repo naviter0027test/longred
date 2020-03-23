@@ -26,6 +26,10 @@
                 <p> <input type="text" name="email" value="{{ $result['account']->email }}" /> </p>
                 <h5>手機</h5>
                 <p> <input type="text" name="phone" value="{{ $result['account']->phone }}" /> </p>
+                <h5>區域</h5>
+                <p> <input type="text" name="area" value="{{ $result['account']->area }}" /> </p>
+                <h5>權限</h5>
+                <p> <input type="text" name="permission" value="{{ $result['account']->permission }}" /> </p>
                 <h5>狀態</h5>
                 <p>
                     <select name="active">

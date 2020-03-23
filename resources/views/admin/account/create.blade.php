@@ -23,6 +23,10 @@
                 <p> <input type="text" name="email" /> </p>
                 <h5>手機</h5>
                 <p> <input type="text" name="phone" /> </p>
+                <h5>區域</h5>
+                <p> <input type="text" name="area" /> </p>
+                <h5>權限</h5>
+                <p> <input type="text" name="permission" /> </p>
                 <h5>狀態</h5>
                 <p>
                     <select name="active">
