@@ -149,7 +149,12 @@ class RecordRepository
             });
         }
         if(isset($params['accountId'])) {
-            $recordQuery->where('accountId', '=', $params['accountId']);
+            $account = Account::where('id', '=', $params['accountId'])
+                ->first();
+            $recordQuery->where(function($query) use($params, $account) {
+                $query->orWhere('accountId', '=', $params['accountId']);
+                $query->orWhere('dealer', '=', $account->account);
+            });
         }
         $records = $recordQuery->get();
         foreach($records as $record) {
@@ -512,8 +517,13 @@ class RecordRepository
     }
 
     public function cancel($id, $accountId) {
+        $account = Account::where('id', '=', $accountId)
+            ->first();
         $record = Record::where('id', '=', $id)
-            ->where('accountId', '=', $accountId)
+            ->where(function($query) use ($account) {
+                $query->orWhere('accountId', '=', $account->id);
+                $query->orWhere('dealer', '=', $account->account);
+            })
             ->first();
         if(isset($record->id) == false) {
             throw new Exception('案件不存在');
