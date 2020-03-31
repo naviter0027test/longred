@@ -387,6 +387,8 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['CustGIDPicture1']->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['CustGIDPicture2'])) {
             if(trim($record->CustGIDPicture2) == '') {
@@ -400,6 +402,8 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['CustGIDPicture2']->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['applyUploadPath'])) {
             if(trim($record->applyUploadPath) == '') {
@@ -426,6 +430,8 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['proofOfProperty']->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][0])) {
             if(trim($record->otherDoc) == '') {
@@ -439,6 +445,8 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][0]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][1])) {
             if(trim($record->otherDoc2) == '') {
@@ -452,6 +460,8 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][1]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][2])) {
             if(trim($record->otherDoc3) == '') {
@@ -465,6 +475,8 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][2]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][3])) {
             if(trim($record->otherDoc4) == '') {
@@ -478,6 +490,8 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][3]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][4])) {
             if(trim($record->otherDoc5) == '') {
@@ -491,6 +505,8 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][4]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][5])) {
             if(trim($record->otherDoc6) == '') {
@@ -504,6 +520,8 @@ class RecordRepository
                 $filename = $splitArr[3];
             }
             $files['otherDoc'][5]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
     }
 
@@ -575,6 +593,8 @@ class RecordRepository
             }
             $files['CustGIDPicture1']->move($root. $path, $filename);
             $notify['CustGIDPicture1'] = true;
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['CustGIDPicture2'])) {
             if(trim($record->CustGIDPicture2) == '') {
@@ -589,6 +609,8 @@ class RecordRepository
             }
             $files['CustGIDPicture2']->move($root. $path, $filename);
             $notify['CustGIDPicture2'] = true;
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['applyUploadPath'])) {
             if(trim($record->applyUploadPath) == '') {
@@ -617,6 +639,8 @@ class RecordRepository
             }
             $files['proofOfProperty']->move($root. $path, $filename);
             $notify['proofOfProperty'] = true;
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][0])) {
             if(trim($record->otherDoc) == '') {
@@ -631,6 +655,8 @@ class RecordRepository
             }
             $files['otherDoc'][0]->move($root. $path, $filename);
             $notify['otherDoc'] = true;
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][1])) {
             if(trim($record->otherDoc2) == '') {
@@ -645,6 +671,8 @@ class RecordRepository
             }
             $files['otherDoc'][1]->move($root. $path, $filename);
             $notify['otherDoc2'] = true;
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][2])) {
             if(trim($record->otherDoc3) == '') {
@@ -659,6 +687,8 @@ class RecordRepository
             }
             $files['otherDoc'][2]->move($root. $path, $filename);
             $notify['otherDoc3'] = true;
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][3])) {
             if(trim($record->otherDoc4) == '') {
@@ -673,6 +703,8 @@ class RecordRepository
             }
             $files['otherDoc'][3]->move($root. $path, $filename);
             $notify['otherDoc4'] = true;
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][4])) {
             if(trim($record->otherDoc5) == '') {
@@ -687,6 +719,8 @@ class RecordRepository
             }
             $files['otherDoc'][4]->move($root. $path, $filename);
             $notify['otherDoc5'] = true;
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][5])) {
             if(trim($record->otherDoc6) == '') {
@@ -701,6 +735,8 @@ class RecordRepository
             }
             $files['otherDoc'][5]->move($root. $path, $filename);
             $notify['otherDoc6'] = true;
+
+            $this->addText($root. $path. $filename);
         }
         $isNotify = false;
         foreach($notify as $item) {
@@ -831,5 +867,38 @@ class RecordRepository
             throw new Exception('zip open failed');
         }
         return $zipArr;
+    }
+
+    public function addText($filePath) {
+        $extArr = preg_split("/\./", $filePath);
+        $ext = $extArr[count($extArr) -1];
+        $root = config('filesystems')['disks']['uploads']['root'];
+        if(function_exists('imagecreatefromstring') == false) {
+            throw new Exception('gd not extend');
+        }
+        $img = imagecreatefromstring(file_get_contents($filePath));
+        $fontPath = "$root/mingliu.ttc";
+        $fontColor = imagecolorallocatealpha($img, 0, 0, 0, 50);
+        $fontSize = 20;
+        $fontAngle = -35;
+        $fontLeft = 45;
+        $fontTop = 45;
+        $fontText = '限機車分期使用';
+        imagefttext($img, $fontSize, $fontAngle, $fontLeft, $fontTop, $fontColor, $fontPath, $fontText);
+        switch($ext) {
+        case 'bmp':
+            imagewbmp($img, $filePath);
+            break;
+        case 'gif':
+            imagegif($img, $filePath);
+            break;
+        case 'jpg':
+        case 'jpeg':
+            imagejpeg($img, $filePath);
+            break;
+        case 'png':
+            imagepng($img, $filePath);
+            break;
+        }
     }
 }
