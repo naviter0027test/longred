@@ -876,14 +876,30 @@ class RecordRepository
         if(function_exists('imagecreatefromstring') == false) {
             throw new Exception('gd not extend');
         }
+        $imgIntro = getimagesize($filePath);
+        $imgWidth = $imgIntro[0];
+        $imgHeight = $imgIntro[1];
+        $thirdSide = sqrt(pow($imgWidth, 2) + pow($imgHeight, 2));
+        
         $img = imagecreatefromstring(file_get_contents($filePath));
         $fontPath = "$root/mingliu.ttc";
         $fontColor = imagecolorallocatealpha($img, 0, 0, 0, 50);
         $fontSize = 20;
-        $fontAngle = -35;
-        $fontLeft = 45;
-        $fontTop = 45;
-        $fontText = '限機車分期使用';
+        $fontAngle = 0 - rad2deg(atan($imgHeight/$imgWidth));
+        $fontLeft = 20;
+        $fontTop = 20;
+
+        $spaceAmount = (int) ($thirdSide / 7 / $fontSize) / 2;
+        //\Log::info("width: $imgWidth");
+        //\Log::info("height: $imgHeight");
+        //\Log::info("thirdSide: $thirdSide");
+        //\Log::info("spaceAmount: $spaceAmount");
+        $space = '';
+        for($spaceIdx = 0;$spaceIdx < $spaceAmount;++$spaceIdx) {
+            $space .= ' ';
+        }
+
+        $fontText = implode($space, ['限','機','車','分','期','使','用']);
         imagefttext($img, $fontSize, $fontAngle, $fontLeft, $fontTop, $fontColor, $fontPath, $fontText);
         switch($ext) {
         case 'bmp':
