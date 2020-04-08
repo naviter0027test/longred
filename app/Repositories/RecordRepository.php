@@ -46,6 +46,8 @@ class RecordRepository
             $record->CustGIDPicture1 = $path. $filename;
             $record->save();
             $files['CustGIDPicture1']->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['CustGIDPicture2'])) {
             $ext = $files['CustGIDPicture2']->getClientOriginalExtension();
@@ -53,6 +55,8 @@ class RecordRepository
             $record->CustGIDPicture2 = $path. $filename;
             $record->save();
             $files['CustGIDPicture2']->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['applyUploadPath'])) {
             $ext = $files['applyUploadPath']->getClientOriginalExtension();
@@ -67,6 +71,8 @@ class RecordRepository
             $record->proofOfProperty = $path. $filename;
             $record->save();
             $files['proofOfProperty']->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][0])) {
             $ext = $files['otherDoc'][0]->getClientOriginalExtension();
@@ -74,6 +80,8 @@ class RecordRepository
             $record->otherDoc = $path. $filename;
             $record->save();
             $files['otherDoc'][0]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][1])) {
             $ext = $files['otherDoc'][1]->getClientOriginalExtension();
@@ -81,6 +89,8 @@ class RecordRepository
             $record->otherDoc2 = $path. $filename;
             $record->save();
             $files['otherDoc'][1]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][2])) {
             $ext = $files['otherDoc'][2]->getClientOriginalExtension();
@@ -88,6 +98,8 @@ class RecordRepository
             $record->otherDoc3 = $path. $filename;
             $record->save();
             $files['otherDoc'][2]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][3])) {
             $ext = $files['otherDoc'][3]->getClientOriginalExtension();
@@ -95,6 +107,8 @@ class RecordRepository
             $record->otherDoc4 = $path. $filename;
             $record->save();
             $files['otherDoc'][3]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][4])) {
             $ext = $files['otherDoc'][4]->getClientOriginalExtension();
@@ -102,6 +116,8 @@ class RecordRepository
             $record->otherDoc5 = $path. $filename;
             $record->save();
             $files['otherDoc'][4]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
         if(isset($files['otherDoc'][5])) {
             $ext = $files['otherDoc'][5]->getClientOriginalExtension();
@@ -109,6 +125,8 @@ class RecordRepository
             $record->otherDoc6 = $path. $filename;
             $record->save();
             $files['otherDoc'][5]->move($root. $path, $filename);
+
+            $this->addText($root. $path. $filename);
         }
 
         $params['recordId'] = $record->id;
@@ -895,8 +913,13 @@ class RecordRepository
         //\Log::info("thirdSide: $thirdSide");
         //\Log::info("spaceAmount: $spaceAmount");
         $space = '';
-        for($spaceIdx = 0;$spaceIdx < $spaceAmount;++$spaceIdx) {
-            $space .= ' ';
+        if ($imgWidth > 300)
+            for($spaceIdx = 0;$spaceIdx < $spaceAmount;++$spaceIdx) {
+                $space .= ' ';
+            }
+        else {
+            $fontLeft = 35;
+            $fontTop = 35;
         }
 
         $fontText = implode($space, ['限','機','車','分','期','使','用']);
