@@ -11,13 +11,13 @@ stream_context_set_option($ctx, 'ssl', 'passphrase', $passphrase);
 
 // Open a connection to the APNS server
 $fp = stream_socket_client(
-'ssl://gateway.sandbox.push.apple.com:2195', $err,
-$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
+	'ssl://gateway.sandbox.push.apple.com:2195', $err,
+	$errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
 if (!$fp)
-exit("Failed to connect: $err $errstr" . PHP_EOL);
+	exit("Failed to connect: $err $errstr" . PHP_EOL);
 // Create the payload body
 $body['aps'] = array(
-	'alert' => "測試推撥",
+	'alert' => "測試推播",
 	'badge' => 1,
 	'sound' => 'default'
 );
@@ -29,14 +29,15 @@ $msg = chr(0) . pack('n', 32) . pack('H*', $deviceToken) . pack('n', strlen($pay
 
 // Send it to the server
 $result3 = fwrite($fp, $msg, strlen($msg));
-		/*
-		if (!$result)
-			echo 'Message not delivered' . PHP_EOL;
-		else
-			echo 'Message successfully delivered' . PHP_EOL;
-		*/
-		// Close the connection to the server
+/*
+	if (!$result3)
+		echo 'Message not delivered' . PHP_EOL;
+	else
+		echo 'Message successfully delivered' . PHP_EOL;
+ */
+// Close the connection to the server
 fclose($fp);
-							
-					
+
+
 ?>
+
