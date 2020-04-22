@@ -47,8 +47,10 @@ class AppleRepository
         $fp = stream_socket_client(
             $server, $err,
             $errstr, 60, STREAM_CLIENT_CONNECT|STREAM_CLIENT_PERSISTENT, $ctx);
-        if (!$fp)
+        if (!$fp) {
+	    \Log::info("Failed to connect: $err $errstr");
             throw new Exception("Failed to connect: $err $errstr");
+	}
         // Create the payload body
         $body['aps'] = array(
             'alert' => $content,
@@ -63,10 +65,13 @@ class AppleRepository
 
         // Send it to the server
         $result3 = fwrite($fp, $msg, strlen($msg));
-        if (!$result3)
+        if (!$result3) {
+	    \Log::info("Message not deliverd");
             throw new Exception('Message not delivered');
+	}
 
         // Close the connection to the server
         fclose($fp);
+	//\Log::info('send finish');
     }
 }
