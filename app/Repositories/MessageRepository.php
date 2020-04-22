@@ -24,6 +24,7 @@ class MessageRepository
         $receive3 = '';
         $link = "/admin/record/edit/$recordId";
 
+        /*
         \Mail::send('email.statusUpdate', ['link' => $link, 'content' => $content, 'recordId' => $recordId], function($mail) use ($receive1, $receive2, $receive3) {
             $fromAddr = Config::get('mail.from.address');
             $fromName = Config::get('mail.from.name');
@@ -34,7 +35,6 @@ class MessageRepository
                 ->subject("$testTitle 長鴻系統 - 狀態變動 (系統發信，請勿回覆)");
         });
 
-        /*
         $record = Record::where('id', '=', $recordId)->first();
         if(isset($record->id) == false) {
             throw new Exception('案件不存在');
@@ -101,7 +101,7 @@ class MessageRepository
         else
             throw new Exception('recordId is required');
 
-        //使用者留言的狀況下，要發通知
+        //案件新增的狀況下，要發通知
         $recordId = $params['recordId'];
         $receive1 = Config::get('mail.receive1');
         $receive2 = Config::get('mail.receive2');
@@ -136,7 +136,8 @@ class MessageRepository
         $receive2 = Config::get('mail.receive2');
         $receive3 = '';
         $link = "/admin/record/edit/$recordId";
-        /*
+
+        //使用者補件的狀況下，要發通知
         \Mail::send('email.additionalNotify', ['link' => $link, 'notify' => $notify], function($mail) use ($receive1, $receive2, $receive3) {
             $fromAddr = Config::get('mail.from.address');
             $fromName = Config::get('mail.from.name');
@@ -146,7 +147,6 @@ class MessageRepository
                 ->cc($receive2)
                 ->subject("$testTitle 長鴻系統 - 補件通知 (系統發信，請勿回覆)");
         });
-         */
 
         $notifyArr = [];
         if($notify['CustGIDPicture1'] == true) {
