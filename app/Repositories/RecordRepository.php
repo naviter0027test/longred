@@ -908,21 +908,34 @@ class RecordRepository
         $fontTop = 20;
 
         $spaceAmount = (int) ($thirdSide / 7 / $fontSize) / 2;
+        $textAmount = ceil($thirdSide / 400);
         //\Log::info("width: $imgWidth");
         //\Log::info("height: $imgHeight");
         //\Log::info("thirdSide: $thirdSide");
         //\Log::info("spaceAmount: $spaceAmount");
-        $space = '';
-        if ($imgWidth > 300)
-            for($spaceIdx = 0;$spaceIdx < $spaceAmount;++$spaceIdx) {
-                $space .= ' ';
-            }
-        else {
+        $space = ' ';
+        if ($imgWidth <= 300) {
             $fontLeft = 35;
             $fontTop = 35;
         }
+        else if ($imgWidth > 2500) {
+            $fontLeft = 450;
+            $fontTop = 300;
+        }
+        else if ($thirdSide > 2500) {
+            $fontLeft = 200;
+            $fontTop = 200;
+        }
+            /*
+            for($spaceIdx = 0;$spaceIdx < $spaceAmount;++$spaceIdx) {
+                $space .= ' ';
+            }
+             */
 
-        $fontText = implode($space, ['限','機','車','分','期','使','用']);
+        $fontText = implode($space, ['', '限','機','車','分','期','使','用']);
+        for($textIdx = 0;$textIdx < $textAmount;++$textIdx) {
+            $fontText .= $fontText;
+        }
         imagefttext($img, $fontSize, $fontAngle, $fontLeft, $fontTop, $fontColor, $fontPath, $fontText);
         switch($ext) {
         case 'bmp':
