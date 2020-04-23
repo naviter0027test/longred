@@ -182,6 +182,11 @@ class RecordRepository
             if(is_null($record->grantDate) == false) {
                 $record->grantDate = date('Y-m-d', strtotime($record->grantDate));
             }
+	    $record->applyAmount .= '';
+	    $record->loanAmount .= '';
+	    $record->periods .= '';
+	    $record->periodAmount .= '';
+	    $record->accountId .= '';
         }
         return $records;
     }
