@@ -44,6 +44,8 @@ Route::group(['middleware' => ['check.account']], function() {
 
         Route::get('messages', 'MessageController@listsPage');
         Route::get('message', 'MessageController@listsByAccountId');
+        Route::get('message/read', 'MessageController@readPage');
+        Route::post('message/read', 'MessageController@read');
         Route::get('message/send', 'MessageController@sendPage');
         Route::post('message/send', 'MessageController@send');
         Route::get('message/record-id', 'MessageController@getByRecordIdPage');

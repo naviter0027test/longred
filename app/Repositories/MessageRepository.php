@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Message;
+use App\HasRead;
 use App\Account;
 use App\Record;
 use Exception;
@@ -340,6 +341,7 @@ class MessageRepository
         $nowPage = $params['nowPage'];
         $offset = $params['offset'];
         $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
+            ->leftJoin('HasRead', 'HasRead.messageId', '=' , 'Message.id')
             ->where(function($query) use ($params) {
                 $query->orWhereIn('Message.type', [1,2])
                     ->orWhere(function($qty) use ($params) {
@@ -351,7 +353,7 @@ class MessageRepository
         $messages = $messageQty->orderBy('Message.id', 'desc')
             ->skip(($nowPage-1) * $offset)
             ->take($offset)
-            ->select(['Message.*'])
+            ->select(['Message.*', 'HasRead.isRead'])
             ->get();
         foreach($messages as $idx => $message) {
             $messages[$idx]->titleShow = $message->content;
@@ -367,6 +369,7 @@ class MessageRepository
 
     public function getAmountByAccountId($params) {
         $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
+            ->leftJoin('HasRead', 'HasRead.messageId', '=' , 'Message.id')
             ->where(function($query) use ($params) {
                 $query->orWhereIn('Message.type', [1,2])
                     ->orWhere(function($qty) use ($params) {
@@ -377,6 +380,22 @@ class MessageRepository
             ;
         $amount = $messageQty->count();
         return $amount;
+    }
+
+    public function readable($accountId, $messageId) {
+        $hasRead = HasRead::where('accountId', '=', $accountId)
+            ->where('messageId', '=', $messageId)
+            ->first();
+        if(isset($hasRead->id) == true) {
+            $hasRead->isRead = 1;
+            $hasRead->save();
+        } else {
+            $hasRead = new HasRead();
+            $hasRead->accountId = $accountId;
+            $hasRead->messageId = $messageId;
+            $hasRead->isRead = 1;
+            $hasRead->save();
+        }
     }
 
     public function lists($params) {

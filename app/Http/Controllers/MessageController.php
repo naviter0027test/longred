@@ -119,4 +119,39 @@ class MessageController extends Controller
 
         return json_encode($result);
     }
+
+    public function readPage(Request $request) {
+        return view('account.message.read');
+    }
+
+    public function read(Request $request) {
+        $params = $request->all();
+        $validate = Validator::make($request->all(), [
+            'messageId' => 'required|integer',
+        ]);
+
+        if($validate->fails()) {
+            $res['status'] = false;
+            $res['message'] = $validate->errors();
+            return response()->json($res, 200);
+        }
+        $messageId = $params['messageId'];
+
+        $account = Session::get('account');
+        $accountId = $account->id;
+        $result = [
+            'result' => true,
+            'msg' => 'success',
+        ];
+        try {
+            $messageRepository = new MessageRepository();
+            $messageRepository->readable($accountId, $messageId);
+        }
+        catch(Exception $e) {
+            $result['result'] = false;
+            $result['msg'] = $e->getMessage();
+        }
+
+        return json_encode($result);
+    }
 }
