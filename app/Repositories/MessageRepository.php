@@ -25,29 +25,6 @@ class MessageRepository
         $receive3 = '';
         $link = "/admin/record/edit/$recordId";
 
-        /*
-        \Mail::send('email.statusUpdate', ['link' => $link, 'content' => $content, 'recordId' => $recordId], function($mail) use ($receive1, $receive2, $receive3) {
-            $fromAddr = Config::get('mail.from.address');
-            $fromName = Config::get('mail.from.name');
-            $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
-            $mail->from($fromAddr, $fromName);
-            $mail->to($receive1, '管理者')
-                ->cc($receive2)
-                ->subject("$testTitle 長鴻系統 - 狀態變動 (系統發信，請勿回覆)");
-        });
-
-        $record = Record::where('id', '=', $recordId)->first();
-        if(isset($record->id) == false) {
-            throw new Exception('案件不存在');
-        }
-
-        if(is_numeric($record->accountId)) {
-            $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
-            $content = $testTitle. $content;
-            $appleRepository = new AppleRepository();
-            $appleRepository->pushOne($record->accountId, $content);
-        }
-         */
     }
 
     //案件留言與回覆
@@ -246,6 +223,7 @@ class MessageRepository
             $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
             $content = $testTitle. "長鴻 消息通知:". $message->title;
             $appleRepository = new AppleRepository();
+            //$appleRepository = new PhoneMessageRepository();
             $appleRepository->pushNewsToAll($message->title);
         }
     }
@@ -308,6 +286,7 @@ class MessageRepository
             $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
             $content = $testTitle. "長鴻 公告通知:". $message->title;
             $appleRepository = new AppleRepository();
+            //$appleRepository = new PhoneMessageRepository();
             $appleRepository->pushNewsToAll($message->title);
         }
     }

@@ -122,6 +122,7 @@ class AccountRepository
     public function appleTokenSet($id, $appleToken) {
         $account = Account::where('id', '=', $id)
             ->first();
+	\Log::info("save apple-token $appleToken");
         if(isset($account->id) == false)
             throw new Exception('帳號不存在');
         $account->appleToken = $appleToken;
