@@ -12,6 +12,7 @@
         <div class="loginDiv">
             <h3 class="companyName">長鴻系統</h3>
             <form class="loginForm" method="post" action="/account/login">
+                <input type="hidden" name="appleToken" />
                 <h5>帳號:</h5>
                 <p> <input type="text" name="account" /> </p>
                 <h5>密碼:</h5>

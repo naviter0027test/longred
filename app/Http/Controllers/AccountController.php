@@ -21,12 +21,18 @@ class AccountController extends Controller
             'msg' => 'login failure',
         ];
         $params = $request->all();
+        \Log::info($params);
         $params['account'] = isset($params['account']) ? $params['account'] : '';
         $params['password'] = isset($params['password']) ? $params['password'] : '';
+        $params['appleToken'] = isset($params['appleToken']) ? $params['appleToken'] : '';
         $accountRepository = new AccountRepository();
         $account = $accountRepository->checkPassword($params);
         if($account != false) {
             Session::put('account', $account);
+            if(trim($params['appleToken']) != '') {
+                $accountRepository = new AccountRepository();
+                $accountRepository->appleTokenSet($account->id, $params['appleToken']);
+            }
             $result = [
                 'status' => true,
                 'msg' => 'login success',
