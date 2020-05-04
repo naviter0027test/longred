@@ -361,6 +361,21 @@ class MessageRepository
         return $amount;
     }
 
+    public function getReadableAmountByAccountId($params) {
+        $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
+            ->join('HasRead', 'HasRead.messageId', '=' , 'Message.id')
+            ->where(function($query) use ($params) {
+                $query->orWhereIn('Message.type', [1,2])
+                    ->orWhere(function($qty) use ($params) {
+                        $qty->where('Record.accountId', '=', $params['accountId'])
+                            ->whereIn('Message.type', [3, 4, 5]);
+                    });
+            })
+            ;
+        $amount = $messageQty->count();
+        return $amount;
+    }
+
     public function readable($accountId, $messageId) {
         $hasRead = HasRead::where('accountId', '=', $accountId)
             ->where('messageId', '=', $messageId)

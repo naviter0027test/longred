@@ -111,6 +111,7 @@ class MessageController extends Controller
             $messageRepository = new MessageRepository();
             $result['data'] = $messageRepository->getByAccountId($params);
             $result['amount'] = $messageRepository->getAmountByAccountId($params);
+            $result['notReadableAmount'] = $result['amount'] - $messageRepository->getReadableAmountByAccountId($params);
         }
         catch(Exception $e) {
             $result['result'] = false;
