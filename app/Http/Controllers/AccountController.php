@@ -30,7 +30,6 @@ class AccountController extends Controller
         if($account != false) {
             Session::put('account', $account);
             if(trim($params['appleToken']) != '') {
-                $accountRepository = new AccountRepository();
                 $accountRepository->appleTokenSet($account->id, $params['appleToken']);
             }
             $result = [

@@ -5,5 +5,5 @@ return [
 
     'pem_path' => env('APPLE_PEM_PATH', '../apple/ck.pem'),
 
-    'server' => env('APPLE_SERVER', 'ssl://gateway.sandbox.push.apple.com:2195'),
+    'server' => env('APPLE_SERVER', 'ssl://gateway.push.apple.com:2195'),
 ];

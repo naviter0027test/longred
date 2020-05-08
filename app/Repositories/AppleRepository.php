@@ -72,6 +72,6 @@ class AppleRepository
 
         // Close the connection to the server
         fclose($fp);
-	//\Log::info('send finish');
+	\Log::info($result3);
     }
 }

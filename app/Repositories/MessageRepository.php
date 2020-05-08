@@ -342,6 +342,8 @@ class MessageRepository
                 $messages[$idx]->titleShow = $message->title;
                 break;
             }
+            if(is_null($messages[$idx]->isRead) == true)
+                $messages[$idx]->isRead = 0;
         }
         return $messages;
     }
