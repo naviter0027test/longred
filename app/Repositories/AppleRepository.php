@@ -14,24 +14,33 @@ class AppleRepository
             ->get();
         foreach($accounts as $account)
             if(trim($account->appleToken) != '')
-                $this->push($account->appleToken, $content);
+                $this->push($account->appleToken, $content, $account->id);
     }
 
     public function pushOne($accountId, $content = '') {
         $account = Account::where('appleToken', '<>', '')
             ->first();
         if(trim($account->appleToken) != '')
-            $this->push($account->appleToken, $content);
+            $this->push($account->appleToken, $content, $account->id);
         else
             \Log::info($account->id. ': apple token no data');
     }
 
-    public function push($deviceToken = '', $content = '') {
+    public function push($deviceToken = '', $content = '', $accountId = 0) {
         if(trim($deviceToken) == '')
             throw new Exception('device token not input');
 
         if(trim($content) == '')
             throw new Exception('content not input');
+
+        if($accountId == 0)
+            throw new Exception('accountId not input');
+
+        $params = array();
+        $params['accountId'] = $accountId;
+        $messageRepository = new MessageRepository();
+        $amount = $messageRepository->getAmountByAccountId($params);
+        $notReadableAmount = $amount - $messageRepository->getReadableAmountByAccountId($params);
 
         // Put your private key's passphrase here:
         $passphrase = config('apple.passphrase');
@@ -54,7 +63,7 @@ class AppleRepository
         // Create the payload body
         $body['aps'] = array(
             'alert' => $content,
-            'badge' => 1,
+            'badge' => $notReadableAmount,
             'sound' => 'default'
         );
         // Encode the payload as JSON
