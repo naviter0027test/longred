@@ -25,6 +25,10 @@ class MessageRepository
         $receive3 = '';
         $link = "/admin/record/edit/$recordId";
 
+        $record = Record::where('id', '=', $recordId)->first();
+        //$content = "[系統通知] 案件審核/撥款狀態更新";
+        $appleRepository = new AppleRepository();
+        $appleRepository->pushOne($record->accountId, $content);
     }
 
     //案件留言與回覆
@@ -40,6 +44,8 @@ class MessageRepository
         else
             throw new Exception('recordId is required');
         $message->isAsk = $params['isAsk'];
+        if(isset($params['who']))
+            $message->who = $params['who'];
 
         //使用者留言的狀況下，要發通知
         if($message->isAsk == 1) { 
@@ -64,9 +70,12 @@ class MessageRepository
             $teleContent = "[系統通知] 留言通知 請前往查看 $teleLink";
             $telegramRepository = new TelegramRepository();
             $telegramRepository->notify($teleContent);
+        } else if ($message->isAsk == 2) {
+            $content = "管理者留言: ". $message->content;
+
+            $appleRepository = new AppleRepository();
+            $appleRepository->pushOne($record->accountId, $content);
         }
-        if(isset($params['who']))
-            $message->who = $params['who'];
         $message->save();
     }
 
@@ -170,6 +179,11 @@ class MessageRepository
             $teleContent = "[系統通知] 補件通知 請前往查看 $teleLink";
             $telegramRepository = new TelegramRepository();
             $telegramRepository->notify($teleContent);
+
+            $record = Record::where('id', '=', $recordId)->first();
+            $content = "[系統通知] 補件通知";
+            $appleRepository = new AppleRepository();
+            $appleRepository->pushOne($record->accountId, $content);
         }
     }
 

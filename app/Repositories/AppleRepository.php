@@ -19,6 +19,7 @@ class AppleRepository
 
     public function pushOne($accountId, $content = '') {
         $account = Account::where('appleToken', '<>', '')
+            ->where('id', '=', $accountId)
             ->first();
         if(trim($account->appleToken) != '')
             $this->push($account->appleToken, $content, $account->id);
