@@ -11,9 +11,10 @@ use Config;
 
 class MessageRepository
 {
-    public function statusUpdate($recordId, $content, $creator) {
+    public function statusUpdate($recordId, $content, $creator, $title = '') {
         //狀態變動的相關處理於此，比如寄信或一些通知
         $message = new Message();
+        $message->title = $title;
         $message->content = $content;
         $message->type = 5;
         $message->recordId = $recordId;
@@ -36,6 +37,7 @@ class MessageRepository
         $record = Record::where('id', '=', $params['recordId'])->first();
         //狀態變動的相關處理於此，比如寄信或一些通知
         $message = new Message();
+        $message->title = '[案件留言與回覆]';
         $message->content = isset($params['content']) ? $params['content'] : '';
         $message->content .= " (". $record->applicant. ")";
         $message->type = isset($params['type']) ? $params['type'] : 0;
@@ -168,6 +170,7 @@ class MessageRepository
         }
         if(count($notifyArr) > 0) {
             $message = new Message();
+            $message->title = '[案件補件通知]';
             $message->content = '補件通知 補件:'. implode(',', $notifyArr);
             $message->type = 4;
             $message->recordId = $recordId;

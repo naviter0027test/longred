@@ -280,7 +280,7 @@ class RecordRepository
                     $oldStatus = $record->checkStatus;
                     $newStatus = $row[3];
                     $messageRepository = new MessageRepository();
-                    $messageRepository->statusUpdate($record->id, "審核狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id);
+                    $messageRepository->statusUpdate($record->id, "審核狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id, '[案件狀態變更]');
                 }
                 $record->checkStatus = $row[3];
             }
@@ -293,7 +293,7 @@ class RecordRepository
                     $oldStatus = $record->schedule;
                     $newStatus = $row[14];
                     $messageRepository = new MessageRepository();
-                    $messageRepository->statusUpdate($record->id, "撥款狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id);
+                    $messageRepository->statusUpdate($record->id, "撥款狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id, '[撥款狀態變更]');
                 }
                 $record->schedule = $row[14];
             }
@@ -380,7 +380,7 @@ class RecordRepository
                 $oldStatus = $record->checkStatus;
                 $newStatus = $params['checkStatus'];
                 $messageRepository = new MessageRepository();
-                $messageRepository->statusUpdate($record->id, "審核狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id);
+                $messageRepository->statusUpdate($record->id, "審核狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id, '[案件狀態變更]');
             }
             $record->checkStatus =  $params['checkStatus'];
         }
@@ -389,7 +389,7 @@ class RecordRepository
                 $oldStatus = $record->schedule;
                 $newStatus = $params['schedule'];
                 $messageRepository = new MessageRepository();
-                $messageRepository->statusUpdate($record->id, "撥款狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id);
+                $messageRepository->statusUpdate($record->id, "撥款狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id, '[撥款狀態變更]');
             }
             $record->schedule = $params['schedule'];
         }
