@@ -21,10 +21,10 @@ class AppleRepository
         $account = Account::where('appleToken', '<>', '')
             ->where('id', '=', $accountId)
             ->first();
-        if(trim($account->appleToken) != '')
+        if(isset($account->id) == true && trim($account->appleToken) != '')
             $this->push($account->appleToken, $content, $account->id);
         else
-            \Log::info($account->id. ': apple token no data');
+            \Log::info($accountId. ': apple token no data');
     }
 
     public function push($deviceToken = '', $content = '', $accountId = 0) {

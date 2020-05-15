@@ -18,12 +18,12 @@ class ApplicationController extends Controller
         ];
 
         $validate = Validator::make($request->all(), [
-            'applyAmount' => 'required',
-            //'applicant' => 'required',
-            //'CustGID' => 'required',
-            //'CustGIDPicture1' => 'required',
-            //'CustGIDPicture2' => 'required',
-            //'applyUploadPath' => 'required',
+            //'applyAmount' => 'required',
+            'applicant' => 'required',
+            'CustGID' => 'required',
+            'CustGIDPicture1' => 'required',
+            'CustGIDPicture2' => 'required',
+            'applyUploadPath' => 'required',
         ]);
 
         if($validate->fails()) {
