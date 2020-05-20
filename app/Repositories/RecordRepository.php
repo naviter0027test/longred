@@ -193,14 +193,37 @@ class RecordRepository
 
     public function listsAmount($params) {
         $recordQuery = Record::orderBy('id', 'desc');
-        if(isset($params['checkStatus'])) {
+        if(isset($params['dealer']) && trim($params['dealer']) != '') {
+            $recordQuery->where('dealer', 'like', "%". $params['dealer']. "%");
+        }
+        if(isset($params['checkStatus']) && trim($params['checkStatus']) != '') {
             $recordQuery->where('checkStatus', '=', $params['checkStatus']);
         }
-        if(isset($params['schedule'])) {
+        if(isset($params['schedule']) && trim($params['schedule']) != '') {
             $recordQuery->where('schedule', '=', $params['schedule']);
         }
+        if(isset($params['startDate'])) {
+            $startDate = $params['startDate']. ' 00:00:00';
+        }
+        $recordQuery->where('created_at', '>=', $startDate);
+        if(isset($params['endDate'])) {
+            $endDate = $params['endDate']. ' 23:59:59';
+            $recordQuery->where('created_at', '<=', $endDate);
+        }
+        if(isset($params['keyword'])) {
+            $recordQuery->where(function($query) use ($params) {
+                $query->orWhere('applicant', 'like', '%'. $params['keyword']. '%');
+                $query->orWhere('CustGID', 'like', '%'. $params['keyword']. '%');
+                $query->orWhere('productName', 'like', '%'. $params['keyword']. '%');
+            });
+        }
         if(isset($params['accountId'])) {
-            $recordQuery->where('accountId', '=', $params['accountId']);
+            $account = Account::where('id', '=', $params['accountId'])
+                ->first();
+            $recordQuery->where(function($query) use($params, $account) {
+                $query->orWhere('accountId', '=', $params['accountId']);
+                $query->orWhere('dealer', '=', $account->account);
+            });
         }
         return $recordQuery->count();
     }
