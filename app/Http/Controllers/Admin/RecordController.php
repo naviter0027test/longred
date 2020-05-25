@@ -87,6 +87,7 @@ class RecordController extends Controller
         $result = [
             'result' => true,
             'msg' => 'success',
+            'amount' => 0,
         ];
         try {
             $recordRepository = new RecordRepository();

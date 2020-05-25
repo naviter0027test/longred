@@ -193,6 +193,7 @@ class RecordRepository
 
     public function listsAmount($params) {
         $recordQuery = Record::orderBy('id', 'desc');
+        $startDate = date('Y-m-d 00:00:00', strtotime('-3 months'));
         if(isset($params['dealer']) && trim($params['dealer']) != '') {
             $recordQuery->where('dealer', 'like', "%". $params['dealer']. "%");
         }
