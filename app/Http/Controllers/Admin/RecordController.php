@@ -29,6 +29,7 @@ class RecordController extends Controller
             $result['result'] = false;
             $result['msg'] = $e->getMessage();
         }
+        unset($params['nowPage']);
         return view('admin/record/index', ['adm' => $admin, 'result' => $result, 'offset' => $offset, 'nowPage' => $nowPage, 'params' => $params]);
     }
 
@@ -98,6 +99,7 @@ class RecordController extends Controller
             $result['result'] = false;
             $result['msg'] = $e->getMessage();
         }
+        unset($params['nowPage']);
         return view('admin/grant/index', ['adm' => $admin, 'result' => $result, 'offset' => $offset, 'nowPage' => $nowPage, 'params' => $params]);
     }
 
