@@ -15,6 +15,10 @@
                 <p> 
                     <input type="text" name="appleToken" value="" />
                 </p>
+                <h5>token mode (1: ios, 2: android)</h5>
+                <p> 
+                    <input type="text" name="tokenMode" value="1" />
+                </p>
                 <p class=""> <button class="btn">設定</button> </p>
             </form>
         </div>

@@ -25,12 +25,17 @@ class AccountController extends Controller
         $params['account'] = isset($params['account']) ? $params['account'] : '';
         $params['password'] = isset($params['password']) ? $params['password'] : '';
         $params['appleToken'] = isset($params['appleToken']) ? $params['appleToken'] : '';
+        if(isset($params['tokenMode'])) {
+            $tokenMode = (int) $params['tokenMode'];
+            $params['tokenMode'] = $tokenMode == 0 ? 1 : $tokenMode;
+        } else
+            $params['tokenMode'] = 1;
         $accountRepository = new AccountRepository();
         $account = $accountRepository->checkPassword($params);
         if($account != false) {
             Session::put('account', $account);
             if(trim($params['appleToken']) != '') {
-                $accountRepository->appleTokenSet($account->id, $params['appleToken']);
+                $accountRepository->appleTokenSet($account->id, $params['appleToken'], $params['tokenMode']);
             }
             $result = [
                 'status' => true,
@@ -102,13 +107,18 @@ class AccountController extends Controller
         $account = Session::get('account');
         $params = $request->all();
         $appleToken = isset($params['appleToken']) ? $params['appleToken'] : '';
+        if(isset($params['tokenMode'])) {
+            $tokenMode = (int) $params['tokenMode'];
+            $params['tokenMode'] = $tokenMode == 0 ? 1 : $tokenMode;
+        } else
+            $params['tokenMode'] = 1;
         $res = [
             'status' => true,
             'msg' => '設定成功'
         ];
         try {
             $accountRepository = new AccountRepository();
-            $accountRepository->appleTokenSet($account->id, $appleToken);
+            $accountRepository->appleTokenSet($account->id, $appleToken, $params['tokenMode']);
         } catch (Exception $e) {
             $res['status'] = false;
             $res['message'] = $e->getMessage();
