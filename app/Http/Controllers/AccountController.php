@@ -21,7 +21,6 @@ class AccountController extends Controller
             'msg' => 'login failure',
         ];
         $params = $request->all();
-        \Log::info($params);
         $params['account'] = isset($params['account']) ? $params['account'] : '';
         $params['password'] = isset($params['password']) ? $params['password'] : '';
         $params['appleToken'] = isset($params['appleToken']) ? $params['appleToken'] : '';
@@ -118,7 +117,8 @@ class AccountController extends Controller
         ];
         try {
             $accountRepository = new AccountRepository();
-            $accountRepository->appleTokenSet($account->id, $appleToken, $params['tokenMode']);
+            if(trim($appleToken) != '')
+                $accountRepository->appleTokenSet($account->id, $appleToken, $params['tokenMode']);
         } catch (Exception $e) {
             $res['status'] = false;
             $res['message'] = $e->getMessage();
