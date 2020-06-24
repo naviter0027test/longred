@@ -37,6 +37,10 @@ class AppleRepository
         if($accountId == 0)
             throw new Exception('accountId not input');
 
+        $appEnv = env('APP_ENV');
+        if(in_array($appEnv, ['demo', 'develop']) == true)
+            return ;
+
         $params = array();
         $params['accountId'] = $accountId;
         $messageRepository = new MessageRepository();
