@@ -304,7 +304,11 @@ class RecordRepository
                     $oldStatus = $record->checkStatus;
                     $newStatus = $row[3];
                     $messageRepository = new MessageRepository();
-                    $messageRepository->statusUpdate($record->id, "審核狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id, '[案件狀態變更]');
+                    try {
+                        $messageRepository->statusUpdate($record->id, "審核狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id, '[案件狀態變更]');
+                    } catch (Exception $e) {
+                        \Log::info('record id: '. $record->id. ' log:'. $e->getMessage());
+                    }
                 }
                 $record->checkStatus = $row[3];
             }
@@ -317,7 +321,11 @@ class RecordRepository
                     $oldStatus = $record->schedule;
                     $newStatus = $row[14];
                     $messageRepository = new MessageRepository();
-                    $messageRepository->statusUpdate($record->id, "撥款狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id, '[撥款狀態變更]');
+                    try {
+                        $messageRepository->statusUpdate($record->id, "撥款狀況：$oldStatus -> $newStatus (". $record->applicant. ")", $admin->id, '[撥款狀態變更]');
+                    } catch (Exception $e) {
+                        \Log::info('record id: '. $record->id. ' log:'. $e->getMessage());
+                    }
                 }
                 $record->schedule = $row[14];
             }
