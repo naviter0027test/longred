@@ -15,6 +15,8 @@ Route::get('/', function () {
     return redirect('/admin/login');
 });
 
+Route::get('/fcm-test', 'AccountController@fcmTest');
+
 Route::group(['middleware' => ['check.account']], function() {
 
     Route::get('/application', function () {

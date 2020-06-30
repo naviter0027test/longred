@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\RecordRepository;
 use App\Repositories\AccountRepository;
+use App\Repositories\AndroidRepository;
 use Session;
 use Exception;
 
@@ -145,5 +146,20 @@ class AccountController extends Controller
 
     public function apiHelp(Request $request) {
         return view('api.help');
+    }
+
+    public function fcmTest(Request $request) {
+        $res = [
+            'status' => true,
+            'msg' => 'success'
+        ];
+        try {
+            $androidRepository = new AndroidRepository();
+            $res['result'] = json_decode($androidRepository->pushTest(), true);
+        } catch (Exception $e) {
+            $res['status'] = false;
+            $res['message'] = $e->getMessage();
+        }
+        return response()->json($res);
     }
 }
