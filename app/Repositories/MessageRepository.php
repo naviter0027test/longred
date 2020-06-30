@@ -29,7 +29,9 @@ class MessageRepository
         $record = Record::where('id', '=', $recordId)->first();
         //$content = "[系統通知] 案件審核/撥款狀態更新";
         $appleRepository = new AppleRepository();
+        $androidRepository = new AndroidRepository();
         $appleRepository->pushOne($record->accountId, $content);
+        $androidRepository->pushOne($record->accountId, $content);
     }
 
     //案件留言與回覆
@@ -76,7 +78,9 @@ class MessageRepository
             $content = "管理者留言: ". $message->content;
 
             $appleRepository = new AppleRepository();
+            $androidRepository = new AndroidRepository();
             $appleRepository->pushOne($record->accountId, $content);
+            $androidRepository->pushOne($record->accountId, $content);
         }
         $message->save();
     }
@@ -186,7 +190,9 @@ class MessageRepository
             $record = Record::where('id', '=', $recordId)->first();
             $content = "[系統通知] 補件通知";
             $appleRepository = new AppleRepository();
+            $androidRepository = new AndroidRepository();
             $appleRepository->pushOne($record->accountId, $content);
+            $androidRepository->pushOne($record->accountId, $content);
         }
     }
 
@@ -240,8 +246,9 @@ class MessageRepository
             $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
             $content = $testTitle. "長鴻 消息通知:". $message->title;
             $appleRepository = new AppleRepository();
-            //$appleRepository = new PhoneMessageRepository();
+            $androidRepository = new AndroidRepository();
             $appleRepository->pushNewsToAll($message->title);
+            $androidRepository->pushNewsToAll($message->title);
         }
     }
 
@@ -303,8 +310,9 @@ class MessageRepository
             $testTitle = env('APP_ENV') == 'local' ? '[Test] ' : '';
             $content = $testTitle. "長鴻 公告通知:". $message->title;
             $appleRepository = new AppleRepository();
-            //$appleRepository = new PhoneMessageRepository();
+            $androidRepository = new AndroidRepository();
             $appleRepository->pushNewsToAll($message->title);
+            $androidRepository->pushNewsToAll($message->title);
         }
     }
 

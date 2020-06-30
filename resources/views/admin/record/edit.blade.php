@@ -168,6 +168,7 @@
                 <h5>撥款狀態</h5>
                 <p>
                     <select name="schedule">
+                        <option value="" ></option>
                         <option value="核准" {{ $result['record']->schedule == '核准' ? 'selected="selected"' : '' }} >核准</option>
                         <option value="已撥款"   {{ $result['record']->schedule == '已撥款' ? 'selected="selected"' : '' }} >已撥款</option>
                     </select>

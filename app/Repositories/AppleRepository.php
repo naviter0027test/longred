@@ -9,11 +9,10 @@ use Config;
 class AppleRepository
 {
     public function pushNewsToAll($content = '') {
-        //\Log::info(getcwd());
         $accounts = Account::where('appleToken', '<>', '')
             ->get();
         foreach($accounts as $account)
-            if(trim($account->appleToken) != '')
+            if(trim($account->appleToken) != '' && $account->tokenMode == 1)
                 $this->push($account->appleToken, $content, $account->id);
     }
 
@@ -21,8 +20,10 @@ class AppleRepository
         $account = Account::where('appleToken', '<>', '')
             ->where('id', '=', $accountId)
             ->first();
-        if(isset($account->id) == true && trim($account->appleToken) != '')
-            $this->push($account->appleToken, $content, $account->id);
+        if(isset($account->id) == true && trim($account->appleToken) != '') {
+            if($account->tokenMode == 1)
+                $this->push($account->appleToken, $content, $account->id);
+        }
         else
             \Log::info($accountId. ': apple token no data');
     }

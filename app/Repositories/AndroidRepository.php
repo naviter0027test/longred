@@ -8,6 +8,26 @@ use Config;
 
 class AndroidRepository
 {
+    public function pushNewsToAll($content = '') {
+        $accounts = Account::where('appleToken', '<>', '')
+            ->get();
+        foreach($accounts as $account)
+            if(trim($account->appleToken) != '' && $account->tokenMode == 2)
+                $this->push($account->appleToken, $content, $account->id);
+    }
+
+    public function pushOne($accountId, $content = '') {
+        $account = Account::where('appleToken', '<>', '')
+            ->where('id', '=', $accountId)
+            ->first();
+        if(isset($account->id) == true && trim($account->appleToken) != '') {
+            if($account->tokenMode == 2)
+                $this->push($account->appleToken, $content, $account->id);
+        }
+        else
+            \Log::info($accountId. ': apple token no data');
+    }
+
     public function push($deviceToken = '', $content = '', $accountId = 0) {
         if(trim($deviceToken) == '')
             throw new Exception('device token not input');
@@ -15,7 +35,6 @@ class AndroidRepository
         if(trim($content) == '')
             throw new Exception('content not input');
 
-        /*
         if($accountId == 0)
             throw new Exception('accountId not input');
 
@@ -24,7 +43,6 @@ class AndroidRepository
         $messageRepository = new MessageRepository();
         $amount = $messageRepository->getAmountByAccountId($params);
         $notReadableAmount = $amount - $messageRepository->getReadableAmountByAccountId($params);
-         */
 
         // Put your private key's passphrase here:
         $apiKey = config('fcm.key');
@@ -32,12 +50,22 @@ class AndroidRepository
 
         $msg = array(
             'body'  =>  $content,
-            'title' =>  $content,
+            'title' =>  '長鴻通知',
         );
 
         $fields = array(
             'to' => $deviceToken,
-            'notification' => $msg);
+            'notification' => $msg,
+            'apns' => [
+                'headers' => [
+                    'apns-priority' => '10',
+                ],
+                'payload' => [
+                    'sound' => 'default',
+                    'badge' => 1,
+                ],
+            ],
+        );
 
         $headers = array(
             'Authorization: key=' . $apiKey,
