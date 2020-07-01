@@ -55,7 +55,7 @@ class AndroidRepository
 
         $fields = array(
             'to' => $deviceToken,
-            'notification' => $msg,
+            'data' => $msg,
             'apns' => [
                 'headers' => [
                     'apns-priority' => '10',
