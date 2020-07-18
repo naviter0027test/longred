@@ -139,7 +139,7 @@ class RecordRepository
         $offset = isset($params['offset']) ? (int) $params['offset'] : 10;
         $startDate = date('Y-m-d 00:00:00', strtotime('-3 months'));
 
-        $recordQuery = Record::orderBy('id', 'desc')
+        $recordQuery = Record::orderBy('created_at', 'desc')
             ->skip(($nowPage-1) * $offset)
             ->take($offset);
         if(isset($params['dealer']) && trim($params['dealer']) != '') {
