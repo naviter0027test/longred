@@ -346,6 +346,7 @@ class MessageRepository
         $offset = $params['offset'];
         $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
             ->leftJoin('HasRead', 'HasRead.messageId', '=' , 'Message.id')
+            ->where('HasRead.accountId', '=', $params['accountId'])
             ->where(function($query) use ($params) {
                 $query->orWhereIn('Message.type', [1,2])
                     ->orWhere(function($qty) use ($params) {
@@ -376,6 +377,7 @@ class MessageRepository
     public function getAmountByAccountId($params) {
         $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
             ->leftJoin('HasRead', 'HasRead.messageId', '=' , 'Message.id')
+            ->where('HasRead.accountId', '=', $params['accountId'])
             ->where(function($query) use ($params) {
                 $query->orWhereIn('Message.type', [1,2])
                     ->orWhere(function($qty) use ($params) {
@@ -391,6 +393,7 @@ class MessageRepository
     public function getReadableAmountByAccountId($params) {
         $messageQty = Message::leftJoin('Record', 'Record.id', '=', 'Message.recordId')
             ->join('HasRead', 'HasRead.messageId', '=' , 'Message.id')
+            ->where('HasRead.accountId', '=', $params['accountId'])
             ->where(function($query) use ($params) {
                 $query->orWhereIn('Message.type', [1,2])
                     ->orWhere(function($qty) use ($params) {
