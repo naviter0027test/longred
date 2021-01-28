@@ -15,6 +15,11 @@ Route::get('/', function () {
     return redirect('/admin/login');
 });
 
+Route::group(['prefix' => 'front'], function() {
+    Route::get('login', 'FrontController@login');
+    Route::get('home', 'FrontController@home');
+});
+
 Route::get('/fcm-test', 'AccountController@fcmTest');
 
 Route::group(['middleware' => ['check.account']], function() {

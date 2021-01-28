@@ -1,0 +1,132 @@
+.body {
+    background: #eeeeee;
+}
+
+.login-header {
+    padding: 20px;
+    text-align: center;
+
+    color: white;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#bfd255+0,8eb92a+50,72aa00+51,9ecb2d+100;Green+Gloss */
+background: #bfd255; /* Old browsers */
+background: -moz-linear-gradient(top,  #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+
+}
+
+.sec-bar {
+    padding: 10px;
+    text-align: center;
+
+    color: white;
+    background: #222222;
+}
+
+.login-form {
+    margin-top: 20px;
+    padding: 26px 24px 46px;
+
+    /*
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,.13);
+    */
+}
+
+.login-form .login-input {
+    background: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.login-form i {
+    padding: 11px;
+    width: 5%;
+
+    text-align: center;
+}
+
+.login-form input {
+    width: 92%;
+    padding: 8px;
+
+    border: 0px solid transparent;
+}
+
+.login-form .login-submit {
+    width: 100%;
+
+    color: white;
+    background: #8eb92a;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.login-form .login-submit:hover {
+    background: #72aa00;
+    transition: background 1s;
+}
+
+.login-form .login-forget {
+    text-align: center;
+}
+
+.header {
+    padding: 20px;
+    text-align: center;
+
+    color: white;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#bfd255+0,8eb92a+50,72aa00+51,9ecb2d+100;Green+Gloss */
+background: #bfd255; /* Old browsers */
+background: -moz-linear-gradient(top,  #bfd255 0%, #8eb92a 50%, #72aa00 51%, #9ecb2d 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #bfd255 0%,#8eb92a 50%,#72aa00 51%,#9ecb2d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#9ecb2d',GradientType=0 ); /* IE6-9 */
+
+}
+
+.content {
+    text-align: center;
+}
+
+.content .item {
+    display: inline-block;
+    margin: 20px 0 30px 0;
+    width: 30%;
+
+    text-align: center;
+}
+
+.content .item .img {
+    padding: 20px;
+
+    background: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.content .item .desc {
+    margin-top: 5px;
+}
+
+.content .item-a {
+    text-decoration: none;
+    color: #0066cc;
+}
+
+.logout {
+    text-align: center;
+}
+
+.logout a {
+    text-decoration: none;
+}
+
+.footer {
+    color: #aaaaaa;
+    text-align: center;
+}
