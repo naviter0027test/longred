@@ -25,4 +25,6 @@
             <p class="login-forget"> <a href="/front/forget">忘記密碼</a> </p>
         </form>
     </body>
+    <script src="/lib/jquery-2.1.4.min.js"></script>
+    <script src="/js/front/login.js"></script>
 </html>

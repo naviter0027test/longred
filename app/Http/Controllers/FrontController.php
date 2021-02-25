@@ -19,4 +19,8 @@ class FrontController extends Controller
     public function home(Request $request) {
         return view('front.home');
     }
+
+    public function create(Request $request) {
+        return view('front.create');
+    }
 }
