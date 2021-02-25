@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'front'], function() {
     Route::get('login', 'FrontController@login');
     Route::get('home', 'FrontController@home');
+    Route::get('create', 'FrontController@create');
 });
 
 Route::get('/fcm-test', 'AccountController@fcmTest');
