@@ -53,7 +53,8 @@ class ApplicationController extends Controller
             $res['message'] = $e->getMessage();
         }
         //$res['params'] = $request->all();
-        $res['message'] = 'success';
+        if($res['status'] == true)
+            $res['message'] = 'success';
 
         return response()->json($res);
     }
