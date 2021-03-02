@@ -21,7 +21,7 @@
                 </a>
             </div>
             <div class="item">
-                <a class="item-a" href="#">
+                <a class="item-a" href="/front/search">
                     <div class="img glyphicon glyphicon-search"></div>
                     <div class="desc">案件查詢</div>
                 </a>

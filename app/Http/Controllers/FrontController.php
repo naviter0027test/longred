@@ -23,4 +23,8 @@ class FrontController extends Controller
     public function create(Request $request) {
         return view('front.create');
     }
+
+    public function search(Request $request) {
+        return view('front.search');
+    }
 }

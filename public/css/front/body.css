@@ -141,6 +141,73 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', end
     border-radius: 35px;
 }
 
+.search-panel form {
+    position: relative;
+    padding: 26px 24px 46px;
+
+    background: #336699;
+    top: -10px;
+}
+
+.search-panel form h4 {
+    padding: 5px;
+    color: white;
+}
+
+.search-panel form input {
+    width: 100%;
+    padding: 5px;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+
+.search-panel h3.tag {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 20px;
+    width: 50%;
+    top: -10px;
+
+    text-align: center;
+    border-bottom: 10px solid #aaaaaa;
+    color: #666666;
+    cursor: pointer;
+}
+
+.search-panel h3.tag-hover {
+    color: #00b3b3;
+    border-bottom: 10px solid #00b3b3;
+}
+
+.search-panel table {
+    position: relative;
+    top: -10px;
+    width: 100%;
+
+    text-align: center;
+}
+
+.search-panel thead {
+    background: #cccccc;
+}
+
+.search-panel thead td {
+    padding: 10px;
+}
+
+.search-panel form select {
+    width: 100%;
+    padding: 5px;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
 .logout {
     text-align: center;
 }
