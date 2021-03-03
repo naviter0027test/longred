@@ -199,6 +199,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', end
     padding: 10px;
 }
 
+.search-panel tbody td {
+    padding: 10px 0 10px 0;
+}
+
 .search-panel form select {
     width: 100%;
     padding: 5px;

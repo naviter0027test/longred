@@ -10,11 +10,11 @@
     </head>
     <body class="body">
         <div class="header">
-            借貸 APP 展示
+            案件查詢
         </div>
         <p class="sec-bar"> 經銷商分期 </p>
         <div class="search-panel">
-            <form action="/account/record" method="post" enctype="multipart/form-data" class="">
+            <form action="/account/record" method="post" enctype="multipart/form-data" class="search-form">
                 <h4>狀態設定</h4>
                 <select name="checkStatus">
                     <option value="">全部</option>
@@ -27,8 +27,8 @@
                 <h4>關鍵字搜尋</h4>
                 <input type="text" name="keyword" />
             </form>
-            <h3 class="tag tag-hover">近一個月</h3><h3 class="tag">近三個月</h3>
-            <table>
+            <h3 class="tag one-month tag-hover">近一個月</h3><h3 class="tag three-month">近三個月</h3>
+            <table class="search-result">
                 <thead>
                     <tr>
                         <td>進件日期</td>
