@@ -20,6 +20,7 @@ Route::group(['prefix' => 'front'], function() {
     Route::get('home', 'FrontController@home');
     Route::get('create', 'FrontController@create');
     Route::get('search', 'FrontController@search');
+    Route::get('appropriation', 'FrontController@appropriation');
 });
 
 Route::get('/fcm-test', 'AccountController@fcmTest');

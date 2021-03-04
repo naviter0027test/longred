@@ -27,7 +27,7 @@
                 </a>
             </div>
             <div class="item">
-                <a class="item-a" href="#">
+                <a class="item-a" href="/front/appropriation">
                     <div class="img glyphicon glyphicon-euro"></div>
                     <div class="desc">撥款查詢</div>
                 </a>

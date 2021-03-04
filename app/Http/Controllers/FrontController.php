@@ -27,4 +27,8 @@ class FrontController extends Controller
     public function search(Request $request) {
         return view('front.search');
     }
+
+    public function appropriation(Request $request) {
+        return view('front.appropriation');
+    }
 }
