@@ -25,10 +25,48 @@ class FrontController extends Controller
     }
 
     public function search(Request $request) {
-        return view('front.search');
+        $data = [
+            'checkStatus' => '',
+        ];
+        return view('front.search', ['data' => $data]);
     }
 
     public function appropriation(Request $request) {
         return view('front.appropriation');
+    }
+
+    public function process(Request $request) {
+        $data = [
+            'checkStatus' => '處理中',
+        ];
+        return view('front.search', ['data' => $data]);
+    }
+
+    public function wait(Request $request) {
+        $data = [
+            'checkStatus' => '待核准',
+        ];
+        return view('front.search', ['data' => $data]);
+    }
+
+    public function agree(Request $request) {
+        $data = [
+            'checkStatus' => '核准',
+        ];
+        return view('front.search', ['data' => $data]);
+    }
+
+    public function degree(Request $request) {
+        $data = [
+            'checkStatus' => '婉拒',
+        ];
+        return view('front.search', ['data' => $data]);
+    }
+
+    public function cancel(Request $request) {
+        $data = [
+            'checkStatus' => '取消申辦',
+        ];
+        return view('front.search', ['data' => $data]);
     }
 }

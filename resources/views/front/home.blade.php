@@ -33,31 +33,31 @@
                 </a>
             </div>
             <div class="item">
-                <a class="item-a" href="#">
+                <a class="item-a" href="/front/process">
                     <div class="img glyphicon glyphicon-play-circle"></div>
                     <div class="desc">處理中</div>
                 </a>
             </div>
             <div class="item">
-                <a class="item-a" href="#">
+                <a class="item-a" href="/front/wait">
                     <div class="img glyphicon glyphicon-pause"></div>
                     <div class="desc">待核准</div>
                 </a>
             </div>
             <div class="item">
-                <a class="item-a" href="#">
+                <a class="item-a" href="/front/agree">
                     <div class="img glyphicon glyphicon-ok"></div>
                     <div class="desc">核准</div>
                 </a>
             </div>
             <div class="item">
-                <a class="item-a" href="#">
+                <a class="item-a" href="/front/degree">
                     <div class="img glyphicon glyphicon-trash"></div>
                     <div class="desc">婉拒</div>
                 </a>
             </div>
             <div class="item">
-                <a class="item-a" href="#">
+                <a class="item-a" href="/front/cancel">
                     <div class="img glyphicon glyphicon-remove"></div>
                     <div class="desc">取消申辦</div>
                 </a>

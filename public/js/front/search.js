@@ -41,10 +41,12 @@ function initSearch() {
     var monthAgo = new Date();
     monthAgo.setMonth(monthAgo.getMonth() - 1);
     var monthAgoDate = formatDate(monthAgo);
+    var checkStatus = $('[name=checkStatus]').val();
     var nowDate = formatDate(new Date());
     var postData = {
         'startDate': monthAgoDate,
         'endDate': nowDate,
+        'checkStatus': checkStatus,
         'nowPage': 1,
         'offset': 9999
     };

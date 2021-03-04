@@ -18,11 +18,11 @@
                 <h4>狀態設定</h4>
                 <select name="checkStatus">
                     <option value="">全部</option>
-                    <option value="處理中">處理中</option>
-                    <option value="待核准">待核准</option>
-                    <option value="核准">核准</option>
-                    <option value="取消申辦">取消申辦</option>
-                    <option value="婉拒">婉拒</option>
+                    <option value="處理中" {{ $data['checkStatus'] == "處理中" ? 'selected' : '' }}>處理中</option>
+                    <option value="待核准" {{ $data['checkStatus'] == "待核准" ? 'selected' : '' }}>待核准</option>
+                    <option value="核准" {{ $data['checkStatus'] == "核准" ? 'selected' : '' }}>核准</option>
+                    <option value="取消申辦" {{ $data['checkStatus'] == "取消申辦" ? 'selected' : '' }}>取消申辦</option>
+                    <option value="婉拒" {{ $data['checkStatus'] == "婉拒" ? 'selected' : '' }}>婉拒</option>
                 </select>
                 <h4>關鍵字搜尋</h4>
                 <input type="text" name="keyword" />
