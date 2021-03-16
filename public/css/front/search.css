@@ -1,0 +1,7 @@
+.search-result tr {
+    cursor: pointer;
+}
+
+.search-result tbody tr:hover {
+    background: #ffffff;
+}

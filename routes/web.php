@@ -26,6 +26,8 @@ Route::group(['prefix' => 'front'], function() {
     Route::get('agree', 'FrontController@agree');
     Route::get('degree', 'FrontController@degree');
     Route::get('cancel', 'FrontController@cancel');
+
+    Route::get('modify', 'FrontController@modify');
 });
 
 Route::get('/fcm-test', 'AccountController@fcmTest');

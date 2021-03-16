@@ -69,4 +69,13 @@ class FrontController extends Controller
         ];
         return view('front.search', ['data' => $data]);
     }
+
+    public function news(Request $request) {
+        return view('front.news');
+    }
+
+    public function modify(Request $request) {
+        return view('front.modify');
+    }
+
 }

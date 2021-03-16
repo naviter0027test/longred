@@ -7,6 +7,7 @@
         <link href='/lib/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' />
         <link href='/lib/bootstrap/dist/css/bootstrap-theme.min.css' rel='stylesheet' />
         <link href='/css/front/body.css' rel='stylesheet' />
+        <link href='/css/front/search.css' rel='stylesheet' />
     </head>
     <body class="body">
         <div class="header">

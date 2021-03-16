@@ -63,7 +63,7 @@
                 </a>
             </div>
             <div class="item">
-                <a class="item-a" href="#">
+                <a class="item-a" href="/front/news">
                     <div class="img glyphicon glyphicon-globe"></div>
                     <div class="desc">最新消息</div>
                 </a>

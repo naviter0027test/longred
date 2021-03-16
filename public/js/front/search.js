@@ -13,13 +13,19 @@ function formatDate(d) {
 
 function showTable(jsonData) {
     $('.search-result tbody').html('');
+    window.sessionStorage.setItem('recordList', JSON.stringify(jsonData));
     jsonData['records'].forEach(function(record, idx) {
         var tr = document.createElement('tr');
         $(tr).append("<td>"+ record['created_at'] +"</td>");
         $(tr).append("<td>"+ record['CustGID'] +"</td>");
         $(tr).append("<td>"+ record['productName'] +"</td>");
         $(tr).append("<td>"+ record['checkStatus'] +"</td>");
+        $(tr).attr('recordId', record['id']);
         $('.search-result tbody').append(tr);
+        $(tr).on('click', function() {
+            window.sessionStorage.setItem('clickRecordId', $(this).attr('recordId'));
+            location.href = "/front/modify";
+        });
     });
 }
 
