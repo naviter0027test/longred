@@ -1,0 +1,22 @@
+.message-content {
+    padding: 10px;
+}
+
+.message-content > div {
+    margin-top: 5px;
+    padding: 10px;
+
+    background: white;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.message-me {
+    margin-right: 55%;
+}
+
+.message-admin {
+    margin-left: 55%;
+    text-align: right;
+}

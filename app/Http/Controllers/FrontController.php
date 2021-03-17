@@ -78,4 +78,8 @@ class FrontController extends Controller
         return view('front.modify');
     }
 
+    public function message(Request $request) {
+        return view('front.message');
+    }
+
 }
