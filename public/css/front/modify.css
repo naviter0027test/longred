@@ -1,0 +1,38 @@
+.modify-panel {
+    padding: 0 10px 10px 10px;
+    text-align: center;
+}
+
+.go-msg, .see-msg {
+    width: 25%;
+    margin: 5px 10px 0 0;
+
+    color: white;
+    background: #8eb92a;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    transition: background 1s;
+}
+
+.go-msg:hover, .see-msg:hover {
+    color: white;
+    background: #558000;
+}
+
+.del-btn {
+    width: 25%;
+    margin: 5px 10px 0 0;
+
+    color: white;
+    background: #ff3300;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    transition: background 1s;
+}
+
+.del-btn:hover {
+    color: white;
+    background: #cc2900;
+}

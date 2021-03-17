@@ -46,4 +46,22 @@ $(document).ready(function() {
             $($('[name="otherDoc[]"]')[5]).after("<img src='/uploads"+ recordNow['otherDoc6']+ "' />");
         }
     }
+
+    $('.go-msg').on('click', function() {
+        var msg = prompt('請輸入留言內容');
+        console.log(msg);
+        if(msg != '' && msg != null) {
+            var postData = {
+                'recordId' : clickRecordId,
+                'content' : msg
+            }
+            $.post('/account/message/send', postData, function(data) {
+                var json = JSON.parse(data);
+                if(json['result'] == true)
+                    alert('留言成功');
+                else
+                    alert(json['msg']);
+            });
+        }
+    });
 });
