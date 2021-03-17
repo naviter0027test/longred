@@ -12,7 +12,7 @@ $(document).ready(function() {
     if(recordNow == null)
         alert('指定資料不存在');
     else {
-        $('[name=id]').val(recordNow['id']);
+        $('[name=recordId]').val(recordNow['id']);
         $('[name=applicant]').val(recordNow['applicant']);
         $('[name=CustGID]').val(recordNow['CustGID']);
         $('[name=applyAmount]').val(recordNow['applyAmount']);
@@ -63,5 +63,42 @@ $(document).ready(function() {
                     alert(json['msg']);
             });
         }
+    });
+
+    $('.create-form').submit(function() {
+        if(recordNow['checkStatus'] == "處理中") {
+            var postData = $(this).serialize();
+            var href = $(this).attr('action');
+            $(this).ajaxSubmit(function(resData) {
+                console.log(resData);
+                var resJson = resData;
+                if(resJson['status'] == true) {
+                    alert('補件成功');
+                    location.href = "/front/home";
+                }
+                else {
+                    alert('送出失敗');
+                }
+            });
+        }
+        else
+            alert("已"+ recordNow['checkStatus']+ "，不得更改");
+        return false;
+    });
+
+    $('.del-btn').on('click', function() {
+        var postData = {
+            'recordId' : clickRecordId
+        };
+        $.post('/application/cancel', postData, function(data) {
+            var json = data;
+            console.log(json);
+            if(json['status'] == true) {
+                alert('退件完成');
+                location.href = "/front/home";
+            }
+            else
+                alert('該案件已進入處理流程');
+        });
     });
 });

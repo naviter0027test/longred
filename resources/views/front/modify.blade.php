@@ -16,18 +16,18 @@
         <p class="sec-bar"> 經銷商分期 </p>
         <div class="create-content">
             <form action="/application/update" method="post" enctype="multipart/form-data" class="login-form create-form">
-                <input type="hidden" name="id" />
+                <input type="hidden" name="recordId" />
                 <p>
                     <h4>申請人姓名</h4>
-                    <input type="text" name="applicant" required />
+                    <input type="text" name="applicant" readonly />
                 </p>
                 <p>
                     <h4>身份證字號</h4>
-                    <input type="text" name="CustGID" required />
+                    <input type="text" name="CustGID" readonly />
                 </p>
                 <p>
                     <h4>申貸金額</h4>
-                    <input type="text" name="applyAmount" required />
+                    <input type="text" name="applyAmount" readonly />
                 </p>
                 <p>
                     <h4>身份證照片 正面</h4>
@@ -39,11 +39,11 @@
                 </p>
                 <p>
                     <h4>商品名稱</h4>
-                    <input type="text" name="productName" />
+                    <input type="text" name="productName" readonly />
                 </p>
                 <p>
                     <h4>車牌號碼</h4>
-                    <input type="text" name="liense" />
+                    <input type="text" name="liense" readonly />
                 </p>
                 <p>
                     <h4>申請文件</h4>
