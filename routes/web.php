@@ -29,6 +29,7 @@ Route::group(['prefix' => 'front'], function() {
 
     Route::get('modify', 'FrontController@modify');
     Route::get('message', 'FrontController@message');
+    Route::get('record', 'FrontController@record');
 });
 
 Route::get('/fcm-test', 'AccountController@fcmTest');

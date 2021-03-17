@@ -82,4 +82,7 @@ class FrontController extends Controller
         return view('front.message');
     }
 
+    public function record(Request $request) {
+        return view('front.record');
+    }
 }
