@@ -13,6 +13,12 @@
             借貸 APP 展示
         </div>
         <p class="sec-bar"> -- </p>
+        <form class="login-form" method="post" action="/account/forget">
+            <p class="login-input">
+                <i class="glyphicon glyphicon-envelope"></i><input type="text" name="email" /> 
+            </p>
+            <p> <button class="btn login-submit">發送</button> </p>
+        </form>
     </body>
     <script src="/lib/jquery-2.1.4.min.js"></script>
     <script src="/js/front/forget.js"></script>
