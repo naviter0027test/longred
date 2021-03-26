@@ -12,6 +12,10 @@ use Exception;
 
 class FrontController extends Controller
 {
+    public function forget(Request $request) {
+        return view('front.forget');
+    }
+
     public function login(Request $request) {
         return view('front.login');
     }

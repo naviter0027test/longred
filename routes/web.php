@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'front'], function() {
+    Route::get('forget', 'FrontController@forget');
     Route::get('login', 'FrontController@login');
     Route::get('home', 'FrontController@home');
     Route::get('create', 'FrontController@create');
