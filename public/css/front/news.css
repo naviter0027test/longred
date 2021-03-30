@@ -1,0 +1,29 @@
+.news-panel {
+    margin-bottom: 20px;
+}
+
+.news-panel a {
+    text-decoration: none;
+}
+
+.news-panel .news-item {
+    display: block;
+    padding: 20px;
+
+    background: white;
+    border-bottom: 1px solid black;
+}
+
+.news-panel .news-item h6 {
+    margin: 0;
+}
+
+.news-panel .news-item h4 {
+    color: black;
+}
+
+.news-panel .news-item .news-right-arrow {
+    float: right;
+    top: -30px;
+    color: black;
+}
