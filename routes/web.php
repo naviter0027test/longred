@@ -32,6 +32,7 @@ Route::group(['prefix' => 'front'], function() {
     Route::get('message', 'FrontController@message');
     Route::get('record', 'FrontController@record');
     Route::get('news', 'FrontController@news');
+    Route::get('news-id/{id}', 'FrontController@newsItem');
 });
 
 Route::get('/fcm-test', 'AccountController@fcmTest');

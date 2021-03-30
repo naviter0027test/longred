@@ -78,6 +78,10 @@ class FrontController extends Controller
         return view('front.news');
     }
 
+    public function newsItem(Request $request, $id) {
+        return view('front.news-item');
+    }
+
     public function modify(Request $request) {
         return view('front.modify');
     }

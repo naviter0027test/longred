@@ -27,3 +27,9 @@
     top: -30px;
     color: black;
 }
+
+.news-panel .news-content {
+    padding: 20px;
+
+    background: white;
+}
