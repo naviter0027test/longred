@@ -224,3 +224,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', end
     color: #aaaaaa;
     text-align: center;
 }
+
+.bell {
+    float: right;
+    color: red;
+
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.bell label {
+    color: white;
+}
