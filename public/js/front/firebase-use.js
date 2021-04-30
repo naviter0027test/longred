@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    getNotReadableAmount();
     if(location.protocol == "https:") {
         var firebaseConfig = {
             apiKey: "AIzaSyCdyxuNQitr6c7aZ_wTe1mPFuHiVuAqwRc",
@@ -40,8 +41,26 @@ $(document).ready(function() {
 
         messaging.onMessage(function (payload) {
             console.log('on message', payload);
+            getNotReadableAmount();
         });
     }
-    else
+    else {
         console.log('not https');
+        getNotReadableAmount();
+        setInterval( getNotReadableAmount, 5000);
+    }
 });
+
+function getNotReadableAmount() {
+    var postMsgData = {
+        'nowPage': 0,
+        'offset': 9999,
+    };
+    $.get('/account/message', postMsgData, function(res) {
+        var jsonData = JSON.parse(res);
+        console.log(jsonData);
+        if(jsonData['result'] == true) {
+            $('.bell label').text(jsonData['notReadableAmount']);
+        }
+    });
+}

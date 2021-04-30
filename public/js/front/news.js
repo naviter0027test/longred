@@ -10,13 +10,16 @@ $(document).ready(function() {
         if(jsonData['result'] == true) {
             $('.news-panel').html('');
             jsonData['data'].forEach(function(news, idx) {
-                $('.news-panel').append(
+                var newsText = 
                     '<a href="/front/news-id/'+ news.id+ '" news-id="'+ news.id+ '" class="news-item">'
-                    + '<h6>'+ news.created_at+ '</h6>'
-                    + '<h4>'+ news.title+ '</h4>'
-                    + '<span class="news-right-arrow glyphicon glyphicon-chevron-right"></span>'
-                    + '</a>'
-                );
+                    + '<h6>'+ news.created_at+ '</h6>';
+                if(news.isRead == 0)
+                    newsText += '<h4><b>'+ news.title+ '</b></h4>';
+                else
+                    newsText += '<h4>'+ news.title+ '</h4>';
+                newsText += '<span class="news-right-arrow glyphicon glyphicon-chevron-right"></span>'
+                    + '</a>';
+                $('.news-panel').append(newsText);
             });
             $('.news-item').on('click', function() {
                 window.sessionStorage.setItem("message-id", $(this).attr('news-id'));

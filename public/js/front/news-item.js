@@ -7,6 +7,14 @@ $(document).ready(function() {
             $('.news-item h6').text(news['created_at']);
             $('.news-item h4').text(news['title']);
             $('.news-content').text(news['content']);
+
+            var postData = {
+                messageId : messageId
+            };
+            $.post('/account/message/read', postData, function(data) {
+                console.log(data);
+                getNotReadableAmount()
+            });
         }
     });
 });

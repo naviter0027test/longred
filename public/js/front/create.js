@@ -1,8 +1,10 @@
 $(document).ready(function() {
     $('.create-form').submit(function() {
+        $.blockUI();
         var postData = $(this).serialize();
         var href = $(this).attr('action');
         $(this).ajaxSubmit(function(resData) {
+            $.unblockUI();
             console.log(resData);
             var resJson = resData;
             if(resJson['status'] == true) {

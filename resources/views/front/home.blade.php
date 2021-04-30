@@ -11,6 +11,7 @@
     <body class="body">
         <div class="header">
             借貸 APP 展示
+            <a href="/front/news" class="glyphicon glyphicon-bell bell"><label>0</label></a>
         </div>
         <p class="sec-bar"> 經銷商分期 </p>
         <div class="content">
@@ -83,6 +84,6 @@
     https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase-messaging.js"></script>
-    <script src="/js/front/home.js"></script>
     <script src="/js/front/firebase-use.js"></script>
+    <script src="/js/front/home.js"></script>
 </html>
