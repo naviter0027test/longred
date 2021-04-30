@@ -81,6 +81,9 @@ class AndroidRepository
         curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
         $result = curl_exec($ch );
         curl_close( $ch );
+        $json = json_decode($result, true);
+        if(isset($json['failure']) && $json['failure'] == 1)
+            \Log::info($result);
         return $result;
     }
 
