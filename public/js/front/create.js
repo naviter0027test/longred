@@ -12,7 +12,7 @@ $(document).ready(function() {
                 location.href = "/front/home";
             }
             else {
-                alert('送出失敗');
+                alert('送出失敗:'+resJson['message']);
             }
         });
         return false;

@@ -10,6 +10,47 @@ use Storage;
 class RecordRepository
 {
     public function create($params, $files = []) {
+        if(isset($files['CustGIDPicture1'])) {
+            $ext = $files['CustGIDPicture1']->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['CustGIDPicture2'])) {
+            $ext = $files['CustGIDPicture2']->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['applyUploadPath'])) {
+            $ext = $files['applyUploadPath']->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['proofOfProperty'])) {
+            $ext = $files['proofOfProperty']->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][0])) {
+            $ext = $files['otherDoc'][0]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][1])) {
+            $ext = $files['otherDoc'][1]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][2])) {
+            $ext = $files['otherDoc'][2]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][3])) {
+            $ext = $files['otherDoc'][3]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][4])) {
+            $ext = $files['otherDoc'][4]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][5])) {
+            $ext = $files['otherDoc'][5]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+
         $today = date('Y-m-d');
         $recordCount = Record::where('created_at', '>=' , "$today 00:00:00")
             ->where('created_at', '<=', "$today 23:59:59")
@@ -376,6 +417,47 @@ class RecordRepository
     }
 
     public function updateById($id, $params, $admin, $files = []) {
+        if(isset($files['CustGIDPicture1'])) {
+            $ext = $files['CustGIDPicture1']->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['CustGIDPicture2'])) {
+            $ext = $files['CustGIDPicture2']->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['applyUploadPath'])) {
+            $ext = $files['applyUploadPath']->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['proofOfProperty'])) {
+            $ext = $files['proofOfProperty']->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][0])) {
+            $ext = $files['otherDoc'][0]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][1])) {
+            $ext = $files['otherDoc'][1]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][2])) {
+            $ext = $files['otherDoc'][2]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][3])) {
+            $ext = $files['otherDoc'][3]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][4])) {
+            $ext = $files['otherDoc'][4]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+        if(isset($files['otherDoc'][5])) {
+            $ext = $files['otherDoc'][5]->getClientOriginalExtension();
+            $this->checkExt($ext);
+        }
+
         $record = Record::where('id', '=', $id)
             ->first();
         if(isset($record->id) == false) {
@@ -989,5 +1071,12 @@ class RecordRepository
             imagepng($img, $filePath);
             break;
         }
+    }
+
+    public function checkExt($ext) {
+        $validExtArr = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'doc', 'docx', 'odt', 'pdf', 'xls', 'xlsx', 'ods'];
+        $ext = strtolower(trim($ext));
+        if(in_array($ext, $validExtArr) == false)
+            throw new Exception('上傳檔案格式限定:'. implode(',', $validExtArr) );
     }
 }
