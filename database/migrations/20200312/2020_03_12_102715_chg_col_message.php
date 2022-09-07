@@ -13,6 +13,10 @@ class ChgColMessage extends Migration
      */
     public function up()
     {
+        if(env('DB_CONNECTION', '') == 'testing') {
+            echo "tdd模式跳過 mediumtext \n";
+            return false;
+        }
         Schema::table('Message', function (Blueprint $table) {
             $table->mediumText('content')->change();
         });
