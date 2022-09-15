@@ -42,12 +42,13 @@ class DropTables extends Command
             echo "非測試模式\n";
             return false;
         }
-        echo "開始刪除\n";
+        echo "開始刪除資料表 (Memory Mode)\n";
         Schema::dropIfExists('Admin');
         Schema::dropIfExists('Account');
         Schema::dropIfExists('Record');
         Schema::dropIfExists('Message');
         Schema::dropIfExists('HasRead');
         Schema::dropIfExists('migrations');
+        echo "刪除完成\n";
     }
 }
