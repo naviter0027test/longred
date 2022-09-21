@@ -25,4 +25,38 @@ class RecordTest extends TestCase
         $amount = $recordRepo->listsAmount($params);
         $this->assertEquals(20, $amount);
     }
+
+    public function testGetById() {
+        $recordRepo = new RecordRepository();
+        try {
+            $recordRepo->getById(1044);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('案件不存在', $e->getMessage());
+        }
+
+        $record = $recordRepo->getById(1);
+        $this->assertEquals('200902A00210', $record->submitId);
+    }
+
+    public function testCreate() {
+        $recordRepo = new RecordRepository();
+        $params = [];
+        $params['CustGID'] = "A154943977";
+        $params['applicant'] = "唐銘煌";
+        $params['productName'] = "汽車頭期款";
+        $params['applyAmount'] = "35800";         //申貸金額
+        $params['liense'] = "ARF-342";            //車牌
+        $params['memo'] = "備註測試";
+        $params['accountId'] = 1;
+        $recordRepo->create($params);
+
+        $record = $recordRepo->getById(21);
+        $this->assertEquals("A154943977", $record->CustGID);
+        $this->assertEquals("唐銘煌", $record->applicant);
+        $this->assertEquals("汽車頭期款", $record->productName);
+        $this->assertEquals("35800", $record->applyAmount);
+        $this->assertEquals("ARF-342", $record->liense);
+        $this->assertEquals("備註測試", $record->memo);
+    }
 }

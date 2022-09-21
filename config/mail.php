@@ -120,6 +120,14 @@ return [
         ],
     ],
 
+    'stream' => [
+        'ssl' => [
+            'allow_self_signed' => true,
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+        ],
+    ],
+
     /*
     'receive1' => 'app.receive@ch-finance.com.tw',
     'receive2' => 'app.changhong@gmail.com',

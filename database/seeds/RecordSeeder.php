@@ -54,8 +54,8 @@ class RecordSeeder extends Seeder
             $record->SubArea = '';
             $record->memo = '';
             $record->accountId = 1;
-            $record->created_at = "2022-09-12 $strHour:00:00";
-            $record->updated_at = "2022-09-12 $strHour:00:00";
+            $record->created_at = date('Y-m'). "-01 $strHour:00:00";
+            $record->updated_at = date('Y-m'). "-01 $strHour:00:00";
             $record->save();
         }
     }
