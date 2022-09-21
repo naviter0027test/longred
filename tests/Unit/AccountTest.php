@@ -99,7 +99,7 @@ class AccountTest extends TestCase
     public function testCreate() {
         $accountRepo = new AccountRepository();
         $params = [
-            'account' => 'account101',
+            'account' => 'account21',
             'password' => '123456',
             'name' => '葉忠明',
             'phone' => '0912341234',
@@ -109,7 +109,7 @@ class AccountTest extends TestCase
         $accountRepo->create($params);
         $account1 = $accountRepo->getById(21);
         $this->assertEquals(21, $account1->id);
-        $this->assertEquals('account101', $account1->account);
+        $this->assertEquals('account21', $account1->account);
         $this->assertEquals('葉忠明', $account1->name);
         $this->assertEquals('台北市XX路二段XXX號', $account1->area);
 
@@ -122,5 +122,76 @@ class AccountTest extends TestCase
         catch(Exception $e) {
             $this->assertEquals('帳號重複', $e->getMessage());
         }
+    }
+
+    public function testUpdate() {
+        $accountRepo = new AccountRepository();
+        $params = [
+            'account' => 'account22',
+            'password' => '123456',
+            'name' => '蔡核鑫',
+            'phone' => '0912341234',
+            'area' => '桃園市XX路九段OOO號',
+            'active' => 1,
+        ];
+        $accountRepo->create($params);
+
+        $updateId = 22;
+        $params = [
+            'name' => '蔡核鑫2',
+            'phone' => '0988887777',
+            'area' => '桃園市XX路九段OO2號',
+        ];
+        $accountRepo->update($updateId, $params);
+        $account22 = $accountRepo->getById(22);
+        $this->assertEquals('蔡核鑫2', $account22->name);
+        $this->assertEquals('0988887777', $account22->phone);
+        $this->assertEquals('桃園市XX路九段OO2號', $account22->area);
+    }
+
+    public function testDelById() {
+        $accountRepo = new AccountRepository();
+        try {
+            $accountRepo->delById(1044);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('帳號不存在', $e->getMessage());
+        }
+
+        $accountRepo->delById(21);
+        try {
+            $account2 = $accountRepo->getById(21);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('帳號不存在', $e->getMessage());
+        }
+    }
+
+    public function testAppleTokenGet() {
+        $accountRepo = new AccountRepository();
+        try {
+            $accountRepo->appleTokenGet(1044);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('帳號不存在', $e->getMessage());
+        }
+
+        $appleToken = $accountRepo->appleTokenGet(11);
+        $this->assertEquals('1qaz2wsx', $appleToken);
+    }
+
+    public function testAppleTokenSet() {
+        $accountRepo = new AccountRepository();
+        $tokenSetStr = 'aaabbbccc';
+        try {
+            $accountRepo->appleTokenSet(1044, $tokenSetStr);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('帳號不存在', $e->getMessage());
+        }
+
+        $accountRepo->appleTokenSet(12, $tokenSetStr);
+        $appleToken = $accountRepo->appleTokenGet(12);
+        $this->assertEquals($tokenSetStr, $appleToken);
     }
 }

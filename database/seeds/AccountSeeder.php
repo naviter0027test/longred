@@ -25,6 +25,10 @@ class AccountSeeder extends Seeder
             $account->tokenMode = 2;
             $account->created_at = '2020-09-01 18:00:00';
             $account->updated_at = '2020-09-01 18:00:00';
+            if($i == 11) {
+                $account->appleToken = '1qaz2wsx';
+                $account->tokenMode = 1;
+            }
             $account->save();
         }
     }
