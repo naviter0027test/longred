@@ -13,6 +13,7 @@ class RecordSeeder extends Seeder
     public function run()
     {
         for($i = 1; $i <= 20; ++$i) {
+            $strHour = str_pad($i, 2, '0', STR_PAD_LEFT);
             $record = new Record();
             $record->id = $i;
             $submitId = '200902A'. str_pad($i+1, 3, '0', STR_PAD_LEFT). '10';
@@ -53,8 +54,8 @@ class RecordSeeder extends Seeder
             $record->SubArea = '';
             $record->memo = '';
             $record->accountId = 1;
-            $record->created_at = '2020-09-02 12:00:00';
-            $record->updated_at = '2020-09-02 12:00:00';
+            $record->created_at = "2022-09-12 $strHour:00:00";
+            $record->updated_at = "2022-09-12 $strHour:00:00";
             $record->save();
         }
     }
