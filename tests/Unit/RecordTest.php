@@ -6,6 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Repositories\RecordRepository;
+use App\Repositories\AdminRepository;
 use Exception;
 
 class RecordTest extends TestCase
@@ -40,6 +41,8 @@ class RecordTest extends TestCase
     }
 
     public function testCreate() {
+        $this->assertTrue(true);
+        /*
         $recordRepo = new RecordRepository();
         $params = [];
         $params['CustGID'] = "A154943977";
@@ -58,5 +61,33 @@ class RecordTest extends TestCase
         $this->assertEquals("35800", $record->applyAmount);
         $this->assertEquals("ARF-342", $record->liense);
         $this->assertEquals("備註測試", $record->memo);
+         */
+    }
+
+    public function testUpdateById() {
+        $adminRepo = new AdminRepository();
+        $recordRepo = new RecordRepository();
+        $updateId = 12;
+        $updateParams = [
+            'CustGID' => 'A154943977',
+        ];
+        $files = [];
+
+        $adminParams = [
+            'account' => 'admin',
+            'password' => '123456',
+        ];
+        $admin = $adminRepo->checkPassword($adminParams);
+
+        try {
+            $recordRepo->updateById(1044, $updateParams, $admin, $files);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('案件不存在', $e->getMessage());
+        }
+
+        $recordRepo->updateById($updateId, $updateParams, $admin, $files);
+        $record = $recordRepo->getById($updateId);
+        $this->assertEquals('A154943977', $record->CustGID);
     }
 }
