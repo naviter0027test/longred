@@ -9,13 +9,7 @@ use App\Repositories\AccountRepository;
 
 class WHttpAccountTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
+    public function testIsLogin() {
         $accountRepo = new AccountRepository();
         $params = [
             'account' => 'account1',
@@ -36,6 +30,30 @@ class WHttpAccountTest extends TestCase
                  ->assertJson([
                      'status' => true,
                      'msg' => 'has login',
+                 ]);
+    }
+
+    public function testLogin() {
+        $test1Params = [
+            'account' => 'aaaaa',
+            'password' => 'bbbbbbb',
+        ];
+        $response = $this->call('POST', '/account/login', $test1Params);
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => false,
+                     'msg' => 'login failure',
+                 ]);
+
+        $test2Params = [
+            'account' => 'account1',
+            'password' => '123456',
+        ];
+        $response = $this->call('POST', '/account/login', $test2Params);
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => true,
+                     'msg' => 'login success',
                  ]);
     }
 }
