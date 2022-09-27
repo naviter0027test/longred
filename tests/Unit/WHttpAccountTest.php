@@ -56,4 +56,27 @@ class WHttpAccountTest extends TestCase
                      'msg' => 'login success',
                  ]);
     }
+
+    public function testLogout() {
+        $accountRepo = new AccountRepository();
+        $params = [
+            'account' => 'account1',
+            'password' => '123456',
+        ];
+        $account = $accountRepo->checkPassword($params);
+        $response = $this->withSession(['account' => $account])
+             ->call('GET', '/account/logout');
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => true,
+                     'msg' => 'logout success',
+                 ]);
+
+        $response = $this->get('/account/isLogin');
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => false,
+                     'msg' => 'not login',
+                 ]);
+    }
 }
