@@ -90,4 +90,50 @@ class RecordTest extends TestCase
         $record = $recordRepo->getById($updateId);
         $this->assertEquals('A154943977', $record->CustGID);
     }
+
+    public function testDel() {
+        $recordRepo = new RecordRepository();
+        $delId = 1049;
+        try {
+            $recordRepo->del($delId);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('案件不存在', $e->getMessage());
+        }
+
+        $delId = 20;
+        try {
+            $recordRepo->del($delId);
+        }
+        catch(Exception $e) {
+        }
+
+        try {
+            $recordRepo->getById($delId);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('案件不存在', $e->getMessage());
+        }
+    }
+
+    public function testCancel() {
+        $recordRepo = new RecordRepository();
+        $cancelId = 20;
+        $accountId = 1;
+        try {
+            $recordRepo->cancel($cancelId, $accountId);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('案件不存在', $e->getMessage());
+        }
+        $cancelId = 19;
+        try {
+            $recordRepo->cancel($cancelId, $accountId);
+            $record = $recordRepo->getById($cancelId);
+            $this->assertEquals('取消申辦', $record->checkStatus);
+        }
+        catch(Exception $e) {
+            $this->assertEquals('案件應該存在', $e->getMessage());
+        }
+    }
 }

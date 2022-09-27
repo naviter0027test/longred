@@ -32,6 +32,8 @@ class RecordSeeder extends Seeder
             $record->otherDoc6 = '';
             $record->applicant = '';
             $record->checkStatus = '';
+            if($record->id == 19)
+                $record->checkStatus = '處理中';
             $record->dealer = '';
             $record->inCharge = '';
             $record->beneficiary = '';
