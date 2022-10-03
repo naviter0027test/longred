@@ -10,8 +10,7 @@ use App\Repositories\AccountRepository;
 
 class WHttpApplicationTest extends TestCase
 {
-    public function testCreate()
-    {
+    public function testCreate() {
         $accountRepo = new AccountRepository();
         $params = [
             'account' => 'account1',
@@ -68,6 +67,7 @@ class WHttpApplicationTest extends TestCase
                      ]
                  ]);
 
+        /*
         $createParams3 = [
             'applicant' => '陳泰生',
             'CustGID' => 'A154943977',
@@ -81,6 +81,37 @@ class WHttpApplicationTest extends TestCase
                  ->assertJson([
                      'status' => true,
                      "message" => 'success',
+                 ]);
+         */
+    }
+
+    public function testCancel() {
+        $accountRepo = new AccountRepository();
+        $params = [
+            'account' => 'account1',
+            'password' => '123456',
+        ];
+        $account = $accountRepo->checkPassword($params);
+        $this->withSession(['account' => $account]);
+
+        $params = [
+            'recordId' => 1041,
+        ];
+        $response = $this->call('POST', '/application/cancel', $params);
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => false,
+                     "message" => '案件不存在',
+                 ]);
+
+        $params = [
+            'recordId' => 18,
+        ];
+        $response = $this->call('POST', '/application/cancel', $params);
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => true,
+                     "message" => 'cancel success',
                  ]);
     }
 }

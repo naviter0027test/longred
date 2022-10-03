@@ -32,7 +32,7 @@ class RecordSeeder extends Seeder
             $record->otherDoc6 = '';
             $record->applicant = '';
             $record->checkStatus = '';
-            if($record->id == 19)
+            if(in_array($record->id, [18, 19]))
                 $record->checkStatus = '處理中';
             $record->dealer = '';
             $record->inCharge = '';
