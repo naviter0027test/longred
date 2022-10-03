@@ -117,6 +117,7 @@ class ApplicationController extends Controller
         $params = $request->all();
         $id = $params['recordId'];
 
+        $files = [];
         if($request->hasFile('CustGIDPicture1'))
             $files['CustGIDPicture1'] = $request->file('CustGIDPicture1');
         if($request->hasFile('CustGIDPicture2'))
@@ -131,8 +132,8 @@ class ApplicationController extends Controller
             $recordRepository = new RecordRepository();
             $recordRepository->updateFileById($id, $files);
         } catch (Exception $e) {
-            $result['result'] = false;
-            $result['msg'] = $e->getMessage();
+            $res['status'] = false;
+            $res['message'] = $e->getMessage();
         }
         return response()->json($res);
     }

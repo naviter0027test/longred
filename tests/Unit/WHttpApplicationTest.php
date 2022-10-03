@@ -114,4 +114,48 @@ class WHttpApplicationTest extends TestCase
                      "message" => 'cancel success',
                  ]);
     }
+
+    public function testUpdate() {
+        $accountRepo = new AccountRepository();
+        $params = [
+            'account' => 'account1',
+            'password' => '123456',
+        ];
+        $account = $accountRepo->checkPassword($params);
+        $this->withSession(['account' => $account]);
+
+        $updateParams1 = [
+        ];
+        $response = $this->call('POST', '/application/update', $updateParams1);
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => false,
+                     "message" => [
+                         "recordId" => [
+                             "The record id field is required."
+                         ],
+                     ],
+                 ]);
+
+        $updateParams2 = [
+            'recordId' => 1044,
+        ];
+        $response = $this->call('POST', '/application/update', $updateParams2);
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => false,
+                     "message" => '案件不存在',
+                 ]);
+
+        $updateParams3 = [
+            'recordId' => 17,
+             "CustGIDPicture1" => UploadedFile::fake()->image('img.jpg'),
+        ];
+        $response = $this->call('POST', '/application/update', $updateParams3);
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => true,
+                     "message" => 'success',
+                 ]);
+    }
 }
