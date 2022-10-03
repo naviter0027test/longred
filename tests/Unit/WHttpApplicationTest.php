@@ -4,9 +4,11 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Repositories\AccountRepository;
+use App\Repositories\RecordRepository;
 
 class WHttpApplicationTest extends TestCase
 {
@@ -82,6 +84,9 @@ class WHttpApplicationTest extends TestCase
                      'status' => true,
                      "message" => 'success',
                  ]);
+        $record = $recordRepo->getById(21);
+        Storage::disk('uploads')->assertExists($record->CustGIDPicture1);
+        Storage::disk('uploads')->delete($record->CustGIDPicture1);
          */
     }
 
@@ -117,6 +122,8 @@ class WHttpApplicationTest extends TestCase
 
     public function testUpdate() {
         $accountRepo = new AccountRepository();
+        $recordRepo = new RecordRepository();
+
         $params = [
             'account' => 'account1',
             'password' => '123456',
@@ -157,5 +164,8 @@ class WHttpApplicationTest extends TestCase
                      'status' => true,
                      "message" => 'success',
                  ]);
+        $record = $recordRepo->getById(17);
+        Storage::disk('uploads')->assertExists($record->CustGIDPicture1);
+        Storage::disk('uploads')->delete($record->CustGIDPicture1);
     }
 }
