@@ -79,4 +79,51 @@ class WHttpAccountTest extends TestCase
                      'msg' => 'not login',
                  ]);
     }
+
+    public function testAppleTokenGet() {
+        $accountRepo = new AccountRepository();
+        $params = [
+            'account' => 'account2',
+            'password' => '123456',
+        ];
+        $account = $accountRepo->checkPassword($params);
+        $response = $this->withSession(['account' => $account])
+             ->call('GET', '/account/apple-token/get');
+        //print_r($response->decodeResponseJson());
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => true,
+                     "msg" => '取得成功',
+                     'appleToken' => '',
+                 ]);
+    }
+
+    public function testAppleTokenSet() {
+        $accountRepo = new AccountRepository();
+        $params = [
+            'account' => 'account2',
+            'password' => '123456',
+        ];
+        $account = $accountRepo->checkPassword($params);
+
+        $paramsSet = [
+            'appleToken' => 'qwcideasb',
+            'tokenMode' => 1,
+        ];
+        $response = $this->withSession(['account' => $account])
+             ->call('POST', '/account/apple-token/set', $paramsSet);
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => true,
+                     "msg" => '設定成功',
+                 ]);
+
+        $response = $this->call('GET', '/account/apple-token/get');
+        $response->assertStatus(200)
+                 ->assertJson([
+                     'status' => true,
+                     "msg" => '取得成功',
+                     'appleToken' => 'qwcideasb',
+                 ]);
+    }
 }
